@@ -3,7 +3,7 @@ const sequelize = require('../../../global/config/getSequelize')()
 
 class Account extends Model {}
 
-Account.init('account ',{
+Account.init({
   userId: {
     field: "user_id",
     type: DataTypes.INTEGER,

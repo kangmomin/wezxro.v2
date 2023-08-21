@@ -8,7 +8,6 @@ const port = process.env.PORT
 const bp = require('body-parser')
 const cp = require('cookie-parser')
 const session = require('express-session')
-const router = require('./domain/account/controller/accountController')
 const sessionStore = require('express-mysql-session')(session)
 
 const accessController = require('./domain/account/controller/accessController')
@@ -52,5 +51,13 @@ app.use(express.static(__dirname + '/public'))
 
 app.get('*', (req, res) => res.render('error', { status: 404, title: "THE PAGE", content: "WAS NOT FOUND" }))
 //force : 서버 실행 시 마다 테이블을 재생성 할 것인지 아닌지
-sequelize.sync({ force: false }).catch(err => console.error(err))
+sequelize.authenticate().then(() => {
+    console.log('Connection has been established successfully.');
+    // 테이블 생성
+    sequelize.sync().then(() => {
+        console.log('DB Sync complete.');
+    });
+}).catch((error) => {
+    console.error('Unable to connect to the database:', error);
+});
 app.listen(port, () => { console.log(`server is running on ${port}`) })
