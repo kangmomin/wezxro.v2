@@ -10,7 +10,9 @@ const cp = require('cookie-parser')
 const session = require('express-session')
 const sessionStore = require('express-mysql-session')(session)
 
-const accessController = require('./domain/account/controller/accessController')
+const customMiddleware = require('./global/middleware/customViewMiddleware')
+
+const accountRouter = require('./domain/account/controller/router')
 
 app.use(cp())
 app.use(cors({
@@ -39,17 +41,20 @@ app.use(
 )
 
 // ejs
-app.set('views', __dirname + '/public')
 app.set('view engine', 'ejs')
 app.engine('html', require('ejs').renderFile)
-app.post('*', bp.urlencoded({ extended: false }))
+app.use('*', bp.urlencoded({ extended: false }))
 
-app.use(accessController)
+app.use((_,__,next) => customMiddleware(next, app, "account"))
+app.use(accountRouter)
 
 // public static 파일 설정
 app.use(express.static(__dirname + '/public'))
 
+app.use((_, __, n) => {app.set('views', __dirname + '/global/view'); n()})
 app.get('*', (req, res) => res.render('error', { status: 404, title: "THE PAGE", content: "WAS NOT FOUND" }))
+
+
 //force : 서버 실행 시 마다 테이블을 재생성 할 것인지 아닌지
 sequelize.authenticate().then(() => {
     console.log('Connection has been established successfully.');

@@ -3,7 +3,7 @@ const NotEngoughArgsException = require('../../../global/error/exception/NotEnou
 const accountService = require('../service/accountService')
 const app = require('express').Router()
 
-app.post("/join", async (req, res, next) => {
+app.post("/ajax_sign_up", async (req, res) => {
     try {
         const { password, email, first_name } = req.body
     
@@ -23,7 +23,7 @@ app.post("/join", async (req, res, next) => {
     }
 })
 
-app.post("/login", async (req, res) => {
+app.post("/ajax_sign_in", async (req, res) => {
     try {
         const { email, password } = req.body
     
