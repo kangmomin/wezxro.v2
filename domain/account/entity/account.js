@@ -1,6 +1,5 @@
-import { Sequelize, DataTypes, Model } from 'sequelize';
-
-const sequelize = new Sequelize('sqlite::memory:');
+const { DataTypes, Model } = require('sequelize');
+const sequelize = require('../../../global/config/getSequelize')()
 
 class Account extends Model {}
 
