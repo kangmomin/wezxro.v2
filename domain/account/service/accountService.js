@@ -44,13 +44,15 @@ ex.updateMoney = async (money, userId) => {
  * @param {Number} user_id
  */
 ex.login = async (email, password) => {
-   const account = await accountRepository.login(conn, email)
-   const encryptedPwd = encrypter(password, account[0].random)
+   const account = await accountRepository.findOne({
+    where: { email }
+   }) 
+   if (account === null) throw new UserNotFoundException()
+
+   const encryptedPwd = encrypter(password, account.random)
    
     // 비밀번호 매칭
-    if (account.length < 1 || 
-        account[0].password != encryptedPwd)
-      throw new UserNotFoundException()
+    if (account.password != encryptedPwd) throw new UserNotFoundException()
 
     return account[0].user_id
 }
