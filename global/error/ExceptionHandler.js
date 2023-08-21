@@ -15,4 +15,6 @@ module.exports = (res, error) => {
         message: "알 수 없는 에러 발생",
         status: "error"
     }))
+
+    console.log(error)
 }
