@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="Content-Language" content="en">
+  <meta name="description" content="                                    ">
+  <meta name="keywords" content="                                                           ">
+  <title>
+    <%= process.env.EN_NAME %>
+  </title>
+
+  <link rel="shortcut icon" type="image/x-icon"
+    href="./assets/uploads/user54ceb91256e8190e474aa752a6e0650a2df5ba37/logo.png">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+
+  <script src="./assets/js/vendors/jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" href="./assets/plugins/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="./assets/plugins/emoji/emojionearea.min.css" media="screen">
+  <script type="text/javascript" src="./assets/plugins/emoji/emojionearea.min.js"></script>
+
+  <!-- c3.js Charts Plugin -->
+  <link href="./assets/plugins/flags/css/flag-icon.css" rel="stylesheet">
+  <!-- vendor -->
+  <link href="./assets/admin/vendors/css/vendor.css" rel="stylesheet">
+  <link href="./assets/admin/dist/css/admin-core.css" rel="stylesheet" />
+  <link href="./assets/admin/dist/css/layout.css" rel="stylesheet">
+  <script type="text/javascript">
+    var token = '234715f102b89364f16e4990573da2e4',
+      PATH = './',
+      BASE = './';
+    var deleteItem = "Are you sure you want to delete this item?";
+    var deleteItems = "Are you sure you want to delete all items?";
+  </script>
+</head>
+
+<body class="antialiased vertical-menu">
+
+  <div id="page-overlay" class="visible incoming">
+    <div class="loader-wrapper-outer">
+      <div class="loader-wrapper-inner">
+        <div class="lds-double-ring">
+          <div></div>
+          <div></div>
+          <div>
+            <div></div>
+          </div>
+          <div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .search-box div.form-group {
+      margin-bottom: 0px !important;
+    }
+
+    .search-box .form-control {
+      height: auto !important;
+    }
+  </style>
+
+  <header class="navbar navbar-expand-lg js-header">
+    <div class="header-wrap">
+
+      <a class="navbar-toggler mobile-menu">
+        <span class="navbar-toggler-icon"><i class="icon fe fe-menu"></i></span>
+      </a>
+
+      <a href="./" class="navbar-brand text-inherit mr-md-3">
+        <img src="./assets/uploads/user54ceb91256e8190e474aa752a6e0650a2df5ba37/logo.png" alt="Website Logo"
+          class="d-md-none navbar-brand-logo">
+      </a>
+
+      <ul class="nav navbar-menu align-items-center order-1 order-lg-2">
+
+
+
+
+        <li class="nav-item dropdown">
+          <a href="#" data-toggle="dropdown" class="nav-link d-flex align-items-center py-0 px-lg-0 px-2 text-color">
+            <span class="ml-2 d-none d-lg-block leading-none">
+              <span class="mt-1"><span class="text-uppercase">
+                  <%= user.name %>
+                </span>님</span>
+              <small class="badge bg-indigo d-block mt-1">
+                <%= user.money %>원
+              </small>
+            </span>
+            <span class="avatar admin-profile m-l-10"></span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/logout">
+              <i class="icon fe fe-log-out dropdown-icon"></i>
+              로그아웃
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <div class="d-flex flex-row h-100p">
+
+    <style>
+      .tickets-number {
+        font-size: 14px !important;
+      }
+    </style>
+
+
+    <aside class="navbar navbar-side navbar-fixed js-sidebar" id="aside">
+      <div class="mobile-logo">
+        <a href="./statistics" class="navbar-brand text-inherit">
+          <h1 style="margin-top: 0.5rem;">
+            <%= process.env.EN_NAME %>
+          </h1>
+        </a>
+      </div>
+      <div class="flex-fill scroll-bar">
+        <ul class="navbar-nav mb-md-4" id="menu">
+
+          <li class="nav-item">
+            <a class="nav-link " href="./add-order" data-toggle="tooltip" data-placement="right" title="주문하기">
+              <span class="nav-icon">
+                <i class="fe fe-shopping-cart"></i>
+              </span>
+              <span class="nav-text">
+                주문하기
+
+              </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="./order" data-toggle="tooltip" data-placement="right" title="주문 내역">
+              <span class="nav-icon">
+                <i class="fe fe-calendar"></i>
+              </span>
+              <span class="nav-text">
+                주문 내역
+
+              </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./services" data-toggle="tooltip" data-placement="right" title="서비스 목록">
+              <span class="nav-icon">
+                <i class="fa fa-list-ul"></i>
+              </span>
+              <span class="nav-text">
+                서비스 목록
+
+              </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="./transactions" data-toggle="tooltip" data-placement="right" title="충전하기">
+              <span class="nav-icon">
+                <i class="fa fa-credit-card"></i>
+              </span>
+              <span class="nav-text active">
+                충전하기
+
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+    <div class="layout-main d-flex flex-column flex-fill max-w-full">
+      <main class="app-content">
+        <div class="modal1 payform" <%- `style="display: ${result == 'default' ? 'none' : 'none'};" ` %>>
+          <div class="modal_body" style="height: 750px;">
+            <a class="main-logo" href="./transactions"><img
+                src="./assets/uploads/user54ceb91256e8190e474aa752a6e0650a2df5ba37/logo_white.png" alt="logo"
+                style="height: 100px;"></a>
+            <form class="form" action="./add-depoist" method="POST">
+              <h4 style="margin-bottom: 18px;">무통장입금 <span style="font-weight: 400;">충전 신청</span></h4>
+              <div class="form-group">
+                <p style="color: black; margin-bottom: 10px; font-size: 16px;">부산은행 112-2007-03-7109 정화랑</p>
+                <label for="username" class="control-label"
+                  style="color: black; margin-bottom: 10px; font-size: 16px;">충전 금액을 입력해주세요.</label>
+                <input type="number" class="form-control" name="payamount">
+              </div>
+              <div class="form-group" style="margin-top: 18px;">
+                <label for="username" class="control-label"
+                  style="color: black; margin-bottom: 10px; font-size: 16px;">입금자명을 입력해주세요.</label>
+                <input type="text" class="form-control" name="payname">
+              </div>
+
+
+              <div class="form-group" style="margin-top: 18px;">
+                <span class="control-label"
+                  style="color: black; margin-bottom: 10px; font-size: 16px; margin-right: 10px;"><input type="radio"
+                    name="type" id="none" value="선택안함" checked="checked" /> 선택안함</input></span>
+                <span class="control-label"
+                  style="color: black; margin-bottom: 10px; font-size: 16px; margin-right: 10px;"><input type="radio"
+                    name="type" id="business" value="세금계산서" /> 세금계산서</input></span>
+                <span class="control-label"
+                  style="color: black; margin-bottom: 10px; font-size: 16px; margin-right: 10px;"><input type="radio"
+                    name="type" id="personal" value="현금영수증" /> 현금영수증</input></span>
+
+              </div>
+
+
+
+              <div class="form-group businessform" style="margin-top: 4px; display: none;">
+                <div class="row">
+                  <div class="col-md-6" style="margin-bottom: 8px;">
+                    <label for="username" class="control-label"
+                      style="color: black; margin-bottom: 10px; font-size: 16px;">회사명</label>
+                    <input type="text" class="form-control" name="business_name" id="business_name">
+                  </div>
+                  <div class="col-md-6" style="margin-bottom: 8px;">
+                    <label for="username" class="control-label"
+                      style="color: black; margin-bottom: 10px; font-size: 16px;">사업자번호</label>
+                    <input type="text" class="form-control" name="business_regno" id="business_regno">
+                  </div>
+                  <div class="col-md-6" style="margin-bottom: 8px;">
+                    <label for="username" class="control-label"
+                      style="color: black; margin-bottom: 10px; font-size: 16px;">대표자</label>
+                    <input type="text" class="form-control" name="business_owner" id="business_owner">
+                  </div>
+                  <div class="col-md-6" style="margin-bottom: 8px;">
+                    <label for="username" class="control-label"
+                      style="color: black; margin-bottom: 10px; font-size: 16px;">연락처</label>
+                    <input type="text" class="form-control" name="business_phone" id="business_phone">
+                  </div>
+                  <div class="col-md-12">
+                    <label for="username" class="control-label"
+                      style="color: black; margin-bottom: 10px; font-size: 16px;">이메일</label>
+                    <input type="text" class="form-control" name="business_email" id="business_email">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group personalform" style="margin-top: 4px; display: none;">
+                <div class="row">
+                  <div class="col-md-12">
+                    <label for="username" class="control-label"
+                      style="color: black; margin-bottom: 10px; font-size: 16px;">전화번호</label>
+                    <input type="text" class="form-control" name="personal_phone" id="personal_phone">
+                  </div>
+                </div>
+              </div>
+
+              <script>
+                var nonetype = document.getElementById("none");
+                var businesstype = document.getElementById("business");
+                var personaltype = document.getElementById("personal");
+
+                var businessform = document.getElementsByClassName('businessform')[0];
+                var personalform = document.getElementsByClassName('personalform')[0];
+
+                nonetype.addEventListener("change", function () {
+                  businessform.style.display = 'none';
+                  personalform.style.display = 'none';
+                  document.getElementById('business_name').value = '';
+                  document.getElementById('business_regno').value = '';
+                  document.getElementById('business_owner').value = '';
+                  document.getElementById('business_phone').value = '';
+                  document.getElementById('business_email').value = '';
+                  document.getElementById('personal_phone').value = '';
+                })
+
+                businesstype.addEventListener("change", function () {
+                  businessform.style.display = 'block';
+                  personalform.style.display = 'none';
+                  document.getElementById('personal_phone').value = '';
+                })
+
+                personaltype.addEventListener("change", function () {
+                  businessform.style.display = 'none';
+                  personalform.style.display = 'block';
+                  document.getElementById('business_name').value = '';
+                  document.getElementById('business_regno').value = '';
+                  document.getElementById('business_owner').value = '';
+                  document.getElementById('business_phone').value = '';
+                  document.getElementById('business_email').value = '';
+                })
+              </script>
+
+
+              <input class="form-control square" type="text" name="payuid" value="999916a18a5b939afe95290962c4a459"
+                style="display: none;">
+              <input class="form-control square" type="text" name="payid" value="102" style="display: none;">
+              <div class="form-group" style="padding-bottom: 12px;">
+                <label class="custom-control custom-checkbox">
+                  <span class="custom-control-label text-uppercase"
+                    style="font-size: 16px; margin-bottom: 8px; font-weight: 400; line-height: 1.5"><input
+                      type="checkbox" class="custom-control-input" name="agree" value="1"> 입금을 신청하실 경우 <span
+                      style="font-weight: 500;">이용약관</span>에 동의하는 것으로 간주되는 것을 확인하였습니다.</span>
+                </label>
+              </div>
+              <div class="form-actions left text-center">
+                <input type="hidden" name="payment_id" value="">
+                <input type="hidden" name="payment_method" value="">
+                <button type="submit" class="nav-link btn btn-info mb-1" name="paynow" style="width: 100%;">
+                  입금 신청 <span style="font-weight: 400; font-size: 12px;">(보통 1분 이내 자동 처리)</span>
+                </button>
+                <a href="./transactions"
+                  style="font-size: 14px; color: grey; font-weight: 700; text-align: center;">신청하지 않고 돌아가기</a>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal1 paycompleted" <%- `style="display: ${result == 'default' ? 'none' : 'block'};" ` %>>
+          <div class="modal_body" style="height: 350px;">
+            <a class="main-logo" href="/transactions"><img
+                src="/assets/uploads/user54ceb91256e8190e474aa752a6e0650a2df5ba37/logo_white.png" alt="logo"
+                style="height: 60px;"></a>
+            <h4 style="margin-bottom: 18px;"><span style="font-weight: 400;">충전 신청이 </span>완료<span
+                style="font-weight: 400;">되었습니다.</span></h4>
+            <h1 style="font-size: 22px; line-height: 1.25">관리자 &gt; 시스템 설정 &gt; 계좌번호 및 기타 설정에서 설정해주세요.</h1>
+            <h6 style="font-size: 18px; font-weight: 400; margin-top: 14px;">입금 후 1분 이내에 충전됩니다.</h6>
+            <a class="nav-link btn btn-info mb-1" href="/transactions" style="margin-top: 22px; ">
+              <%= process.env.KR_NAME %>로 돌아가기
+            </a>
+          </div>
+        </div>
+        <style>
+          .modal1 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: none;
+            width: 100%;
+            z-index: 1050;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+          }
+
+          .modal_body {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            height: 650px;
+            padding: 40px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 10px;
+            box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+            transform: translateX(-50%) translateY(-50%);
+          }
+        </style>
+        <script>
+          var keys = { 37: 1, 38: 1, 39: 1, 40: 1 };
+
+          function preventDefault(e) {
+            e.preventDefault();
+          }
+
+          function preventDefaultForScrollKeys(e) {
+            if (keys[e.keyCode]) {
+              preventDefault(e);
+              return false;
+            }
+          }
+
+          var supportsPassive = false;
+          try {
+            window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
+              get: function () { supportsPassive = true; }
+            }));
+          } catch (e) { }
+
+          var wheelOpt = supportsPassive ? { passive: false } : false;
+          var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
+          var payform = document.getElementsByClassName('payform')[0];
+
+          function pay() {
+            payform.style.display = 'block';
+            window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
+            window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
+            window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
+            window.addEventListener('keydown', preventDefaultForScrollKeys, false);
+          }
+        </script>
+        <div class="page-title m-b-20 add-funds-form-content">
+          <div class="row justify-content-between">
+            <div class="col-md-12" style="padding-left: 0px;">
+              <h1 class="page-title" style="font-size: 32px; font-weight: 600; margin-bottom: 24px;">
+                충전하기
+              </h1>
+            </div>
+            <div class="col-md-6">
+              <div class="row card justify-content-between"
+                style="padding-left: 24px; padding-right: 24px; padding-top: 36px; padding-bottom: 36px;">
+                <div class="col-md-12">
+                  <h2>충전하기</h2>
+                  <h4 style="margin-bottom: 8px; font-weight: 400;">원하는 결제 수단을 <strong>선택 후</strong> 충전해주세요.</h4>
+                  <a class="nav-link btn btn-info mb-1" href="#" onClick="pay();"
+                    style="margin-top: 22px; width: 100%; font-size: 24px;">
+                    무통장 입금
+                  </a>
+                  <div class="row">
+                    <div class="col-md-12 data-empty text-center">
+                      <% if(depoist.length> 0) {%>
+                        <div class="row">
+                          <div class="col-md-12 col-xl-12" style="margin-top: 24px;">
+                            <div class="table-responsive">
+                              <table class="table table-hover table-bordered table-vcenter card-table">
+                                <thead>
+                                  <tr>
+                                    <th class="text-center">결제번호</th>
+                                    <th class="text-center">결제수단</th>
+                                    <th class="text-center">결제금액</th>
+                                    <th class="text-center">결제일자</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <% depoist.forEach(e=> { %>
+                                    <tr class="tr_<%= e.depoistId %>" style="font-size: 14px;">
+                                      <td class="text-center w-5p text-muted">
+                                        <%= e.depoistId %>
+                                      </td>
+                                      <td class="text-center w-10p"><img class="payment"
+                                          src="https://console.prvad.com/assets/images/payments/manual.png"
+                                          alt="manual">
+                                      </td>
+                                      <td class="text-center w-10p">
+                                        <%= e.pay %>
+                                      </td>
+                                      <td class="text-center w-5p text-muted" style="line-height: 1.5;">
+                                        <%= e.created %>
+                                      </td>
+                                    </tr>
+                                    <% }) %>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                        <% } else { %>
+                          <div class="content">
+                            데이터가 없습니다.
+                          </div>
+                          <% } %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="row card justify-content-between"
+                style="padding-left: 24px; padding-right: 24px; padding-top: 36px; padding-bottom: 36px;">
+                <form class="form" action="./files/rtpay.php" method="POST">
+                  <div class="col-md-12">
+                    <h2>유의사항</h2>
+                    <h4 style="margin-bottom: 8px; font-weight: 400;">꼭 <strong>유의사항</strong>을 확인 후 충전해주세요.</h4>
+                    <h6 style="margin-top: 24px; font-size: 16px; font-weight: 400;">
+                      <li style="margin-bottom: 12px;">결제 금액과 입금자명이 동일하여야 합니다.</li>
+                      <li style="margin-bottom: 12px;">충전 신청 후 입금해주셔야 정상적으로 처리됩니다.</li>
+                      <li style="margin-bottom: 12px;">세금계산서나 현금영수증은 충전 시 같이 신청해주세요.</li>
+                    </h6>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <!-- modal -->
+  <div id="modal-ajax" class="modal fade" tabindex="-1"></div>
+  <!-- Theme Settings -->
+  <div class="modal fade" id="customize" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-right">
+      <div class="modal-dialog theme-customizer" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="modal-header bg-pantone">
+              <h4 class="modal-title"><i class="icon-fa fa fa-cogs"></i> Theme customizer</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              </button>
+            </div>
+            <form action="#" class="form js-layout-form p-l-20">
+
+              <!--Color mode  -->
+              <div class="form-group m-t-20">
+                <label class="form-label">Daynight mode</label>
+                <div class="custom-controls-stacked">
+                  <div class="row">
+                    <div class="col-6">
+                      <label class="form-check-inline custom-control-inline">Day <input class="selectgroup-input"
+                          type="radio" name="color-scheme" value="light">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div class="col-6">
+                      <label class="form-check-inline custom-control-inline">Night <input class="selectgroup-input"
+                          type="radio" name="color-scheme" value="dark">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group mb-2 d-none">
+                <label class="form-label">Nav position</label>
+                <div class="selectgroup w-100p">
+                  <label class="selectgroup-item">
+                    <input type="radio" name="nav-position" value="top" class="selectgroup-input">
+                    <span class="selectgroup-button">top</span>
+                  </label>
+                  <label class="selectgroup-item">
+                    <input type="radio" name="nav-position" value="side" class="selectgroup-input">
+                    <span class="selectgroup-button">side</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group mb-2 d-none">
+                <label class="form-label">Header color</label>
+                <div class="selectgroup w-100p">
+                  <label class="selectgroup-item">
+                    <input type="radio" name="header-color" value="light" class="selectgroup-input">
+                    <span class="selectgroup-button">light</span>
+                  </label>
+                  <label class="selectgroup-item">
+                    <input type="radio" name="header-color" value="dark" class="selectgroup-input">
+                    <span class="selectgroup-button">dark</span>
+                  </label>
+                </div>
+              </div>
+
+              <!--</div>-->
+              <div class="form-group mb-2 d-none">
+                <label class="form-label">Sidebar position</label>
+                <div class="selectgroup w-100p">
+                  <label class="selectgroup-item">
+                    <input type="radio" name="sidebar-position" value="left" class="selectgroup-input">
+                    <span class="selectgroup-button">left</span>
+                  </label>
+                  <label class="selectgroup-item">
+                    <input type="radio" name="sidebar-position" value="right" class="selectgroup-input">
+                    <span class="selectgroup-button">right</span>
+                  </label>
+                </div>
+              </div>
+
+              <!--Layout Option-->
+              <div class="form-group m-t-20">
+                <label class="form-label"><i class="fe fe-layout"></i> Layout option</label>
+                <div class="custom-controls-stacked">
+                  <div class="row">
+                    <div class="col-6">
+                      <label class="form-check-inline custom-control-inline">Expanded menu <input
+                          class="selectgroup-input" type="radio" name="sidebar-size" value="default">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div class="col-6">
+                      <label class="form-check-inline custom-control-inline">Collapsed menu <input
+                          class="selectgroup-input" type="radio" name="sidebar-size" value="folded">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!--Sidebar color option-->
+              <div class="form-group m-t-20">
+                <label class="form-label">Sidebar color option</label>
+                <div class="custom-controls-stacked">
+                  <div class="row">
+                    <div class="col-6">
+                      <label class="form-check-inline custom-control-inline">Light <input class="selectgroup-input"
+                          type="radio" name="sidebar-color" value="light">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                    <div class="col-6">
+                      <label class="form-check-inline custom-control-inline">Dark <input class="selectgroup-input"
+                          type="radio" name="sidebar-color" value="dark">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group mb-2 d-none">
+                <label class="form-label">Sidebar fixed</label>
+                <div class="selectgroup w-100p">
+                  <label class="selectgroup-item">
+                    <input type="radio" name="sidebar-fixed" value="fixed" class="selectgroup-input">
+                    <span class="selectgroup-button">fixed</span>
+                  </label>
+                  <label class="selectgroup-item">
+                    <input type="radio" name="sidebar-fixed" value="default" class="selectgroup-input">
+                    <span class="selectgroup-button">default</span>
+                  </label>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> <!-- Scripts -->
+  <!-- General scripts -->
+  <script type="text/javascript" src="./assets/js/vendors/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="./assets/js/vendors/jquery.sparkline.min.js"></script>
+  <script type="text/javascript" src="./assets/js/vendors/selectize.min.js"></script>
+  <script type="text/javascript" src="./assets/admin/vendors/autosize/autosize.min.js"></script>
+  <script type="text/javascript" src="./assets/admin/vendors/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+  <!-- Core scripts -->
+  <script src="./assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+  <!-- Core scripts -->
+  <script type="text/javascript" src="./assets/js/core.js"></script>
+  <script type="text/javascript" src="./assets/admin/dist/js/admin-core.min.js"></script>
+  <script type="text/javascript" src="./assets/admin/dist/js/customizer.js"></script>
+
+  <!-- toast -->
+  <script type="text/javascript" src="./assets/plugins/jquery-toast/js/jquery.toast.js"></script>
+  <!-- emoji picker -->
+  <script src="./assets/plugins/emoji-picker/lib/js/config.js"></script>
+  <script src="./assets/plugins/emoji-picker/lib/js/util.js"></script>
+  <script src="./assets/plugins/emoji-picker/lib/js/jquery.emojiarea.js"></script>
+  <script src="./assets/plugins/emoji-picker/lib/js/emoji-picker.js"></script>
+  <!-- flags icon -->
+  <script type="text/javascript" src="./assets/plugins/flags/js/docs.js"></script>
+
+  <script type="text/javascript" src="./assets/admin/vendors/js/notify.min.js"></script>
+  <!-- general JS -->
+  <script type="text/javascript" src="./assets/js/process.js"></script>
+  <script type="text/javascript" src="./assets/js/general.js"></script> <a href=""><img class="kakaoChat"
+      src="https://pkweb.xyz/assets/img/kakao_01.png" alt="톡상담" /></a>
+</body>
+
+</html>

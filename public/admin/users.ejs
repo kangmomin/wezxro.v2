@@ -1,0 +1,1669 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta http-equiv="Content-Language" content="en">
+<meta name="description" content="                                    ">
+<meta name="keywords" content="                                                           ">
+<title><%= process.env.EN_NAME %></title>
+
+<link rel="shortcut icon" type="image/x-icon" href="../assets/uploads/user54ceb91256e8190e474aa752a6e0650a2df5ba37/logo.png">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+
+<script src="../assets/js/vendors/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="../assets/plugins/font-awesome/css/font-awesome.min.css">
+
+<link rel="stylesheet" type="text/css" href="../assets/plugins/emoji/emojionearea.min.css" media="screen">
+<script type="text/javascript" src="../assets/plugins/emoji/emojionearea.min.js"></script>
+ 
+<!-- c3.js Charts Plugin -->
+<link href="../assets/plugins/flags/css/flag-icon.css" rel="stylesheet">
+<!-- vendor -->
+<link href="../assets/admin/vendors/css/vendor.css" rel="stylesheet">
+<link href="../assets/admin/dist/css/admin-core.css" rel="stylesheet" />
+<link href="../assets/admin/dist/css/layout.css" rel="stylesheet">
+<script type="text/javascript">
+    var token = '881f8aa8f3508a318738939a44c7eef0',
+        PATH  = './',
+        BASE  = './';
+    var    deleteItem = "Are you sure you want to delete this item?";
+    var    deleteItems = "Are you sure you want to delete all items?";
+</script>  </head>
+  <body class="antialiased vertical-menu">
+
+    <div id="page-overlay" class="visible incoming">
+      <div class="loader-wrapper-outer">
+        <div class="loader-wrapper-inner">
+          <div class="lds-double-ring">
+            <div></div>
+            <div></div>
+            <div>
+              <div></div>
+            </div>
+            <div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <style>
+  .search-box div.form-group{
+    margin-bottom: 0px !important;
+  }
+  .search-box .form-control {
+    height: auto !important;
+  }
+</style>
+
+<header class="navbar navbar-expand-lg js-header">
+  <div class="header-wrap">
+
+    <a class="navbar-toggler mobile-menu">
+      <span class="navbar-toggler-icon"><i class="icon fe fe-menu"></i></span>
+    </a>
+
+    <a href="./" class="navbar-brand text-inherit mr-md-3">
+      <img src="../assets/uploads/user54ceb91256e8190e474aa752a6e0650a2df5ba37/logo.png" alt="Website Logo" class="d-md-none navbar-brand-logo">
+    </a>
+    
+    <ul class="nav navbar-menu align-items-center order-1 order-lg-2">
+      <li class="nav-item d-none d-lg-block">
+        <a class="nav-link" href="#customize" data-toggle="modal" >
+          <span class="nav-icon">
+            <i class="icon fe fe-sliders" data-toggle="tooltip" data-placement="bottom" title="Theme Customizer"></i>
+          </span>
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a href="#" data-toggle="dropdown" class="nav-link d-flex align-items-center py-0 px-lg-0 px-2 text-color ml-2">
+          <span class="ml-2 d-none d-lg-block leading-none">
+            <span class="mt-1">Hi! 관리자 </span>
+          </span>
+          <span class="avatar admin-profile m-l-10"></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+          <a class="dropdown-item" href="./profile">
+            <i class="icon fe fe-user dropdown-icon"></i>
+            Profile          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/logout">
+            <i class="icon fe fe-log-out dropdown-icon"></i>
+            Logout          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</header>    <div class="d-flex flex-row h-100p">
+      
+<style>
+  .tickets-number{
+    font-size: 14px !important;
+  }
+</style>
+
+
+<aside class="navbar navbar-side navbar-fixed js-sidebar" id="aside">
+  <div class="mobile-logo">
+    <a href="./statistics" class="navbar-brand text-inherit">
+              <h1 style="margin-top: 0.5rem;"><%= process.env.EN_NAME %></h1>
+</a>
+  </div>
+  <div class="flex-fill scroll-bar">
+    <ul class="navbar-nav mb-md-4" id="menu"><h6 class="navbar-heading first"><span class="text">대시보드</span></h6><li class="nav-item">
+          <a class="nav-link " href="./statistics" data-toggle="tooltip" data-placement="right" title="대시보드">
+            <span class="nav-icon">
+              <i class="fa fa-bar-chart"></i>
+            </span>
+            <span class="nav-text">
+              대시보드
+              
+            </span>
+          </a>
+        </li><h6 class="navbar-heading first"><span class="text">서비스 및 주문 관리</span></h6><li class="nav-item">
+          <a class="nav-link " href="./order" data-toggle="tooltip" data-placement="right" title="주문 관리">
+            <span class="nav-icon">
+              <i class="fe fe-shopping-cart"></i>
+            </span>
+            <span class="nav-text">
+              주문 관리
+              
+            </span>
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link " href="./services" data-toggle="tooltip" data-placement="right" title="서비스 관리">
+            <span class="nav-icon">
+              <i class="fa fa-list-ul"></i>
+            </span>
+            <span class="nav-text">
+              서비스 관리
+              
+            </span>
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link " href="./transactions" data-toggle="tooltip" data-placement="right" title="충전 관리">
+            <span class="nav-icon">
+              <i class="fa fa-file-text-o"></i>
+            </span>
+            <span class="nav-text">
+              충전 관리
+              
+            </span>
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link " href="./category" data-toggle="tooltip" data-placement="right" title="카테고리 관리">
+            <span class="nav-icon">
+              <i class="fa fa-th-large"></i>
+            </span>
+            <span class="nav-text">
+              카테고리 관리
+              
+            </span>
+          </a>
+        </li><h6 class="navbar-heading first"><span class="text">회원 관리</span></h6><li class="nav-item">
+          <a class="nav-link active" href="./users" data-toggle="tooltip" data-placement="right" title="회원 관리">
+            <span class="nav-icon">
+              <i class="fe fe-users"></i>
+            </span>
+            <span class="nav-text">
+              회원 관리
+              
+            </span>
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link " href="./provider" data-toggle="tooltip" data-placement="right" title="도매처 관리">
+            <span class="nav-icon">
+              <i class="fe fe-link"></i>
+            </span>
+            <span class="nav-text">
+              도매처 관리
+              
+            </span>
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link " href="./payments" data-toggle="tooltip" data-placement="right" title="결제 수단 관리">
+            <span class="nav-icon">
+              <i class="fe fe-dollar-sign"></i>
+            </span>
+            <span class="nav-text">
+              결제 수단 관리
+              
+            </span>
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link " href="./news" data-toggle="tooltip" data-placement="right" title="공지사항 관리">
+            <span class="nav-icon">
+              <i class="fe fe-bell"></i>
+            </span>
+            <span class="nav-text">
+              공지사항 관리
+              
+            </span>
+          </a>
+        </li></ul>  </div>
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a href="/logout" class="nav-link" data-toggle="tooltip" data-placement="right" title="Logout">
+        <span class="nav-icon"><i class="icon fe fe-power"></i>
+        </span>
+        <span class="nav-text">Logout</span>
+      </a>
+    </li>
+  </ul>
+</aside>      <div class="layout-main d-flex flex-column flex-fill max-w-full">
+        <main class="app-content">
+          <div class="page-title m-b-20">
+                <div class="row justify-content-between">
+                    <div class="col-md-2">
+                        <h1 class="page-title">
+                            <span class="fe fe-users"></span> 회원 관리
+                        </h1>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="d-flex">
+                        <a href="./users/update" class="ml-auto btn btn-outline-primary ajaxModal">
+                            <span class="fe fe-plus"></span>
+                            추가
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div><div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">필터</h3>
+                            <div class="card-options">
+                                <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+                                <a href="#" class="card-options-remove" data-toggle="card-remove"><i class="fe fe-x"></i></a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                 <div class="btn-group w-30 m-b-10"><a href="./users?status=3" class="btn ">All <span class="badge badge-pill bg-azure">47</span></a><a href="./users?status=1" class="btn ">Active <span class="badge badge-pill bg-indigo">47</span></a></div>
+                                </div>
+                                <div class="col-md-4 search-area">
+                                 <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" name="query" class="form-control" placeholder="검색" value="">
+                        <select name="field" class="form-control" id=""><option value="email" >이메일</option><option value="first_name" >First name</option><option value="last_name" >Last name</option><option value="history_ip" >History ip</option></select>
+                        <button class="btn btn-primary btn-square btn-search" type="button"><span class="fe fe-search"></span></button>
+                        <button class="btn btn-outline-danger btn-square btn-clear d-none" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Clear" type="button"><span class="fe fe-x"></span></button>
+                    </div>
+                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<div class="row">
+      <div class="col-md-12 col-xl-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">회원 목록</h3>
+          <div class="card-options">
+            <div class="item-action dropdown action-options"><button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown">Actions <span class="fe fe-chevrons-down"></span></button><div class="dropdown-menu dropdown-menu-right"><a href="./users/bulk_action/active" data-type="active" class="dropdown-item ajaxActionOptions"><i class="dropdown-icon fe fe-check-square"></i> Active</a><a href="./users/bulk_action/deactive" data-type="deactive" class="dropdown-item ajaxActionOptions"><i class="dropdown-icon fe fe-x-square"></i> Deactive All</a><a href="./users/export/csv" data-type="csv" class="dropdown-item "><i class="dropdown-icon fe fe-download"></i> Export CSV</a><a href="./users/export/excel" data-type="excel" class="dropdown-item "><i class="dropdown-icon fe fe-download"></i> Export excel</a><a href="./users/bulk_action/delete" data-type="delete" class="dropdown-item ajaxActionOptions"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div>          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered table-vcenter card-table">
+            <thead><tr><th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-items check-all" data-name="check_1"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th><th class="text-center w-1">#</th><th class="">User Profile</th><th class="text-center">Balance</th><th class="text-center">Custom rate</th><th class="text-center">Role</th><th class="text-center">Created</th><th class="text-center">Status</th><th class="text-center">관리</th></tr></thead>            <tbody>
+                              <tr class="tr_3b1bd5cf8885e792d8ac6c0f0495e289">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="3b1bd5cf8885e792d8ac6c0f0495e289"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">1</td>
+                  <td>
+                    <div class="title"><h6>ㄱㄴㄷ </h6></div>
+                    <div class="sub text-muted">123@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/3b1bd5cf8885e792d8ac6c0f0495e289">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-07-15 22:20:18</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="3b1bd5cf8885e792d8ac6c0f0495e289" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/3b1bd5cf8885e792d8ac6c0f0495e289" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/3b1bd5cf8885e792d8ac6c0f0495e289" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/3b1bd5cf8885e792d8ac6c0f0495e289" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/3b1bd5cf8885e792d8ac6c0f0495e289" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/3b1bd5cf8885e792d8ac6c0f0495e289" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/3b1bd5cf8885e792d8ac6c0f0495e289" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/3b1bd5cf8885e792d8ac6c0f0495e289" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/3b1bd5cf8885e792d8ac6c0f0495e289" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_0e97c4182e9f2b3552182899a0997bdc">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="0e97c4182e9f2b3552182899a0997bdc"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">2</td>
+                  <td>
+                    <div class="title"><h6>김재호 </h6></div>
+                    <div class="sub text-muted">yek1191195@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/0e97c4182e9f2b3552182899a0997bdc">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-07-09 22:33:42</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="0e97c4182e9f2b3552182899a0997bdc" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/0e97c4182e9f2b3552182899a0997bdc" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/0e97c4182e9f2b3552182899a0997bdc" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/0e97c4182e9f2b3552182899a0997bdc" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/0e97c4182e9f2b3552182899a0997bdc" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/0e97c4182e9f2b3552182899a0997bdc" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/0e97c4182e9f2b3552182899a0997bdc" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/0e97c4182e9f2b3552182899a0997bdc" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/0e97c4182e9f2b3552182899a0997bdc" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_527b75c50ddfe45f300111f29979be98">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="527b75c50ddfe45f300111f29979be98"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">3</td>
+                  <td>
+                    <div class="title"><h6>김재호 </h6></div>
+                    <div class="sub text-muted">kjh080622@naver.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/527b75c50ddfe45f300111f29979be98">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-07-08 17:44:00</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="527b75c50ddfe45f300111f29979be98" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/527b75c50ddfe45f300111f29979be98" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/527b75c50ddfe45f300111f29979be98" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/527b75c50ddfe45f300111f29979be98" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/527b75c50ddfe45f300111f29979be98" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/527b75c50ddfe45f300111f29979be98" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/527b75c50ddfe45f300111f29979be98" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/527b75c50ddfe45f300111f29979be98" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/527b75c50ddfe45f300111f29979be98" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_32a31faeaa9d12239c1cc2a474206f5f">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="32a31faeaa9d12239c1cc2a474206f5f"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">4</td>
+                  <td>
+                    <div class="title"><h6>강모민 </h6></div>
+                    <div class="sub text-muted">alex108902@naver.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">98000</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/32a31faeaa9d12239c1cc2a474206f5f">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-07-07 18:07:41</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="32a31faeaa9d12239c1cc2a474206f5f" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/32a31faeaa9d12239c1cc2a474206f5f" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/32a31faeaa9d12239c1cc2a474206f5f" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/32a31faeaa9d12239c1cc2a474206f5f" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/32a31faeaa9d12239c1cc2a474206f5f" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/32a31faeaa9d12239c1cc2a474206f5f" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/32a31faeaa9d12239c1cc2a474206f5f" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/32a31faeaa9d12239c1cc2a474206f5f" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/32a31faeaa9d12239c1cc2a474206f5f" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_9502e766ab96c71b3d480490de02c9e3">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="9502e766ab96c71b3d480490de02c9e3"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">5</td>
+                  <td>
+                    <div class="title"><h6>송용민 </h6></div>
+                    <div class="sub text-muted">song1234ay@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/9502e766ab96c71b3d480490de02c9e3">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-06-29 18:49:24</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="9502e766ab96c71b3d480490de02c9e3" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/9502e766ab96c71b3d480490de02c9e3" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/9502e766ab96c71b3d480490de02c9e3" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/9502e766ab96c71b3d480490de02c9e3" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/9502e766ab96c71b3d480490de02c9e3" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/9502e766ab96c71b3d480490de02c9e3" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/9502e766ab96c71b3d480490de02c9e3" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/9502e766ab96c71b3d480490de02c9e3" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/9502e766ab96c71b3d480490de02c9e3" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_89d40a9a7afb90c28922098a0b7443ea">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="89d40a9a7afb90c28922098a0b7443ea"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">6</td>
+                  <td>
+                    <div class="title"><h6>류이준 </h6></div>
+                    <div class="sub text-muted">ryuejun503@naver.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/89d40a9a7afb90c28922098a0b7443ea">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-06-28 11:02:00</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="89d40a9a7afb90c28922098a0b7443ea" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/89d40a9a7afb90c28922098a0b7443ea" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/89d40a9a7afb90c28922098a0b7443ea" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/89d40a9a7afb90c28922098a0b7443ea" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/89d40a9a7afb90c28922098a0b7443ea" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/89d40a9a7afb90c28922098a0b7443ea" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/89d40a9a7afb90c28922098a0b7443ea" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/89d40a9a7afb90c28922098a0b7443ea" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/89d40a9a7afb90c28922098a0b7443ea" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_78feaa373f60d2e3754888358aad11f6">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="78feaa373f60d2e3754888358aad11f6"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">7</td>
+                  <td>
+                    <div class="title"><h6>123 </h6></div>
+                    <div class="sub text-muted">123@naver.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">95000</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/78feaa373f60d2e3754888358aad11f6">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-06-16 16:03:59</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="78feaa373f60d2e3754888358aad11f6" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/78feaa373f60d2e3754888358aad11f6" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/78feaa373f60d2e3754888358aad11f6" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/78feaa373f60d2e3754888358aad11f6" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/78feaa373f60d2e3754888358aad11f6" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/78feaa373f60d2e3754888358aad11f6" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/78feaa373f60d2e3754888358aad11f6" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/78feaa373f60d2e3754888358aad11f6" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/78feaa373f60d2e3754888358aad11f6" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_4a0d78fcedc517b3ebae1e066494c85e">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="4a0d78fcedc517b3ebae1e066494c85e"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">8</td>
+                  <td>
+                    <div class="title"><h6>홍영도 </h6></div>
+                    <div class="sub text-muted">scsxcsss@naver.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/4a0d78fcedc517b3ebae1e066494c85e">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-05-30 03:08:59</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="4a0d78fcedc517b3ebae1e066494c85e" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/4a0d78fcedc517b3ebae1e066494c85e" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/4a0d78fcedc517b3ebae1e066494c85e" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/4a0d78fcedc517b3ebae1e066494c85e" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/4a0d78fcedc517b3ebae1e066494c85e" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/4a0d78fcedc517b3ebae1e066494c85e" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/4a0d78fcedc517b3ebae1e066494c85e" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/4a0d78fcedc517b3ebae1e066494c85e" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/4a0d78fcedc517b3ebae1e066494c85e" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_66a91ef28d43fa069e314177fb5faa4b">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="66a91ef28d43fa069e314177fb5faa4b"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">9</td>
+                  <td>
+                    <div class="title"><h6>안정준 </h6></div>
+                    <div class="sub text-muted">jungjune10@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/66a91ef28d43fa069e314177fb5faa4b">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-05-18 17:45:48</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="66a91ef28d43fa069e314177fb5faa4b" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/66a91ef28d43fa069e314177fb5faa4b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/66a91ef28d43fa069e314177fb5faa4b" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/66a91ef28d43fa069e314177fb5faa4b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/66a91ef28d43fa069e314177fb5faa4b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/66a91ef28d43fa069e314177fb5faa4b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/66a91ef28d43fa069e314177fb5faa4b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/66a91ef28d43fa069e314177fb5faa4b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/66a91ef28d43fa069e314177fb5faa4b" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_ac06fbb634650f8308d036bf5e975fce">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="ac06fbb634650f8308d036bf5e975fce"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">10</td>
+                  <td>
+                    <div class="title"><h6>문효원 </h6></div>
+                    <div class="sub text-muted">hyowonmun89@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/ac06fbb634650f8308d036bf5e975fce">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-05-18 14:05:18</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="ac06fbb634650f8308d036bf5e975fce" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/ac06fbb634650f8308d036bf5e975fce" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/ac06fbb634650f8308d036bf5e975fce" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/ac06fbb634650f8308d036bf5e975fce" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/ac06fbb634650f8308d036bf5e975fce" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/ac06fbb634650f8308d036bf5e975fce" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/ac06fbb634650f8308d036bf5e975fce" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/ac06fbb634650f8308d036bf5e975fce" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/ac06fbb634650f8308d036bf5e975fce" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_fd298dc63b45806f1fcfbe88f3949f6d">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="fd298dc63b45806f1fcfbe88f3949f6d"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">11</td>
+                  <td>
+                    <div class="title"><h6>윤원찬 </h6></div>
+                    <div class="sub text-muted">wc050502@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/fd298dc63b45806f1fcfbe88f3949f6d">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-04-27 10:41:56</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="fd298dc63b45806f1fcfbe88f3949f6d" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/fd298dc63b45806f1fcfbe88f3949f6d" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/fd298dc63b45806f1fcfbe88f3949f6d" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/fd298dc63b45806f1fcfbe88f3949f6d" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/fd298dc63b45806f1fcfbe88f3949f6d" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/fd298dc63b45806f1fcfbe88f3949f6d" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/fd298dc63b45806f1fcfbe88f3949f6d" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/fd298dc63b45806f1fcfbe88f3949f6d" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/fd298dc63b45806f1fcfbe88f3949f6d" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_787f651a644537f4fcd2fa22c9394b5b">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="787f651a644537f4fcd2fa22c9394b5b"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">12</td>
+                  <td>
+                    <div class="title"><h6>이우진 </h6></div>
+                    <div class="sub text-muted">dldnwlsqwer137@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/787f651a644537f4fcd2fa22c9394b5b">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-04-22 00:54:43</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="787f651a644537f4fcd2fa22c9394b5b" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/787f651a644537f4fcd2fa22c9394b5b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/787f651a644537f4fcd2fa22c9394b5b" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/787f651a644537f4fcd2fa22c9394b5b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/787f651a644537f4fcd2fa22c9394b5b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/787f651a644537f4fcd2fa22c9394b5b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/787f651a644537f4fcd2fa22c9394b5b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/787f651a644537f4fcd2fa22c9394b5b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/787f651a644537f4fcd2fa22c9394b5b" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_bbc2de8494b6942de132a9ba5a6387be">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="bbc2de8494b6942de132a9ba5a6387be"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">13</td>
+                  <td>
+                    <div class="title"><h6>김동현 </h6></div>
+                    <div class="sub text-muted">ksh001225@naver.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/bbc2de8494b6942de132a9ba5a6387be">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-04-19 11:05:47</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="bbc2de8494b6942de132a9ba5a6387be" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/bbc2de8494b6942de132a9ba5a6387be" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/bbc2de8494b6942de132a9ba5a6387be" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/bbc2de8494b6942de132a9ba5a6387be" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/bbc2de8494b6942de132a9ba5a6387be" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/bbc2de8494b6942de132a9ba5a6387be" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/bbc2de8494b6942de132a9ba5a6387be" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/bbc2de8494b6942de132a9ba5a6387be" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/bbc2de8494b6942de132a9ba5a6387be" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_3bea8808bd63e7c45fa89f8e44c5bc77">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="3bea8808bd63e7c45fa89f8e44c5bc77"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">14</td>
+                  <td>
+                    <div class="title"><h6>심상훈 </h6></div>
+                    <div class="sub text-muted">tla9245@nate.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/3bea8808bd63e7c45fa89f8e44c5bc77">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-04-15 21:36:52</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="3bea8808bd63e7c45fa89f8e44c5bc77" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/3bea8808bd63e7c45fa89f8e44c5bc77" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/3bea8808bd63e7c45fa89f8e44c5bc77" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/3bea8808bd63e7c45fa89f8e44c5bc77" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/3bea8808bd63e7c45fa89f8e44c5bc77" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/3bea8808bd63e7c45fa89f8e44c5bc77" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/3bea8808bd63e7c45fa89f8e44c5bc77" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/3bea8808bd63e7c45fa89f8e44c5bc77" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/3bea8808bd63e7c45fa89f8e44c5bc77" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_74cb5d3e2739a608bce789f976f9d275">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="74cb5d3e2739a608bce789f976f9d275"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">15</td>
+                  <td>
+                    <div class="title"><h6>도화 </h6></div>
+                    <div class="sub text-muted">bsy7673@naver.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/74cb5d3e2739a608bce789f976f9d275">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-03-04 11:24:24</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="74cb5d3e2739a608bce789f976f9d275" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/74cb5d3e2739a608bce789f976f9d275" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/74cb5d3e2739a608bce789f976f9d275" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/74cb5d3e2739a608bce789f976f9d275" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/74cb5d3e2739a608bce789f976f9d275" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/74cb5d3e2739a608bce789f976f9d275" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/74cb5d3e2739a608bce789f976f9d275" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/74cb5d3e2739a608bce789f976f9d275" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/74cb5d3e2739a608bce789f976f9d275" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_4ee8430957a78ea999f5efb8cc0b99c1">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="4ee8430957a78ea999f5efb8cc0b99c1"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">16</td>
+                  <td>
+                    <div class="title"><h6>아무무 </h6></div>
+                    <div class="sub text-muted">sisisisis@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/4ee8430957a78ea999f5efb8cc0b99c1">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-02-28 04:47:11</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="4ee8430957a78ea999f5efb8cc0b99c1" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/4ee8430957a78ea999f5efb8cc0b99c1" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/4ee8430957a78ea999f5efb8cc0b99c1" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/4ee8430957a78ea999f5efb8cc0b99c1" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/4ee8430957a78ea999f5efb8cc0b99c1" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/4ee8430957a78ea999f5efb8cc0b99c1" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/4ee8430957a78ea999f5efb8cc0b99c1" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/4ee8430957a78ea999f5efb8cc0b99c1" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/4ee8430957a78ea999f5efb8cc0b99c1" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_c2b551f05a62d67df863dee918f0e613">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="c2b551f05a62d67df863dee918f0e613"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">17</td>
+                  <td>
+                    <div class="title"><h6>최백균 </h6></div>
+                    <div class="sub text-muted">cbc061002@naver.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/c2b551f05a62d67df863dee918f0e613">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-02-27 16:15:00</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="c2b551f05a62d67df863dee918f0e613" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/c2b551f05a62d67df863dee918f0e613" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/c2b551f05a62d67df863dee918f0e613" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/c2b551f05a62d67df863dee918f0e613" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/c2b551f05a62d67df863dee918f0e613" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/c2b551f05a62d67df863dee918f0e613" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/c2b551f05a62d67df863dee918f0e613" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/c2b551f05a62d67df863dee918f0e613" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/c2b551f05a62d67df863dee918f0e613" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_ced53a2957025683d6be819e6cf15b91">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="ced53a2957025683d6be819e6cf15b91"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">18</td>
+                  <td>
+                    <div class="title"><h6>조건희 </h6></div>
+                    <div class="sub text-muted">jji113456@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/ced53a2957025683d6be819e6cf15b91">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-02-27 11:55:06</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="ced53a2957025683d6be819e6cf15b91" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/ced53a2957025683d6be819e6cf15b91" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/ced53a2957025683d6be819e6cf15b91" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/ced53a2957025683d6be819e6cf15b91" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/ced53a2957025683d6be819e6cf15b91" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/ced53a2957025683d6be819e6cf15b91" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/ced53a2957025683d6be819e6cf15b91" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/ced53a2957025683d6be819e6cf15b91" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/ced53a2957025683d6be819e6cf15b91" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_c853399a0919e0350800b8b78943ee47">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="c853399a0919e0350800b8b78943ee47"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">19</td>
+                  <td>
+                    <div class="title"><h6>김민준 </h6></div>
+                    <div class="sub text-muted">bon6013@naver.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/c853399a0919e0350800b8b78943ee47">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-02-27 11:05:05</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="c853399a0919e0350800b8b78943ee47" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/c853399a0919e0350800b8b78943ee47" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/c853399a0919e0350800b8b78943ee47" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/c853399a0919e0350800b8b78943ee47" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/c853399a0919e0350800b8b78943ee47" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/c853399a0919e0350800b8b78943ee47" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/c853399a0919e0350800b8b78943ee47" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/c853399a0919e0350800b8b78943ee47" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/c853399a0919e0350800b8b78943ee47" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_6527aa4e89ae6961d00111b4341c9645">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="6527aa4e89ae6961d00111b4341c9645"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">20</td>
+                  <td>
+                    <div class="title"><h6>김시율 </h6></div>
+                    <div class="sub text-muted">yubin081500@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/6527aa4e89ae6961d00111b4341c9645">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-02-23 23:28:57</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="6527aa4e89ae6961d00111b4341c9645" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/6527aa4e89ae6961d00111b4341c9645" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/6527aa4e89ae6961d00111b4341c9645" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/6527aa4e89ae6961d00111b4341c9645" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/6527aa4e89ae6961d00111b4341c9645" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/6527aa4e89ae6961d00111b4341c9645" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/6527aa4e89ae6961d00111b4341c9645" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/6527aa4e89ae6961d00111b4341c9645" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/6527aa4e89ae6961d00111b4341c9645" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_fc56f1757e26fedd4341b75638fd91a7">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="fc56f1757e26fedd4341b75638fd91a7"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">21</td>
+                  <td>
+                    <div class="title"><h6>조비룡 </h6></div>
+                    <div class="sub text-muted">whqlfyd12@naver.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/fc56f1757e26fedd4341b75638fd91a7">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-02-21 23:37:58</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="fc56f1757e26fedd4341b75638fd91a7" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/fc56f1757e26fedd4341b75638fd91a7" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/fc56f1757e26fedd4341b75638fd91a7" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/fc56f1757e26fedd4341b75638fd91a7" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/fc56f1757e26fedd4341b75638fd91a7" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/fc56f1757e26fedd4341b75638fd91a7" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/fc56f1757e26fedd4341b75638fd91a7" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/fc56f1757e26fedd4341b75638fd91a7" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/fc56f1757e26fedd4341b75638fd91a7" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_a82003da95f5731d4c0beb32fa944557">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="a82003da95f5731d4c0beb32fa944557"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">22</td>
+                  <td>
+                    <div class="title"><h6>이서준 </h6></div>
+                    <div class="sub text-muted">gagamel0866@icloud.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/a82003da95f5731d4c0beb32fa944557">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-02-15 03:35:53</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="a82003da95f5731d4c0beb32fa944557" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/a82003da95f5731d4c0beb32fa944557" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/a82003da95f5731d4c0beb32fa944557" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/a82003da95f5731d4c0beb32fa944557" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/a82003da95f5731d4c0beb32fa944557" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/a82003da95f5731d4c0beb32fa944557" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/a82003da95f5731d4c0beb32fa944557" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/a82003da95f5731d4c0beb32fa944557" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/a82003da95f5731d4c0beb32fa944557" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_2c4d0ef970fc6b53cd794529cba94e9e">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="2c4d0ef970fc6b53cd794529cba94e9e"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">23</td>
+                  <td>
+                    <div class="title"><h6>이조영 </h6></div>
+                    <div class="sub text-muted">jimmywhdud@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/2c4d0ef970fc6b53cd794529cba94e9e">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-02-15 01:57:39</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="2c4d0ef970fc6b53cd794529cba94e9e" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/2c4d0ef970fc6b53cd794529cba94e9e" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/2c4d0ef970fc6b53cd794529cba94e9e" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/2c4d0ef970fc6b53cd794529cba94e9e" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/2c4d0ef970fc6b53cd794529cba94e9e" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/2c4d0ef970fc6b53cd794529cba94e9e" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/2c4d0ef970fc6b53cd794529cba94e9e" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/2c4d0ef970fc6b53cd794529cba94e9e" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/2c4d0ef970fc6b53cd794529cba94e9e" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_2d86666e28e3f27b387e707d60109011">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="2d86666e28e3f27b387e707d60109011"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">24</td>
+                  <td>
+                    <div class="title"><h6>황영빈 </h6></div>
+                    <div class="sub text-muted">ohra2009@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/2d86666e28e3f27b387e707d60109011">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-02-13 11:05:32</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="2d86666e28e3f27b387e707d60109011" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/2d86666e28e3f27b387e707d60109011" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/2d86666e28e3f27b387e707d60109011" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/2d86666e28e3f27b387e707d60109011" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/2d86666e28e3f27b387e707d60109011" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/2d86666e28e3f27b387e707d60109011" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/2d86666e28e3f27b387e707d60109011" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/2d86666e28e3f27b387e707d60109011" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/2d86666e28e3f27b387e707d60109011" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_0bcfa1804796b9c86ea550568ab9bacc">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="0bcfa1804796b9c86ea550568ab9bacc"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">25</td>
+                  <td>
+                    <div class="title"><h6>김정호 </h6></div>
+                    <div class="sub text-muted">auddus2007@naver.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/0bcfa1804796b9c86ea550568ab9bacc">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-01-28 11:45:38</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="0bcfa1804796b9c86ea550568ab9bacc" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/0bcfa1804796b9c86ea550568ab9bacc" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/0bcfa1804796b9c86ea550568ab9bacc" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/0bcfa1804796b9c86ea550568ab9bacc" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/0bcfa1804796b9c86ea550568ab9bacc" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/0bcfa1804796b9c86ea550568ab9bacc" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/0bcfa1804796b9c86ea550568ab9bacc" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/0bcfa1804796b9c86ea550568ab9bacc" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/0bcfa1804796b9c86ea550568ab9bacc" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_d6be314b25f8acc3e16282932fef89a8">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="d6be314b25f8acc3e16282932fef89a8"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">26</td>
+                  <td>
+                    <div class="title"><h6>최시원 </h6></div>
+                    <div class="sub text-muted">chiteu08@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/d6be314b25f8acc3e16282932fef89a8">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2023-01-08 19:50:00</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="d6be314b25f8acc3e16282932fef89a8" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/d6be314b25f8acc3e16282932fef89a8" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/d6be314b25f8acc3e16282932fef89a8" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/d6be314b25f8acc3e16282932fef89a8" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/d6be314b25f8acc3e16282932fef89a8" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/d6be314b25f8acc3e16282932fef89a8" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/d6be314b25f8acc3e16282932fef89a8" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/d6be314b25f8acc3e16282932fef89a8" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/d6be314b25f8acc3e16282932fef89a8" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_32953dff2d03eefd014cbc067049eae5">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="32953dff2d03eefd014cbc067049eae5"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">27</td>
+                  <td>
+                    <div class="title"><h6>xxmin </h6></div>
+                    <div class="sub text-muted">immotalbaragi@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/32953dff2d03eefd014cbc067049eae5">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2022-12-26 18:17:36</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="32953dff2d03eefd014cbc067049eae5" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/32953dff2d03eefd014cbc067049eae5" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/32953dff2d03eefd014cbc067049eae5" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/32953dff2d03eefd014cbc067049eae5" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/32953dff2d03eefd014cbc067049eae5" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/32953dff2d03eefd014cbc067049eae5" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/32953dff2d03eefd014cbc067049eae5" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/32953dff2d03eefd014cbc067049eae5" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/32953dff2d03eefd014cbc067049eae5" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_5044ff9c2920f78f4a454fdb7575bf9b">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="5044ff9c2920f78f4a454fdb7575bf9b"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">28</td>
+                  <td>
+                    <div class="title"><h6>류광봄 </h6></div>
+                    <div class="sub text-muted">oopp7925@naver.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/5044ff9c2920f78f4a454fdb7575bf9b">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2022-12-24 00:44:51</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="5044ff9c2920f78f4a454fdb7575bf9b" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/5044ff9c2920f78f4a454fdb7575bf9b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/5044ff9c2920f78f4a454fdb7575bf9b" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/5044ff9c2920f78f4a454fdb7575bf9b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/5044ff9c2920f78f4a454fdb7575bf9b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/5044ff9c2920f78f4a454fdb7575bf9b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/5044ff9c2920f78f4a454fdb7575bf9b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/5044ff9c2920f78f4a454fdb7575bf9b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/5044ff9c2920f78f4a454fdb7575bf9b" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_6e14e5b801e0ddf7ea13d597b51734e3">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="6e14e5b801e0ddf7ea13d597b51734e3"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">29</td>
+                  <td>
+                    <div class="title"><h6>이연재 </h6></div>
+                    <div class="sub text-muted">jae5307@icloud.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/6e14e5b801e0ddf7ea13d597b51734e3">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2022-12-22 01:36:46</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="6e14e5b801e0ddf7ea13d597b51734e3" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/6e14e5b801e0ddf7ea13d597b51734e3" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/6e14e5b801e0ddf7ea13d597b51734e3" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/6e14e5b801e0ddf7ea13d597b51734e3" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/6e14e5b801e0ddf7ea13d597b51734e3" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/6e14e5b801e0ddf7ea13d597b51734e3" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/6e14e5b801e0ddf7ea13d597b51734e3" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/6e14e5b801e0ddf7ea13d597b51734e3" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/6e14e5b801e0ddf7ea13d597b51734e3" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_7633fbf6b6cd8139535a9ec76170d16c">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="7633fbf6b6cd8139535a9ec76170d16c"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">30</td>
+                  <td>
+                    <div class="title"><h6>배정우 </h6></div>
+                    <div class="sub text-muted">bjo824400@naver.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/7633fbf6b6cd8139535a9ec76170d16c">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2022-12-17 17:47:24</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="7633fbf6b6cd8139535a9ec76170d16c" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/7633fbf6b6cd8139535a9ec76170d16c" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/7633fbf6b6cd8139535a9ec76170d16c" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/7633fbf6b6cd8139535a9ec76170d16c" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/7633fbf6b6cd8139535a9ec76170d16c" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/7633fbf6b6cd8139535a9ec76170d16c" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/7633fbf6b6cd8139535a9ec76170d16c" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/7633fbf6b6cd8139535a9ec76170d16c" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/7633fbf6b6cd8139535a9ec76170d16c" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_02089586be1ad8d0f64563b3e91ab64b">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="02089586be1ad8d0f64563b3e91ab64b"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">31</td>
+                  <td>
+                    <div class="title"><h6>영림 한</h6></div>
+                    <div class="sub text-muted">ga080209@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/02089586be1ad8d0f64563b3e91ab64b">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2022-12-17 01:13:05</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="02089586be1ad8d0f64563b3e91ab64b" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/02089586be1ad8d0f64563b3e91ab64b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/02089586be1ad8d0f64563b3e91ab64b" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/02089586be1ad8d0f64563b3e91ab64b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/02089586be1ad8d0f64563b3e91ab64b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/02089586be1ad8d0f64563b3e91ab64b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/02089586be1ad8d0f64563b3e91ab64b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/02089586be1ad8d0f64563b3e91ab64b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/02089586be1ad8d0f64563b3e91ab64b" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_346dabd10ec92470a6b33ea023df7135">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="346dabd10ec92470a6b33ea023df7135"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">32</td>
+                  <td>
+                    <div class="title"><h6>김동현 </h6></div>
+                    <div class="sub text-muted">ksh081225@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/346dabd10ec92470a6b33ea023df7135">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2022-12-16 21:48:54</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="346dabd10ec92470a6b33ea023df7135" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/346dabd10ec92470a6b33ea023df7135" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/346dabd10ec92470a6b33ea023df7135" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/346dabd10ec92470a6b33ea023df7135" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/346dabd10ec92470a6b33ea023df7135" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/346dabd10ec92470a6b33ea023df7135" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/346dabd10ec92470a6b33ea023df7135" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/346dabd10ec92470a6b33ea023df7135" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/346dabd10ec92470a6b33ea023df7135" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_d478de28ee785ee1a21882f8561fe777">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="d478de28ee785ee1a21882f8561fe777"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">33</td>
+                  <td>
+                    <div class="title"><h6>최준서 </h6></div>
+                    <div class="sub text-muted">joonsseo8682@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/d478de28ee785ee1a21882f8561fe777">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2022-11-28 21:39:16</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="d478de28ee785ee1a21882f8561fe777" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/d478de28ee785ee1a21882f8561fe777" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/d478de28ee785ee1a21882f8561fe777" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/d478de28ee785ee1a21882f8561fe777" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/d478de28ee785ee1a21882f8561fe777" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/d478de28ee785ee1a21882f8561fe777" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/d478de28ee785ee1a21882f8561fe777" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/d478de28ee785ee1a21882f8561fe777" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/d478de28ee785ee1a21882f8561fe777" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_3b6528add4fac82ad8813037542d76ac">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="3b6528add4fac82ad8813037542d76ac"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">34</td>
+                  <td>
+                    <div class="title"><h6>유호윤 </h6></div>
+                    <div class="sub text-muted">hoyoun0919@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/3b6528add4fac82ad8813037542d76ac">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2022-11-28 18:40:51</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="3b6528add4fac82ad8813037542d76ac" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/3b6528add4fac82ad8813037542d76ac" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/3b6528add4fac82ad8813037542d76ac" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/3b6528add4fac82ad8813037542d76ac" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/3b6528add4fac82ad8813037542d76ac" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/3b6528add4fac82ad8813037542d76ac" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/3b6528add4fac82ad8813037542d76ac" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/3b6528add4fac82ad8813037542d76ac" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/3b6528add4fac82ad8813037542d76ac" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_9684dff174775aa06b6286e6fdc033f0">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="9684dff174775aa06b6286e6fdc033f0"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">35</td>
+                  <td>
+                    <div class="title"><h6>김하능 </h6></div>
+                    <div class="sub text-muted">rlagksmf7418@naver.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/9684dff174775aa06b6286e6fdc033f0">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2022-11-28 14:48:17</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="9684dff174775aa06b6286e6fdc033f0" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/9684dff174775aa06b6286e6fdc033f0" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/9684dff174775aa06b6286e6fdc033f0" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/9684dff174775aa06b6286e6fdc033f0" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/9684dff174775aa06b6286e6fdc033f0" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/9684dff174775aa06b6286e6fdc033f0" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/9684dff174775aa06b6286e6fdc033f0" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/9684dff174775aa06b6286e6fdc033f0" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/9684dff174775aa06b6286e6fdc033f0" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_59d16e257d403d4d01eff9a51e7b9f8f">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="59d16e257d403d4d01eff9a51e7b9f8f"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">36</td>
+                  <td>
+                    <div class="title"><h6>최준서 </h6></div>
+                    <div class="sub text-muted">cjs8682@naver.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/59d16e257d403d4d01eff9a51e7b9f8f">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2022-11-28 01:22:26</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="59d16e257d403d4d01eff9a51e7b9f8f" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/59d16e257d403d4d01eff9a51e7b9f8f" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/59d16e257d403d4d01eff9a51e7b9f8f" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/59d16e257d403d4d01eff9a51e7b9f8f" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/59d16e257d403d4d01eff9a51e7b9f8f" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/59d16e257d403d4d01eff9a51e7b9f8f" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/59d16e257d403d4d01eff9a51e7b9f8f" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/59d16e257d403d4d01eff9a51e7b9f8f" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/59d16e257d403d4d01eff9a51e7b9f8f" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_0a43e964b326e22cfdc69ba930fdc604">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="0a43e964b326e22cfdc69ba930fdc604"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">37</td>
+                  <td>
+                    <div class="title"><h6>유준민 </h6></div>
+                    <div class="sub text-muted">yukevin1232@naver.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/0a43e964b326e22cfdc69ba930fdc604">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2022-11-03 19:53:08</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="0a43e964b326e22cfdc69ba930fdc604" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/0a43e964b326e22cfdc69ba930fdc604" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/0a43e964b326e22cfdc69ba930fdc604" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/0a43e964b326e22cfdc69ba930fdc604" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/0a43e964b326e22cfdc69ba930fdc604" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/0a43e964b326e22cfdc69ba930fdc604" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/0a43e964b326e22cfdc69ba930fdc604" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/0a43e964b326e22cfdc69ba930fdc604" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/0a43e964b326e22cfdc69ba930fdc604" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_07d8fd1abccc82ac9bf6aedaa9572e6b">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="07d8fd1abccc82ac9bf6aedaa9572e6b"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">38</td>
+                  <td>
+                    <div class="title"><h6>전찬영레스고 </h6></div>
+                    <div class="sub text-muted">chanyoung6425@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/07d8fd1abccc82ac9bf6aedaa9572e6b">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2022-10-26 10:11:58</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="07d8fd1abccc82ac9bf6aedaa9572e6b" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/07d8fd1abccc82ac9bf6aedaa9572e6b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/07d8fd1abccc82ac9bf6aedaa9572e6b" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/07d8fd1abccc82ac9bf6aedaa9572e6b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/07d8fd1abccc82ac9bf6aedaa9572e6b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/07d8fd1abccc82ac9bf6aedaa9572e6b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/07d8fd1abccc82ac9bf6aedaa9572e6b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/07d8fd1abccc82ac9bf6aedaa9572e6b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/07d8fd1abccc82ac9bf6aedaa9572e6b" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_789c2be3773790d28944ee22533cf05e">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="789c2be3773790d28944ee22533cf05e"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">39</td>
+                  <td>
+                    <div class="title"><h6>권인길 </h6></div>
+                    <div class="sub text-muted">gwoningil1209@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/789c2be3773790d28944ee22533cf05e">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2022-10-26 08:06:56</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="789c2be3773790d28944ee22533cf05e" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/789c2be3773790d28944ee22533cf05e" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/789c2be3773790d28944ee22533cf05e" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/789c2be3773790d28944ee22533cf05e" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/789c2be3773790d28944ee22533cf05e" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/789c2be3773790d28944ee22533cf05e" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/789c2be3773790d28944ee22533cf05e" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/789c2be3773790d28944ee22533cf05e" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/789c2be3773790d28944ee22533cf05e" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_c689453d82c99285fb906a603c8ee4c0">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="c689453d82c99285fb906a603c8ee4c0"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">40</td>
+                  <td>
+                    <div class="title"><h6>지윤찬 </h6></div>
+                    <div class="sub text-muted">ychji0831@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/c689453d82c99285fb906a603c8ee4c0">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2022-10-13 19:05:38</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="c689453d82c99285fb906a603c8ee4c0" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/c689453d82c99285fb906a603c8ee4c0" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/c689453d82c99285fb906a603c8ee4c0" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/c689453d82c99285fb906a603c8ee4c0" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/c689453d82c99285fb906a603c8ee4c0" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/c689453d82c99285fb906a603c8ee4c0" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/c689453d82c99285fb906a603c8ee4c0" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/c689453d82c99285fb906a603c8ee4c0" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/c689453d82c99285fb906a603c8ee4c0" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_7d197dfc52976b8ef40fe9d03943771a">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="7d197dfc52976b8ef40fe9d03943771a"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">41</td>
+                  <td>
+                    <div class="title"><h6>최준혁 </h6></div>
+                    <div class="sub text-muted">a55228632@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/7d197dfc52976b8ef40fe9d03943771a">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2022-10-12 13:53:05</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="7d197dfc52976b8ef40fe9d03943771a" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/7d197dfc52976b8ef40fe9d03943771a" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/7d197dfc52976b8ef40fe9d03943771a" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/7d197dfc52976b8ef40fe9d03943771a" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/7d197dfc52976b8ef40fe9d03943771a" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/7d197dfc52976b8ef40fe9d03943771a" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/7d197dfc52976b8ef40fe9d03943771a" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/7d197dfc52976b8ef40fe9d03943771a" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/7d197dfc52976b8ef40fe9d03943771a" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_7f967b27595add6f5e818bd328b84ad6">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="7f967b27595add6f5e818bd328b84ad6"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">42</td>
+                  <td>
+                    <div class="title"><h6>우세용 </h6></div>
+                    <div class="sub text-muted">dntpdyd1023@naver.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/7f967b27595add6f5e818bd328b84ad6">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2022-10-09 15:32:55</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="7f967b27595add6f5e818bd328b84ad6" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/7f967b27595add6f5e818bd328b84ad6" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/7f967b27595add6f5e818bd328b84ad6" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/7f967b27595add6f5e818bd328b84ad6" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/7f967b27595add6f5e818bd328b84ad6" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/7f967b27595add6f5e818bd328b84ad6" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/7f967b27595add6f5e818bd328b84ad6" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/7f967b27595add6f5e818bd328b84ad6" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/7f967b27595add6f5e818bd328b84ad6" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_b2671c0b9c446e22e23be033e661b524">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="b2671c0b9c446e22e23be033e661b524"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">43</td>
+                  <td>
+                    <div class="title"><h6>이준서 </h6></div>
+                    <div class="sub text-muted">juneseolee122@naver.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/b2671c0b9c446e22e23be033e661b524">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2022-10-04 01:52:43</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="b2671c0b9c446e22e23be033e661b524" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/b2671c0b9c446e22e23be033e661b524" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/b2671c0b9c446e22e23be033e661b524" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/b2671c0b9c446e22e23be033e661b524" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/b2671c0b9c446e22e23be033e661b524" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/b2671c0b9c446e22e23be033e661b524" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/b2671c0b9c446e22e23be033e661b524" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/b2671c0b9c446e22e23be033e661b524" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/b2671c0b9c446e22e23be033e661b524" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_c2b4920a8627f78182cf8d359100178b">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="c2b4920a8627f78182cf8d359100178b"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">44</td>
+                  <td>
+                    <div class="title"><h6>이승필 </h6></div>
+                    <div class="sub text-muted">si3187555@gmail.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/c2b4920a8627f78182cf8d359100178b">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2022-10-02 09:31:08</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="c2b4920a8627f78182cf8d359100178b" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/c2b4920a8627f78182cf8d359100178b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/c2b4920a8627f78182cf8d359100178b" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/c2b4920a8627f78182cf8d359100178b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/c2b4920a8627f78182cf8d359100178b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/c2b4920a8627f78182cf8d359100178b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/c2b4920a8627f78182cf8d359100178b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/c2b4920a8627f78182cf8d359100178b" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/c2b4920a8627f78182cf8d359100178b" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_2e084e2cd5876ab658141d3ade8c9694">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="2e084e2cd5876ab658141d3ade8c9694"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">45</td>
+                  <td>
+                    <div class="title"><h6>김재윤 </h6></div>
+                    <div class="sub text-muted">prizm0304@naver.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/2e084e2cd5876ab658141d3ade8c9694">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2022-09-26 12:50:52</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="2e084e2cd5876ab658141d3ade8c9694" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/2e084e2cd5876ab658141d3ade8c9694" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/2e084e2cd5876ab658141d3ade8c9694" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/2e084e2cd5876ab658141d3ade8c9694" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/2e084e2cd5876ab658141d3ade8c9694" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/2e084e2cd5876ab658141d3ade8c9694" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/2e084e2cd5876ab658141d3ade8c9694" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/2e084e2cd5876ab658141d3ade8c9694" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/2e084e2cd5876ab658141d3ade8c9694" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_3fd70759d9c7714873e7ade20f9cf298">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="3fd70759d9c7714873e7ade20f9cf298"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">46</td>
+                  <td>
+                    <div class="title"><h6>둘러보기 </h6></div>
+                    <div class="sub text-muted">demo@<%= process.env.EN_NAME %>.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/3fd70759d9c7714873e7ade20f9cf298">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">user</td>
+                  <td class="text-center w-15p">2022-09-25 22:38:20</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="3fd70759d9c7714873e7ade20f9cf298" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/3fd70759d9c7714873e7ade20f9cf298" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/3fd70759d9c7714873e7ade20f9cf298" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/3fd70759d9c7714873e7ade20f9cf298" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/3fd70759d9c7714873e7ade20f9cf298" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/3fd70759d9c7714873e7ade20f9cf298" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/3fd70759d9c7714873e7ade20f9cf298" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/3fd70759d9c7714873e7ade20f9cf298" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/3fd70759d9c7714873e7ade20f9cf298" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                              <tr class="tr_bb388d0753d3985da512503315e72bba">
+                  <th class="text-center w-1"><div class="custom-controls-stacked">
+                            <label class="form-check"><input type="checkbox" class="form-check-input check-item check_1" name="ids[]" value="bb388d0753d3985da512503315e72bba"><span class="custom-control-label"></span>
+                            </label>
+                        </div></th>
+                  <td class="text-center text-muted">47</td>
+                  <td>
+                    <div class="title"><h6>관리자 </h6></div>
+                    <div class="sub text-muted">admin@<%= process.env.EN_NAME %>.com</small></div>
+                  </td>
+                  <td class="text-center w-10p">0</td></td>
+                  <td class="text-center w-10p"><button type="button" class="btn btn-square btn-outline-info btn-sm btnEditCustomRate" data-action="./users/custom_rate/bb388d0753d3985da512503315e72bba">
+                <i class="fe fe-plus mr-2"></i>Custom Rate
+            </button></td>
+                  <td class="text-center text-muted w-5p">admin</td>
+                  <td class="text-center w-15p">2022-09-25 22:31:32</td>
+                  <td class="text-center w-5p"><label class="custom-switch">      
+                                    <input type="checkbox" name="item_status" data-id="bb388d0753d3985da512503315e72bba" data-status="1" data-action="./users/change_status/" class="custom-switch-input ajaxToggleItemStatus" checked>
+                                    <span class="custom-switch-indicator"></span>
+                                </label></td>
+                  <td class="text-center w-5p"><div class="item-action dropdown">
+                            <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i class="fe fe-more-vertical"></i></a>
+                        <div class="dropdown-menu"><a href="./users/update/bb388d0753d3985da512503315e72bba" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i> Edit</a><a href="./users/view_user/bb388d0753d3985da512503315e72bba" class="dropdown-item ajaxViewUser" data-confirm_ms=""><i class="dropdown-icon fe fe-eye"></i> View User</a><a href="./users/add_funds/bb388d0753d3985da512503315e72bba" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a href="./users/edit_funds/bb388d0753d3985da512503315e72bba" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a href="./users/set_password/bb388d0753d3985da512503315e72bba" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a href="./users/mail/bb388d0753d3985da512503315e72bba" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a href="./users/info/bb388d0753d3985da512503315e72bba" class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a href="./users/delete/bb388d0753d3985da512503315e72bba" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item"><i class="dropdown-icon fe fe-trash-2"></i> Delete</a></div></div></td>
+                </tr>
+                          </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+      </div>
+
+
+<div id="customRate" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"></i> Edit custom rates (ID: 1)</h4>
+        <button type="button" class="close" data-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <select name="service-id" class="select-service-item" class="form-control custom-select">
+                <option value='{"service_id": "1189", "rate": "0.53", "name": "Instagram Likes [100 - 3K] [Instant] [Exclusive]"}' data-rate="1" data-data='{"rate": "0.53", "name": "Instagram Likes [100 - 3K] [Instant] [Exclusive]"}'>128 - Instagram Likes [100 - 3K] [Instant] [Exclusive] [$0.18]</option>
+                <option value='{"service_id": "123", "rate": "0.78", "name": "Instagram Likes [100 - 3K] [Instant] [Exclusive]"}' data-rate="1" data-data='{"rate": "0.53", "name": "Instagram Likes [100 - 3K] [Instant] [Exclusive]"}'>123 - Instagram Likes [100 - 3K] [Instant] [Exclusive] [$0.18]</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div class="o-auto" style="height: 20rem">
+          <ul class="list-unstyled list-separated services-group-items">
+
+            <div class="s-items">
+              <li class="list-separated-item s-item">
+                <div class="row align-items-center">
+                  <div class="col">
+                    111
+                  </div>
+                  <div class="col-md-7">
+                    Facebook [Real Relevant Comments - Custom Comments]
+                  </div>
+                  <div class="col-md-1">
+                    0.53
+                  </div>
+                  <div class="col-md-2">
+                    <input type="hidden" class="form-control" value="customRates[1123][price]">
+                    <input type="text" class="form-control" >
+                  </div>
+                  <div class="col-md-1">
+                    <button class="btn btn-secondary btn-remove-item" type="button"><i class="fe fe-trash-2"></i></button>
+                  </div>
+                </div>
+              </li>
+            </div>
+
+            <div class="s-item-more d-none">
+              <li class="list-separated-item s-item" id="item__serviceID__">
+                <div class="row align-items-center">
+                  <div class="col">
+                    __serviceID__
+                  </div>
+                  <div class="col-md-7">
+                    __serviceName__
+                  </div>
+                  <div class="col-md-1">
+                    __serviceRate__
+                  </div>
+                  <div class="col-md-2">
+                    <input type="hidden" class="form-control" value="customRates[__serviceID__][rate_id]">
+                    <input type="number" class="form-control" value="customRates[__serviceID__][price]">
+                  </div>
+                  <div class="col-md-1">
+                    <button class="btn btn-secondary btn-remove-item" type="button"><i class="fe fe-trash-2"></i></button>
+                  </div>
+                </div>
+              </li>
+            </div>
+            
+          </ul>
+        </div>
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+        </main>
+      </div>
+    </div>
+    <!-- modal -->
+    <div id="modal-ajax" class="modal fade" tabindex="-1"></div>
+    <!-- Theme Settings -->
+    <div class="modal fade" id="customize" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-right">
+        <div class="modal-dialog theme-customizer" role="document">
+            <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-header bg-pantone">
+                <h4 class="modal-title"><i class="icon-fa fa fa-cogs"></i> Theme customizer</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+                </div>
+                <form action="#" class="form js-layout-form p-l-20">
+
+                <!--Color mode  -->
+                <div class="form-group m-t-20">
+                    <label class="form-label">Daynight mode</label>
+                    <div class="custom-controls-stacked">
+                    <div class="row">
+                        <div class="col-6">
+                        <label class="form-check-inline custom-control-inline">Day                            <input class="selectgroup-input" type="radio" name="color-scheme" value="light">
+                            <span class="checkmark"></span>
+                        </label>
+                        </div>
+                        <div class="col-6">
+                        <label class="form-check-inline custom-control-inline">Night                            <input class="selectgroup-input" type="radio" name="color-scheme" value="dark">
+                            <span class="checkmark"></span>
+                        </label>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="form-group mb-2 d-none">
+                    <label class="form-label">Nav position</label>
+                    <div class="selectgroup w-100p">
+                    <label class="selectgroup-item">
+                        <input type="radio" name="nav-position" value="top" class="selectgroup-input">
+                        <span class="selectgroup-button">top</span>
+                    </label>
+                    <label class="selectgroup-item">
+                        <input type="radio" name="nav-position" value="side" class="selectgroup-input">
+                        <span class="selectgroup-button">side</span>
+                    </label>
+                    </div>
+                </div>
+
+                <div class="form-group mb-2 d-none">
+                    <label class="form-label">Header color</label>
+                    <div class="selectgroup w-100p">
+                    <label class="selectgroup-item">
+                        <input type="radio" name="header-color" value="light" class="selectgroup-input">
+                        <span class="selectgroup-button">light</span>
+                    </label>
+                    <label class="selectgroup-item">
+                        <input type="radio" name="header-color" value="dark" class="selectgroup-input">
+                        <span class="selectgroup-button">dark</span>
+                    </label>
+                    </div>
+                </div>
+
+                <!--</div>-->
+                <div class="form-group mb-2 d-none">
+                    <label class="form-label">Sidebar position</label>
+                    <div class="selectgroup w-100p">
+                    <label class="selectgroup-item">
+                        <input type="radio" name="sidebar-position" value="left" class="selectgroup-input">
+                        <span class="selectgroup-button">left</span>
+                    </label>
+                    <label class="selectgroup-item">
+                        <input type="radio" name="sidebar-position" value="right" class="selectgroup-input">
+                        <span class="selectgroup-button">right</span>
+                    </label>
+                    </div>
+                </div>
+
+                <!--Layout Option-->
+                <div class="form-group m-t-20">
+                    <label class="form-label"><i class="fe fe-layout"></i> Layout option</label>
+                    <div class="custom-controls-stacked">
+                    <div class="row">
+                        <div class="col-6">
+                        <label class="form-check-inline custom-control-inline">Expanded menu                            <input class="selectgroup-input" type="radio" name="sidebar-size" value="default">
+                            <span class="checkmark"></span>
+                        </label>
+                        </div>
+                        <div class="col-6">
+                        <label class="form-check-inline custom-control-inline">Collapsed menu                            <input class="selectgroup-input" type="radio" name="sidebar-size" value="folded">
+                            <span class="checkmark"></span>
+                        </label>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <!--Sidebar color option-->
+                <div class="form-group m-t-20">
+                    <label class="form-label">Sidebar color option</label>
+                    <div class="custom-controls-stacked">
+                    <div class="row">
+                        <div class="col-6">
+                        <label class="form-check-inline custom-control-inline">Light                            <input class="selectgroup-input" type="radio" name="sidebar-color" value="light">
+                            <span class="checkmark"></span>
+                        </label>
+                        </div>
+                        <div class="col-6">
+                        <label class="form-check-inline custom-control-inline">Dark                            <input class="selectgroup-input" type="radio" name="sidebar-color" value="dark">
+                            <span class="checkmark"></span>
+                        </label>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="form-group mb-2 d-none">
+                    <label class="form-label">Sidebar fixed</label>
+                    <div class="selectgroup w-100p">
+                    <label class="selectgroup-item">
+                        <input type="radio" name="sidebar-fixed" value="fixed" class="selectgroup-input">
+                        <span class="selectgroup-button">fixed</span>
+                    </label>
+                    <label class="selectgroup-item">
+                        <input type="radio" name="sidebar-fixed" value="default" class="selectgroup-input">
+                        <span class="selectgroup-button">default</span>
+                    </label>
+                    </div>
+                </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Scripts -->
+    <!-- General scripts -->
+<script type="text/javascript" src="../assets/js/vendors/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="../assets/js/vendors/jquery.sparkline.min.js"></script>
+<script type="text/javascript" src="../assets/js/vendors/selectize.min.js"></script>
+<script type="text/javascript" src="../assets/admin/vendors/autosize/autosize.min.js"></script>
+<script type="text/javascript" src="../assets/admin/vendors/perfect-scrollbar/js/perfect-scrollbar.js"></script>
+<!-- Core scripts -->
+<script src="../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+
+<!-- Core scripts -->
+<script type="text/javascript" src="../assets/js/core.js"></script>
+<script type="text/javascript" src="../assets/admin/dist/js/admin-core.min.js"></script>
+<script type="text/javascript" src="../assets/admin/dist/js/customizer.js"></script>
+
+<!-- toast -->
+<script type="text/javascript" src="../assets/plugins/jquery-toast/js/jquery.toast.js"></script>
+<!-- Tiny Editor -->
+<script type="text/javascript" id="tinymce-js" src="../assets/plugins/tinymce/tinymce.min.js"></script>
+<!-- emoji picker -->
+<script src="../assets/plugins/emoji-picker/lib/js/config.js"></script>
+<script src="../assets/plugins/emoji-picker/lib/js/util.js"></script>
+<script src="../assets/plugins/emoji-picker/lib/js/jquery.emojiarea.js"></script>
+<script src="../assets/plugins/emoji-picker/lib/js/emoji-picker.js"></script>
+<!-- flags icon -->
+<script type="text/javascript" src="../assets/plugins/flags/js/docs.js"></script>
+
+<script type="text/javascript" src="../assets/admin/vendors/js/notify.min.js"></script>
+<!-- general JS -->
+<script type="text/javascript" src="../assets/js/process.js"></script>
+<script type="text/javascript" src="../assets/js/general.js"></script>
+<script type="text/javascript" src="../assets/admin/js/admin.js"></script>  </body>
+</html>
