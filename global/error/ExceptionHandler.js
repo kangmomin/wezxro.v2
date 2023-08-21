@@ -6,7 +6,7 @@ const GenericException = require("./exception/GenericException")
  */
 module.exports = (res, error) => {
     if (error instanceof GenericException)
-        res.send(JSON.stringify({
+        return res.send(JSON.stringify({
             message: error.code,
             status: "error"
         }))
