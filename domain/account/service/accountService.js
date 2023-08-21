@@ -2,6 +2,7 @@ const JoinDto = require('../dto/joinDto.js')
 const accountRepository = require('../entity/account.js').default
 const crypto = require('crypto')
 const NeedLoginException = require('../exception/NeedLoginException.js')
+const UserNotFoundException = require('../exception/UserNotFoundException.js')
 
 const ex = module.exports = {}
 
@@ -23,10 +24,7 @@ ex.info = async (req) => {
 
     if (name == null) name = "이름을 불러오지 못했습니다."
     
-    return {
-        name: name,
-        money: money
-    }
+    return { name, money }
 }
 
 /**
@@ -35,18 +33,9 @@ ex.info = async (req) => {
  * @param {Number} userId 
  */
 ex.updateMoney = async (money, userId) => {
-    const conn = await new DB().getConn()
-    
-    try {
-        await accountRepository.updateMoney(conn, money, userId)
-        
-        await conn.commit()
-    } catch(e) {
-        await conn.rollback()
-        throw e
-    } finally {
-        conn.release()
-    }
+    await accountRepository.update({money}, {
+        where: { userId }
+    })
 }
 
 /**
@@ -56,17 +45,14 @@ ex.updateMoney = async (money, userId) => {
  * @param {Number} user_id
  */
 ex.login = async (email, password) => {
-   const conn = await new DB().getConn() 
-
    const account = await accountRepository.login(conn, email)
-
    const encryptedPwd = encrypter(password, account[0].random)
    
     // 비밀번호 매칭
     if (account.length < 1 || 
         account[0].password != encryptedPwd)
-      throw new Error("id or password is not exist")
-    
+      throw UserNotFoundException()
+
     return account[0].user_id
 }
 
@@ -77,25 +63,16 @@ ex.login = async (email, password) => {
  * @param {String} password 
  */
 ex.join = async (email, name, password) => {
-    const conn = await new DB().getConn()
-
     // encrypt password
-    const checkKey = crypto.randomBytes(20).toString('base64')
     const random = crypto.randomBytes(10).toString('base64')
     const encryptedPwd = encrypter(password, random)
-
-    const joinDto = new JoinDto(encryptedPwd, email, random, name, checkKey)
     
-    try {
-        await accountRepository.join(conn, joinDto)
-        await conn.commit()
-    } catch(e) {
-        await conn.release()
-        throw e
-    } finally {
-        conn.release()
-    }
-    
+    await accountRepository.create({
+        name: name,
+        password: encryptedPwd,
+        email: email,
+        random: random,        
+    })
 }
 
 /**

@@ -5,7 +5,8 @@ const sequelize = new Sequelize('sqlite::memory:');
 class Account extends Model {}
 
 Account.init('account ',{
-  user_id: {
+  userId: {
+    field: "user_id",
     type: DataTypes.INTEGER,
     allowNull: false,
     autoIncrementIdentity: true,
@@ -24,7 +25,7 @@ Account.init('account ',{
     allowNull: false
   },
   random: {
-    type: DataTypes.STRING(100),
+    type: DataTypes.STRING(10),
     allowNull: false
   },
   money: {
