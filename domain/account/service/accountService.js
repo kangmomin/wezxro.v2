@@ -1,4 +1,3 @@
-const JoinDto = require('../dto/joinDto.js')
 const accountRepository = require('../entity/account.js').default
 const crypto = require('crypto')
 const NeedLoginException = require('../exception/NeedLoginException.js')
@@ -16,7 +15,7 @@ const ex = module.exports = {}
 ex.info = async (req) => {
     const userId = req.session.userId || null
     
-    if (!userId) throw NeedLoginException()
+    if (!userId) throw new NeedLoginException()
 
     const {name, money} = await accountRepository.findByPk(userId, {
         attributes: ['name', 'money']
@@ -51,7 +50,7 @@ ex.login = async (email, password) => {
     // 비밀번호 매칭
     if (account.length < 1 || 
         account[0].password != encryptedPwd)
-      throw UserNotFoundException()
+      throw new UserNotFoundException()
 
     return account[0].user_id
 }

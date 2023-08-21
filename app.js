@@ -8,6 +8,7 @@ const port = process.env.PORT
 const bp = require('body-parser')
 const cp = require('cookie-parser')
 const session = require('express-session')
+const router = require('./domain/account/controller/accountController')
 const sessionStore = require('express-mysql-session')(session)
 
 app.use(cp())
@@ -45,6 +46,8 @@ app.post('*', bp.urlencoded({ extended: false }))
 // 미로그인 사용자 처리 
 app.use(authFilter.loginFilter)
 app.use("/admin/**", authFilter.adminFilter)
+
+app.use(router)
 
 // public static 파일 설정
 app.use(express.static(__dirname + '/public'))
