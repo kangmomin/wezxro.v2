@@ -1,4 +1,4 @@
-const accountRepository = require('../entity/account.js').default
+const accountRepository = require('../entity/account.js')
 const crypto = require('crypto')
 const NeedLoginException = require('../exception/NeedLoginException.js')
 const UserNotFoundException = require('../exception/UserNotFoundException.js')

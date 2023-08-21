@@ -37,4 +37,4 @@ Account.init('account ',{
   modelName: 'account',
 })
 
-export default Account
+module.exports = Account
