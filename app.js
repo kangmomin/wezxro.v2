@@ -11,6 +11,8 @@ const session = require('express-session')
 const router = require('./domain/account/controller/accountController')
 const sessionStore = require('express-mysql-session')(session)
 
+const accessController = require('./domain/account/controller/accessController')
+
 app.use(cp())
 app.use(cors({
     samesite: true,
@@ -43,11 +45,7 @@ app.set('view engine', 'ejs')
 app.engine('html', require('ejs').renderFile)
 app.post('*', bp.urlencoded({ extended: false }))
 
-// 미로그인 사용자 처리 
-app.use(authFilter.loginFilter)
-app.use("/admin/**", authFilter.adminFilter)
-
-app.use(router)
+app.use(accessController)
 
 // public static 파일 설정
 app.use(express.static(__dirname + '/public'))

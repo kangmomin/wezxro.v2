@@ -2,7 +2,7 @@ const NotEngoughArgsException = require('../../../global/error/exception/NotEnou
 const accountService = require('../service/accountService')
 const app = require('express').Router()
 
-app.post("/join", async (req, res) => {
+app.post("/join", async (req, res, next) => {
     const { password, email, first_name } = req.body
 
     if (email == undefined || email == null ||
@@ -20,7 +20,7 @@ app.post("/join", async (req, res) => {
 
 app.post("login", async (req, res) => {
     const { email, password } = req.body
-    
+
     if (!email || !password) throw new NotEngoughArgsException()
 
     const userId = await accountService.login(email, password)
@@ -34,9 +34,11 @@ app.post("login", async (req, res) => {
     }))
 })
 
-ex.logoutProcess = async (req, res) => {
+app.post('/logout', async (req, res) => {
     await req.session.destroy()
 
     res.clearCookie('loginSession');
     res.redirect('/login');
-}
+})
+
+module.exports = app
