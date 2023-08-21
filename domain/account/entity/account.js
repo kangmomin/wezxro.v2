@@ -15,7 +15,7 @@ Account.init({
     type: DataTypes.STRING(10),
     allowNull: false
   },
-  passowrd: {
+  password: {
     type: DataTypes.STRING(100),
     allowNull: false,
   },
@@ -35,6 +35,7 @@ Account.init({
   timestamps: true,
   sequelize,
   modelName: 'account',
+  tableName: 'account'
 })
 
 module.exports = Account
