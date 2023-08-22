@@ -4,7 +4,7 @@ const app = express.Router()
 const providerService = require('../service/providerService') 
 const SaveProviderDto = require('../dto/SaveProviderDto')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
-const isAdmin = require('../../../global/config/isAdmin')
+const isAdmin = require('../../../global/config/filter/isAdmin')
 
 app.post('/admin/services/provider_services/', async (req, res) => {
     try {
