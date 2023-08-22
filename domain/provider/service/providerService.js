@@ -63,5 +63,23 @@ ex.saveProvider = async (providerInfo, userId) => {
 }
 
 ex.providerList = async () => {
+    let providers = await providerRepository.findAll({
+        attributes: ["providerId", "name", "description", 
+            "status", "apiKey", "apiUrl"]
+    })
 
+    providers = await Promise.all(providers.map(async p => {
+        p.status = p.status === "active"
+
+        const providerUserInfo = await new ProviderApi(p.apiKey, p.apiUrl)
+            .getUserBalance()
+
+        p.balance = providerUserInfo.balance
+        p.apiKey = undefined
+        p.apiUrl = p.apiUrl.split("/api")[0]
+
+        return p
+    }))
+
+    return providers
 }
