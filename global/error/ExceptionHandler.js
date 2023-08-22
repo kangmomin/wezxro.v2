@@ -12,11 +12,11 @@ module.exports = (res, error) => {
             status: "error"
         }))
 
-    if (error instanceof ValidationError)
+    else if (error instanceof ValidationError)
         return res.send(JSON.stringify({
             message: `데이터가 저장 규칙에 맞지 않습니다. [${error.message}]`
         }))
-
+    else 
     res.send(JSON.stringify({
         message: "알 수 없는 에러 발생",
         status: "error"
