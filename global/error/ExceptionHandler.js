@@ -1,11 +1,16 @@
 const GenericException = require("./exception/GenericException")
 const { ValidationError } = require('sequelize')
+const RenderAuthorizedException = require("./exception/RenderUnAuthorizedException")
+const RenderForbiddenException = require("./exception/RenderForbiddenException")
 
 /**
  * @param {import("express").Response} res 
  * @param {GenericException} error 
  */
 module.exports = (res, error) => {
+    if (error instanceof RenderAuthorizedException | RenderForbiddenException) 
+        return res.redirect("/login")
+    
     if (error instanceof GenericException)
         return res.send(JSON.stringify({
             message: error.code,
