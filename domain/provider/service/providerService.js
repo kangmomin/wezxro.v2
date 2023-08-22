@@ -44,7 +44,7 @@ ex.findServices = async (providerId = null) => {
 }
 
 /** @param {SaveProviderDto} providerInfo */
-ex.saveProvider = async (providerInfo) => {
+ex.saveProvider = async (providerInfo, userId) => {
     try {
         await new ProviderApi(providerInfo.key, providerInfo.url)
             .getUserBalance()
@@ -53,7 +53,7 @@ ex.saveProvider = async (providerInfo) => {
     }
 
     await providerRepository.create({
-        userId: providerInfo.userId,
+        userId: userId,
         name: providerInfo.name, 
         description: providerInfo.description,
         apiKey: providerInfo.key,
