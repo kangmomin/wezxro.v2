@@ -2,8 +2,8 @@ const ProviderApi = require('../../../global/api/providerApi')
 const ProviderNotFoundException = require('../exception/ProviderNotFoundException')
 const providerRepository = require('../entity/provider')
 const SaveProviderDto = require('../dto/SaveProviderDto')
-const { UnknownConstraintError } = require('sequelize')
 const status = require('../entity/constant/status')
+const UnknownProviderException = require('../exception/UnknownProviderException')
 
 const ex = module.exports = {}
 
@@ -49,7 +49,7 @@ ex.saveProvider = async (providerInfo) => {
         await new ProviderApi(providerInfo.key, providerInfo.url)
             .getUserBalance()
     } catch (e) {
-        throw new UnknownConstraintError()
+        throw new UnknownProviderException()
     }
 
     await providerRepository.create({
@@ -60,4 +60,8 @@ ex.saveProvider = async (providerInfo) => {
         apiUrl: providerInfo.url,
         status: providerInfo.status === 1 ? status.active : status.deactive
     })
+}
+
+ex.providerList = async () => {
+
 }
