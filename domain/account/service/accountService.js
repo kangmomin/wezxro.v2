@@ -53,7 +53,7 @@ ex.login = async (email, password) => {
     // 비밀번호 매칭
     if (account.password != encryptedPwd) throw new UserNotFoundException()
 
-    return account.user_id
+    return account.userId
 }
 
 /**
