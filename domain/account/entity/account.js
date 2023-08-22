@@ -8,7 +8,7 @@ Account.init({
     field: "user_id",
     type: DataTypes.INTEGER,
     allowNull: false,
-    autoIncrementIdentity: true,
+    autoIncrement: true,
     primaryKey: true,
   },
   name: {
@@ -24,7 +24,7 @@ Account.init({
     allowNull: false
   },
   random: {
-    type: DataTypes.STRING(10),
+    type: DataTypes.STRING(20),
     allowNull: false
   },
   money: {
