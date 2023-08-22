@@ -1,4 +1,4 @@
-const exceptionHandler = require('../../../global/error/exceptionHandler')
+const exceptionHandler = require('../../../global/error/ExceptionHandler')
 const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException')
 const accountService = require('../service/accountService')
 const app = require('express').Router()
@@ -31,6 +31,7 @@ app.post("/ajax_sign_in", async (req, res) => {
     
         const userId = await accountService.login(email, password)
         req.session.userId = userId
+        req.session.isAdmin = email == `admin@${process.env.EN_NAME.toLocaleLowerCase()}.com`
     
         res.cookie("sessionID", req.sessionID, { httpOnly: true, secure: false, maxAge: 600000 })
         res.setHeader('Content-Type', 'text/html; charset=utf-8')

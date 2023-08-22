@@ -40,8 +40,7 @@ ex.updateMoney = async (money, userId) => {
 /**
  * 
  * @param {String} email 
- * @param {String} password 
- * @param {Number} user_id
+ * @param {String} password
  */
 ex.login = async (email, password) => {
    const account = await accountRepository.findOne({

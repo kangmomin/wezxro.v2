@@ -13,6 +13,7 @@ const sessionStore = require('express-mysql-session')(session)
 const customMiddleware = require('./global/middleware/customViewMiddleware')
 
 const accountRouter = require('./domain/account/controller/router')
+const providerRouter = require('./domain/provider/controller/router')
 
 app.use(cp())
 app.use(cors({
@@ -48,6 +49,9 @@ app.use('*', bp.urlencoded({ extended: false }))
 app.use((_,__,next) => customMiddleware(next, app, "account"))
 app.use(accountRouter)
 
+app.use((_,__,next) => customMiddleware(next, app, "provider"))
+app.use(providerRouter)
+
 
 // ================== index 페이지 렌더링 =====================
 app.use((_, __, n) => {app.set('views', __dirname + '/global/view'); n()})
@@ -66,7 +70,7 @@ app.get('*', (req, res) => res.render('error', { status: 404, title: "THE PAGE",
 
 
 //force : 서버 실행 시 마다 테이블을 재생성 할 것인지 아닌지
-sequelize.sync({force: true}).then(() => {
+sequelize.sync({force: false}).then(() => {
     console.log('DB Sync complete.');
     app.listen(port, () => { console.log(`server is running on ${port}`) })
 })
