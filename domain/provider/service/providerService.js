@@ -58,7 +58,7 @@ ex.saveProvider = async (providerInfo) => {
         description: providerInfo.description,
         apiKey: providerInfo.key,
         apiUrl: providerInfo.url,
-        status: providerInfo.status === 1 ? status.active : status.deactive
+        status: providerInfo.status == 1 ? status.active : status.deactive
     })
 }
 
