@@ -14,6 +14,7 @@ const customMiddleware = require('./global/middleware/customViewMiddleware')
 
 const accountRouter = require('./domain/account/controller/router')
 const providerRouter = require('./domain/provider/controller/router')
+const categoryRouter = require('./domain/category/controller/router')
 
 app.use(cp())
 app.use(cors({
@@ -38,7 +39,7 @@ app.use(
         cookie: {
             maxAge: 1000 * 60 * 60 * 24 * 7
         }
-    })
+    }) 
 )
 
 // ejs
@@ -51,6 +52,9 @@ app.use(accountRouter)
 
 app.use((_,__,next) => customMiddleware(next, app, "provider"))
 app.use(providerRouter)
+
+app.use((_,__,next) => customMiddleware(next, app, "category"))
+app.use(categoryRouter)
 
 
 // ================== index 페이지 렌더링 =====================
