@@ -1,4 +1,4 @@
 module.exports = {
-    active: "active",
-    deactive: "deactive",
+    active: 1,
+    deactive: 0,
 }
