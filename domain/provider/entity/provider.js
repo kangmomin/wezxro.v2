@@ -1,6 +1,6 @@
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../../../global/config/getSequelize')()
-const status = require('./constant/status')
+const status = require('../../../global/entity/status')
 
 class Provider extends Model { }
 
