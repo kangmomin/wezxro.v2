@@ -69,8 +69,6 @@ ex.providerList = async () => {
     })
 
     providers = await Promise.all(providers.map(async p => {
-        p.status = p.status === "active"
-
         const providerUserInfo = await new ProviderApi(p.apiKey, p.apiUrl)
             .getUserBalance()
 
