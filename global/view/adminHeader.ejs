@@ -135,7 +135,7 @@
         <ul class="navbar-nav mb-md-4" id="menu">
           <h6 class="navbar-heading first"><span class="text">대시보드</span></h6>
           <li class="nav-item">
-            <a class="nav-link " href="./statistics" data-toggle="tooltip" data-placement="right" title="대시보드">
+            <a class="nav-link <%- path == "statistics" ? "active" : "" %>" href="./statistics" data-toggle="tooltip" data-placement="right" title="대시보드">
               <span class="nav-icon">
                 <i class="fa fa-bar-chart"></i>
               </span>
@@ -147,7 +147,7 @@
           </li>
           <h6 class="navbar-heading first"><span class="text">서비스 및 주문 관리</span></h6>
           <li class="nav-item">
-            <a class="nav-link " href="./order" data-toggle="tooltip" data-placement="right" title="주문 관리">
+            <a class="nav-link <%- path == "order" ? "active" : "" %>" href="./order" data-toggle="tooltip" data-placement="right" title="주문 관리">
               <span class="nav-icon">
                 <i class="fe fe-shopping-cart"></i>
               </span>
@@ -158,7 +158,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="./services" data-toggle="tooltip" data-placement="right" title="서비스 관리">
+            <a class="nav-link <%- path == "services" ? "active" : "" %>" href="./services" data-toggle="tooltip" data-placement="right" title="서비스 관리">
               <span class="nav-icon">
                 <i class="fa fa-list-ul"></i>
               </span>
@@ -169,7 +169,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="./transactions" data-toggle="tooltip" data-placement="right" title="충전 관리">
+            <a class="nav-link <%- path == "transactions" ? "active" : "" %>" href="./transactions" data-toggle="tooltip" data-placement="right" title="충전 관리">
               <span class="nav-icon">
                 <i class="fa fa-file-text-o"></i>
               </span>
@@ -180,7 +180,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="./category" data-toggle="tooltip" data-placement="right" title="카테고리 관리">
+            <a class="nav-link <%- path == "category" ? "active" : "" %>" href="./category" data-toggle="tooltip" data-placement="right" title="카테고리 관리">
               <span class="nav-icon">
                 <i class="fa fa-th-large"></i>
               </span>
@@ -192,7 +192,7 @@
           </li>
           <h6 class="navbar-heading first"><span class="text">회원 관리</span></h6>
           <li class="nav-item">
-            <a class="nav-link " href="./users" data-toggle="tooltip" data-placement="right" title="회원 관리">
+            <a class="nav-link <%- path == "users" ? "active" : "" %>" href="./users" data-toggle="tooltip" data-placement="right" title="회원 관리">
               <span class="nav-icon">
                 <i class="fe fe-users"></i>
               </span>
@@ -203,7 +203,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="./provider" data-toggle="tooltip" data-placement="right" title="도매처 관리">
+            <a class="nav-link <%- path == "provider" ? "active" : "" %>" href="./provider" data-toggle="tooltip" data-placement="right" title="도매처 관리">
               <span class="nav-icon">
                 <i class="fe fe-link"></i>
               </span>
@@ -214,7 +214,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="./payments" data-toggle="tooltip" data-placement="right" title="결제 수단 관리">
+            <a class="nav-link <%- path == "payments" ? "active" : "" %>" href="./payments" data-toggle="tooltip" data-placement="right" title="결제 수단 관리">
               <span class="nav-icon">
                 <i class="fe fe-dollar-sign"></i>
               </span>
@@ -225,7 +225,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="./news" data-toggle="tooltip" data-placement="right" title="공지사항 관리">
+            <a class="nav-link <%- path == "news" ? "active" : "" %>" href="./news" data-toggle="tooltip" data-placement="right" title="공지사항 관리">
               <span class="nav-icon">
                 <i class="fe fe-bell"></i>
               </span>
