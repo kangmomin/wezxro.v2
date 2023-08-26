@@ -139,7 +139,7 @@
                         <td class="text-center w-10p"><label class="custom-switch">
                             <input type="checkbox" name="item_status" data-id="<%= p.providerId %>"
                               data-status="<%= p.status %>" data-action="./provider/change_status/"
-                              class="custom-switch-input ajaxToggleItemStatus" <%- p.status===1 ? "checked" : "" %>>
+                              class="custom-switch-input ajaxToggleItemStatus" <%- p.status==1 ? "checked" : "" %>>
                             <span class="custom-switch-indicator"></span>
                           </label></td>
                         <td class="text-center w-20p">
