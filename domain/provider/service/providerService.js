@@ -2,7 +2,7 @@ const ProviderApi = require('../../../global/api/providerApi')
 const ProviderNotFoundException = require('../exception/ProviderNotFoundException')
 const providerRepository = require('../entity/provider')
 const SaveProviderDto = require('../dto/SaveProviderDto')
-const status = require('../entity/constant/status')
+const status = require('../../../global/entity/status')
 const UnknownProviderException = require('../exception/UnknownProviderException')
 
 const ex = module.exports = {}
