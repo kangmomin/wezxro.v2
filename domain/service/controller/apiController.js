@@ -23,47 +23,45 @@ app.get('/admin/services', async (req, res) => {
     }
 })
 
-// app.get('/admin/services/provider_services', async (req, res) => {
-//     const { provider_id } = req.body | null
+app.post('/admin/services/store', async (req, res) => {
+    const {
+        category, 
+        add_type,
+        api_provider_id,
+        api_service_id,
+        original_price,
+        min, 
+        max, 
+        name,
+        price, 
+        status, 
+        desc
+    } = req.body
 
-//     try {
-//         if (!provider_id) throw new Error("argError")
+    if (name === "") throw new NOT_ENOUGH_ARGS()
 
-//         const htmlCode = await adminService.providerServices(provider_id)
+    const addServiceDto = AddServiceDto.builder()
+        .setAddType(add_type)
+        .setApiProviderId(api_provider_id)
+        .setApiServiceId(api_service_id[1])
+        .setCategory(category)
+        .setDesc(desc)
+        .setMax(max)
+        .setMin(min)
+        .setName(name)
+        .setOriginalPrice(original_price)
+        .setPrice(price)
+        .setStatus(status)
+        .build()
 
-//         res.send(htmlCode)
-//     } catch (e) {
-//         let errMsg = "something wrong"
-//         let status = 500
+    await serviceService.saveService(addServiceDto)
 
-//         if (e.toString() === "Error: argError") {
-//             errMsg = "missing provider_id"
-//             status = 400
-//         }
+    res.send(JSON.stringify({message: "저장 성공하였습니다.", status: "success"}))
+})
 
-//         res.status(status).json({ message: errMsg })
-//     }
-// }
-// )
-// app.get('/admin/services/update', async (req, res) => {
-//     try {
-//         const [category, provider] = await adminService.addServiceRender()
-                   
-//         res.render('admin/assets/services_update', {
-//             category, 
-//             providers: provider
-//         })
-//     } catch(e) {
-//         const errInfo = {
-//             status: 400, 
-//             title: "Services", 
-//             content: e.toString()
-//         }
-//         console.log(e)
 
-//         res.render("error", errInfo)
-//     }
-// })
+
+
 
 // /**
 //  * 카테고리에 속하는 서비스 목록 요청
