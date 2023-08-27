@@ -121,7 +121,7 @@
                       <td class="text-center w-10p"><label class="custom-switch">
                         <input type="checkbox" name="item_status" data-id="<%= e.category_id %>"
                         data-status="<%= e.status == 'active' ? '1' : '0' %>" data-action="./category/change_status/"
-                        class="custom-switch-input ajaxToggleItemStatus" <%=e.status=='active' ? 'checked' : '' %>>
+                        class="custom-switch-input ajaxToggleItemStatus" <%=e.status==1 ? 'checked' : '' %>>
                         <span class="custom-switch-indicator"></span>
                       </label></td>
                       <td class="text-center w-10p">

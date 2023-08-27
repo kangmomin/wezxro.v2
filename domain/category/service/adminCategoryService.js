@@ -18,10 +18,25 @@ ex.findAllCategory = async () => {
  * @param {Number} categoryId
  */
 ex.editCategory = async (categoryId) => {
-    const conn = await new DB().getConn()
     
     const result = await categoryRepository.findById(conn, categoryId)
 
-    conn.release()
     return result
+}
+
+/**
+ * 카테고리를 저장하거나 Id가 body에 같이 들어오면 업데이트 해줌
+ */
+ex.addCategory = async ({ id, name, sort, status }) => {
+    // id 값도 body에 같이 들어오면 update
+    // 프론트가 이래 돼있었음,.,,
+    if (id != null && id !== '') {
+        categoryRepository.update({ name, sort, status })
+    } else {
+        id = categoryRepository.create({
+            name, 
+            sort, 
+            status
+        })
+    }
 }
