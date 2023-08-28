@@ -3,7 +3,7 @@
             <option> 서비스를 선택해주세요.</option>
 
 <% result.forEach(e => { %>
-    <option value="${e.serviceId}" data-type="default" data-dripfeed="0">
+    <option value="<%=e.serviceId%>" data-type="default" data-dripfeed="0">
         ID<%=e.serviceId%> - <%=e.name%> - ₩<%=e.rate%></option>
 <% }) %>
 
