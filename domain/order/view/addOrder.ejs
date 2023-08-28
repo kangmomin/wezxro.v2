@@ -34,7 +34,7 @@
                           data-url="./order/get_services/" onchange="changeCategory()" id="select">
                           <option> 카테고리를 먼저 선택해주세요.</option>
                           <% category.forEach(e=> { %>
-                            <option value='<%= `${e.category_id}` %>'>
+                            <option value='<%= `${e.categoryId}` %>'>
                               <%= e.name %>
                             </option>
                             <% }) %>
@@ -296,31 +296,6 @@
                       Place order </button>
                   </div>
                 </form>
-
-                <script>
-                      // const form = document.getElementById('form-field');
-                      // form.addEventListener('submit', function (e) {
-                      //   e.preventDefault();
-                      //   const formData = new FormData(form);
-                      //   const xhr = new XMLHttpRequest();
-                      //   xhr.open('POST', form.action);
-                      //   xhr.onload = function () {
-                      //     if (xhr.status === 200) {
-                      //       // 로그인 성공
-                      //       alert("주문에 성공했습니다.")
-                      //       location.href = "./order"
-                      //     } else {
-                      //       // 로그인 실패
-                      //       alert('주문에 실패했습니다.');
-                      //       location.href = "./add-order"
-                      //     }
-                      //   };
-                      //   xhr.onerror = function () {
-                      //     alert('서버와 통신하는 중 오류가 발생했습니다.');
-                      //   };
-                      //   xhr.send(formData);
-                      // });
-                </script>
               </div>
             </div>
           </div>

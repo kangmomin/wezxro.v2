@@ -61,28 +61,7 @@ app.post('/admin/services/store', async (req, res) => {
 
 
 
-// /**
-//  * 카테고리에 속하는 서비스 목록 요청
-//  * HTML 코드 리턴
-// */
-// app.post('/order/get_services/:categoryId', async (req, res) => {
-//     try {
-//         const categoryId = req.params.categoryId || null
-        
-//         const htmlCode = await serviceService.findByCategoryIdFormat(categoryId)
-        
-//         res.send(htmlCode)
-//     } catch(e) {
-//         let message = ""
-//         if (typeof e === CategoryIdNotFoundError) {
-//             message = "카테고리 아이디가 필요합니다."
-//         } else {
-//             console.error(e)
-//         }
-        
-//         res.send(message)
-//     }
-// })
+
 
 // app.post('/admin/services/store', async (req, res) => {
 //     const {

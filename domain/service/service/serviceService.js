@@ -1,49 +1,13 @@
 const AddServiceDto = require("../dto/addServiceDto")
-const CategoryIdNotFoundError = require("../exception/CategoryIdNotFoundException")
+const CategoryIdNotFoundError = require("../../order/exception/CategoryIdNotFoundException")
 const serviceRepository = require("../entity/service")
 const categoryRepository = require('../../category/entity/category')
 const providerRepository = require('../../provider/entity/provider')
 const status = require("../../../global/entity/status")
 const ProviderApi = require("../../../global/util/providerApi")
+const truncate = require("../../../global/util/truncate")
 
 const ex = module.exports = {}
-
-/**
- * @param {Number} categoryId 
- * @returns {String} html code
- */
-ex.findByCategoryIdFormat = async (categoryId) => {
-
-    if (categoryId === null) {
-        throw new CategoryIdNotFoundError()
-    }
-
-    const conn = await new DB().getConn()
-
-    try {
-        const services = await serviceRepository.findByCategoryId(conn, categoryId)
-        await conn.commit()
-    
-        let html = `
-        <label style="margin-bottom: 8px;">서비스를 선택해주세요.</label>
-        <select name="service_id" class="form-control square ajaxChangeService" data-url="/add-order/get_service/">
-            <option> 서비스를 선택해주세요.</option>`
-    
-        services.forEach(e => {
-            html +=`<option value="${e.serviceId}" data-type="default" data-dripfeed="0">
-                ID${e.serviceId} - ${e.name} - ₩${e.rate}</option>`
-        })
-    
-        html += "</select>"
-    
-        return html
-    } catch(e) {
-        await conn.rollback()
-        throw e
-    } finally {
-        conn.release()
-    }
-}
 
 /**
  * @param {AddServiceDto} addServiceDto 
@@ -180,18 +144,7 @@ ex.providerServices = async (providerId) => {
         
         e.content = truncate(`ID${e.service} - (${e.rate}) - ${e.name}`, 75)
         result[e.category].push(e)
-
     })
     
     return result
-}
-
-/**
- * 글자수 제한에 맞게 문자열을 잘라주는 함수
- * @param {string} str - 처리할 문자열
- * @param {number} limit - 최대 글자수
- * @returns {string} 처리된 문자열
-*/
-const truncate = (str, limit) => {
-    return str.length > limit ? str.substring(0, limit - 3) + "..." : str;
 }

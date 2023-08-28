@@ -1,0 +1,10 @@
+<label style="margin-bottom: 8px;">서비스를 선택해주세요.</label>
+        <select name="service_id" class="form-control square ajaxChangeService" data-url="/add-order/get_service/">
+            <option> 서비스를 선택해주세요.</option>
+
+<% result.forEach(e => { %>
+    <option value="${e.serviceId}" data-type="default" data-dripfeed="0">
+        ID<%=e.serviceId%> - <%=e.name%> - ₩<%=e.rate%></option>
+<% }) %>
+
+</select>

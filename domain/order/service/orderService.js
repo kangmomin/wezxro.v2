@@ -4,6 +4,7 @@ const SaveOrderDto = require("../dto/SaveOrderDto")
 const orderRepository = require('../entity/order')
 const serviceRepository = require('../../service/entity/service')
 const providerRepository = require('../../provider/entity/provider')
+const CategoryIdNotFoundError = require("../exception/CategoryIdNotFoundException")
 
 const ex = module.exports = {}
 
@@ -66,4 +67,21 @@ ex.findByUserId = async (userId) => {
         }))
     
     return orderWithStatus
+}
+
+/**
+ * @param {Number} categoryId 
+ */
+ex.findServiceByCategoryId = async (categoryId) => {
+
+    if (categoryId === null) {
+        throw new CategoryIdNotFoundError()
+    }
+    const services = await serviceRepository.findAll({
+        where: {
+            categoryId
+        }
+    })
+
+    return services
 }
