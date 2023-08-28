@@ -9,13 +9,15 @@ const bp = require('body-parser')
 const cp = require('cookie-parser')
 const session = require('express-session')
 const sessionStore = require('express-mysql-session')(session)
+const path = require('path');
 
 const customMiddleware = require('./global/middleware/customViewMiddleware')
 
 const accountRouter = require('./domain/account/controller/router')
 const providerRouter = require('./domain/provider/controller/router')
 const categoryRouter = require('./domain/category/controller/router')
-const serviceRouter = require('./domain/service/controller/router')
+const serviceRouter = require('./domain/service/controller/router');
+const orderRouter = require('./domain/order/controller/router');
 
 app.use(cp())
 app.use(cors({
@@ -48,8 +50,8 @@ app.set('view engine', 'ejs')
 app.engine('html', require('ejs').renderFile)
 app.use('*', bp.urlencoded({ extended: false }))
 
-app.use((_,__,next) => customMiddleware(next, app, "account"))
-app.use(accountRouter)
+// app.use((_,__,next) => customMiddleware(next, app, "account"))
+app.use((_,__,next) => customMiddleware(next, app, "account"), accountRouter)
 
 app.use((_,__,next) => customMiddleware(next, app, "provider"))
 app.use(providerRouter)
@@ -60,9 +62,13 @@ app.use(categoryRouter)
 app.use((_,__,next) => customMiddleware(next, app, "service"))
 app.use(serviceRouter)
 
+app.use((_,__,next) => customMiddleware(next, app, "order"))
+app.use(orderRouter)
+
 
 // ================== index 페이지 렌더링 ===================== 
-app.get('/', (req, res) => res.status(200).render('/global/view/index.ejs', {
+app.use((_,__,next) => {app.set('views', path.join(__dirname, "/global/view")); next()})
+app.get('/', (req, res) => res.status(200).render('index.ejs', {
     isLogin: req.session.userId !== undefined && req.session.userId !== null
 }))
 // ================== index 페이지 렌더링 =====================
@@ -71,7 +77,7 @@ app.get('/', (req, res) => res.status(200).render('/global/view/index.ejs', {
 app.use(express.static(__dirname + '/public'))
 
 // ================== error 페이지 렌더링 =====================
-app.get('*', (req, res) => res.render('/global/view/error.ejs', { status: 404, title: "THE PAGE", content: "WAS NOT FOUND" }))
+app.get('*', (req, res) => res.render('error.ejs', { status: 404, title: "THE PAGE", content: "WAS NOT FOUND" }))
 // ================== error 페이지 렌더링 =====================
 
 
