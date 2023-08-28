@@ -33,7 +33,6 @@ Provider.init({
     },
     apiUrl: {
         field: "api_url",
-        unique: true,
         type: DataTypes.STRING(100),
         allowNull: false,
     },
