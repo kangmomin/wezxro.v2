@@ -1,10 +1,8 @@
 const express = require('express')
 const app = express.Router()
 
-const adminService = require('../service/adminService')
 const serviceService = require('../service/serviceService')
-const CategoryIdNotFoundError = require('../exception/category/categoryIdNotFound')
-const AddServiceDto = require('../dto/service/addServiceDto')
+const AddServiceDto = require('../dto/addServiceDto')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 
 app.get('/admin/services', async (req, res) => {
