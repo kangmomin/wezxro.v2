@@ -61,24 +61,22 @@ app.use((_,__,next) => customMiddleware(next, app, "service"))
 app.use(serviceRouter)
 
 
-// ================== index 페이지 렌더링 =====================
-app.use((_, __, n) => {app.set('views', __dirname + '/global/view'); n()})
-app.get('/', (req, res) => res.status(200).render('index', {
+// ================== index 페이지 렌더링 ===================== 
+app.get('/', (req, res) => res.status(200).render('/global/view/index.ejs', {
     isLogin: req.session.userId !== undefined && req.session.userId !== null
 }))
 // ================== index 페이지 렌더링 =====================
-
+    
 // public static 파일 설정
 app.use(express.static(__dirname + '/public'))
 
 // ================== error 페이지 렌더링 =====================
-app.use((_, __, n) => {app.set('views', __dirname + '/global/view'); n()})
-app.get('*', (req, res) => res.render('error', { status: 404, title: "THE PAGE", content: "WAS NOT FOUND" }))
+app.get('*', (req, res) => res.render('/global/view/error.ejs', { status: 404, title: "THE PAGE", content: "WAS NOT FOUND" }))
 // ================== error 페이지 렌더링 =====================
 
 
 //force : 서버 실행 시 마다 테이블을 재생성 할 것인지 아닌지
-sequelize.sync({alter: true}).then(() => {
+sequelize.sync({}).then(() => {
     console.log('DB Sync complete.');
     app.listen(port, () => { console.log(`server is running on ${port}`) })
 })
