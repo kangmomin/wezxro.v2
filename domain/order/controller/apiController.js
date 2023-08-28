@@ -27,9 +27,9 @@ app.post("/order/ajax_add_order", async (req, res) => {
     }
     const providerInfo = await serviceService.addOrderInfo(service_id)
     
-    const api = new ProviderApii(providerInfo.api_key, providerInfo.api_url)
+    const api = new ProviderApi(providerInfo.apiKey, providerInfo.apiUrl)
   
-    const data = await api.addOrder(providerInfo.api_service_id, link, 
+    const data = await api.addOrder(providerInfo.apiServiceId, link, 
                 quantity, total_charge)
                 
     if (data.error !== undefined) {

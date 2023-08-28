@@ -2,13 +2,13 @@ class SaveOrderDto {
     constructor(service_id, category_id, 
         user_id,total_charge, quantity, link,
         api_order_id) {
-        this.service_id = service_id
-        this.category_id = category_id
-        this.user_id = user_id
-        this.total_charge = total_charge
+        this.serviceId = service_id
+        this.categoryId = category_id
+        this.userId = user_id
+        this.totalCharge = total_charge
         this.quantity = quantity
         this.link = link
-        this.api_order_id = api_order_id
+        this.apiOrderId = api_order_id
     }
 
     static builder() {

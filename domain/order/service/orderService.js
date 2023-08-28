@@ -36,14 +36,15 @@ ex.findByUserId = async (userId) => {
     })
 
     const serviceIds = orders.map(o => o.serviceId);
-    const providerIds = orders.map(o => o.providerId);
-
+    
     const service = await serviceRepository.findAll({
         where: {
             serviceId: serviceIds
         },
-        attributes: ["name"]
+        attributes: ["name", "providerId"]
     })
+
+    const providerIds = service.map(s => s.providerId);
     
     const provider = await providerRepository.findAll({
         where: {
@@ -54,17 +55,17 @@ ex.findByUserId = async (userId) => {
     
     let orderWithStatus = []
     
-    if (orders.length > 0)
-        await Promise.all(orders.forEach(async (o, i) => {
-            const api = new ProviderApi(o.api_key, o.api_url)
-            
-            o.status = await api.getOrderStatus(o.api_order_id)
-            o.serviceName = service[i].name
-            o.apiKey = provider[i].apiKey
-            o.apiApi = provider[i].apiApi
-            
-            orderWithStatus.push(o)
-        }))
+    let i = 0
+    for (o of orders) {
+        const api = new ProviderApi(provider[i].apiKey, provider[i].apiUrl)
+        
+        o.status = await api.getOrderStatus(o.apiOrderId)
+        o.serviceName = service[i].name
+        
+        orderWithStatus.push(o)
+
+        i++
+    }
     
     return orderWithStatus
 }

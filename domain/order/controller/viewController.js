@@ -3,6 +3,7 @@ const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 const orderService = require('../service/orderService')
 const accountService = require('../../account/service/accountService')
 const categoryService = require('../../category/service/categoryService')
+const formatDateTime = require('../../../global/util/formatDateTime')
 
 app.get("/order", async (req, res) => {
     try {
@@ -10,7 +11,7 @@ app.get("/order", async (req, res) => {
         const user = await accountService.info(req)
         
         orders.map(e => {
-            e.created = formatDateTime(e.created)
+            e.created = formatDateTime(e.createdAt)
             return e
         })
         

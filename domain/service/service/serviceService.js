@@ -6,6 +6,7 @@ const providerRepository = require('../../provider/entity/provider')
 const status = require("../../../global/entity/status")
 const ProviderApi = require("../../../global/util/providerApi")
 const truncate = require("../../../global/util/truncate")
+const Provider = require("../../provider/entity/provider")
 
 const ex = module.exports = {}
 
@@ -42,21 +43,26 @@ ex.serviceDetail = async (serviceId) => {
  * @returns {ProviderOrderDto}
  */
 ex.addOrderInfo = async (serviceId) => {
+    const service = await serviceRepository.findOne({
+        where: {
+            serviceId,
+            status: status.active
+        },
+        attributes: ["apiServiceId", "providerId"]
+    })
 
-    const conn = await new DB().getConn()
+    const addOrderInfoDto = await Provider.findOne({
+        where: {
+            providerId: service.providerId,
+            status: status.active
+        },
+        attributes: ["apiKey", "apiUrl"]
+    })
 
-    try {
-        const addOrderInfoDto = await serviceRepository.addOrderInfo(conn, serviceId)
-    
-        await conn.commit()
-        return addOrderInfoDto
-    } catch(e) {
-        await conn.rollback()
-        throw e
-    } finally {
-        conn.release()
-    }
-    
+
+    addOrderInfoDto.apiServiceId = service.apiServiceId
+
+    return addOrderInfoDto
 }
 
 /**
