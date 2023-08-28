@@ -4,7 +4,7 @@ const serviceRepository = require("../entity/service")
 const categoryRepository = require('../../category/entity/category')
 const providerRepository = require('../../provider/entity/provider')
 const status = require("../../../global/entity/status")
-const ProviderApi = require("../../../global/api/providerApi")
+const ProviderApi = require("../../../global/util/providerApi")
 
 const ex = module.exports = {}
 

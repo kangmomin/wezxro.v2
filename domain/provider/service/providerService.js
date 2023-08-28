@@ -1,4 +1,4 @@
-const ProviderApi = require('../../../global/api/providerApi')
+const ProviderApi = require('../../../global/util/providerApi')
 const ProviderNotFoundException = require('../exception/ProviderNotFoundException')
 const providerRepository = require('../entity/provider')
 const SaveProviderDto = require('../dto/SaveProviderDto')

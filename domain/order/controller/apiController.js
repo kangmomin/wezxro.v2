@@ -4,7 +4,7 @@ const serviceService = require('../../service/service/serviceService')
 const accountService = require('../../account/service/accountService')
 const orderService = require('../service/orderService')
 const SaveOrderDto = require('../dto/SaveOrderDto')
-const ProviderApi = require('../../../global/api/providerApi')
+const ProviderApi = require('../../../global/util/providerApi')
 
 app.post("/order/ajax_add_order", async (req, res) => {
   const { category_id, service_id, link, quantity, total_charge } = req.body

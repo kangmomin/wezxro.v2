@@ -1,4 +1,4 @@
-const ProviderApi = require("../../../global/api/providerApi")
+const ProviderApi = require("../../../global/util/providerApi")
 const OrderViewDto = require("../dto/OrderViewDto")
 const SaveOrderDto = require("../dto/SaveOrderDto")
 const orderRepository = require('../entity/order')
