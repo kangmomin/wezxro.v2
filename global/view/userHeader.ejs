@@ -126,44 +126,44 @@
         <ul class="navbar-nav mb-md-4" id="menu">
 
           <li class="nav-item">
-            <a class="nav-link " href="./order" data-toggle="tooltip" data-placement="right" title="주문 내역">
+            <a class="nav-link <%- path == "order" ? "active" : "" %>" href="./order" data-toggle="tooltip" data-placement="right" title="주문 내역">
               <span class="nav-icon">
                 <i class="fe fe-calendar"></i>
               </span>
-              <span class="nav-text">
+              <span class="nav-text <%- path == "order" ? "active" : "" %>">
                 주문 내역
 
               </span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="./add-order" data-toggle="tooltip" data-placement="right" title="주문하기">
+            <a class="nav-link <%- path == "add-order" ? "active" : "" %>" href="./add-order" data-toggle="tooltip" data-placement="right" title="주문하기">
               <span class="nav-icon">
                 <i class="fe fe-shopping-cart"></i>
               </span>
-              <span class="nav-text active">
+              <span class="nav-text <%- path == "add-order" ? "active" : "" %>">
                 주문하기
 
               </span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./services" data-toggle="tooltip" data-placement="right" title="서비스 목록">
+            <a class="nav-link <%- path == "services" ? "active" : "" %>" href="./services" data-toggle="tooltip" data-placement="right" title="서비스 목록">
               <span class="nav-icon">
                 <i class="fa fa-list-ul"></i>
               </span>
-              <span class="nav-text">
+              <span class="nav-text <%- path == "services" ? "active" : "" %>">
                 서비스 목록
 
               </span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " href="./transactions" data-toggle="tooltip" data-placement="right" title="충전하기">
+            <a class="nav-link <%- path == "transactions" ? "active" : "" %>" href="./transactions" data-toggle="tooltip" data-placement="right" title="충전하기">
               <span class="nav-icon">
                 <i class="fa fa-credit-card"></i>
               </span>
-              <span class="nav-text">
+              <span class="nav-text <%- path == "transactions" ? "active" : "" %>">
                 충전하기
 
               </span>

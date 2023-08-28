@@ -13,7 +13,7 @@ app.get("/order", async (req, res) => {
         return e
       })
   
-      res.render('order', { orders, user })
+      res.render('order', { orders, ...user, path: "order" })
     } catch(e) {
         ExceptionHandler(res, e)
     }
