@@ -31,20 +31,9 @@ ex.saveService = async (addServiceDto) => {
  * @returns {Service}
  */
 ex.serviceDetail = async (serviceId) => {
+    const service = await serviceRepository.findByPk(serviceId)
 
-    const conn = await new DB().getConn()
-
-    try {
-        const service = await serviceRepository.findById(conn, serviceId)
-    
-        await conn.commit()
-        return service
-    } catch(e) {
-        await conn.rollback()
-        throw e
-    } finally {
-        conn.release()
-    }
+    return service
 }
 
 /**

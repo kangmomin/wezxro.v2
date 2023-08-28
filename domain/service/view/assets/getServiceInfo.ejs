@@ -1,0 +1,36 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="form-group">
+      <label style="margin-bottom: 8px;">서비스 이름을 확인해주세요.</label>
+      <input class="form-control square" name="service_name" type="text" value="<%= name %>" disabled>
+    </div>
+  </div>   
+  
+  <div class="col-md-4  col-sm-12 col-xs-12">
+    <div class="form-group">
+      <label style="margin-bottom: 8px;">최소 주문 수량</label>
+      <input class="form-control square" type="text" name="service_min" value="<%= min %>"  readonly>
+    </div>
+  </div>
+  
+  <div class="col-md-4  col-sm-12 col-xs-12">
+    <div class="form-group">
+      <label style="margin-bottom: 8px;">최대 주문 수량</label>
+      <input class="form-control square"  type="text" name="service_max" value="<%= max %>" readonly>
+    </div>
+  </div>
+  
+  <div class="col-md-4  col-sm-12 col-xs-12">
+    <div class="form-group">
+      <label style="margin-bottom: 8px;">1천개 당 가격</label>
+          <input class="form-control square" type="text" name="service_price" value="<%= rate %>" readonly>
+    </div>
+  </div>
+  
+  <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="form-group">
+      <label for="userinput8" style="margin-bottom: 8px;">서비스 설명을 확인해주세요.</label>
+      <textarea rows="10" class="form-control square" name="service_desc" 
+      id="service_desc" class="form-control square" disabled><%= description %></textarea>
+    </div>
+  </div>
+  

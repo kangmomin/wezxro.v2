@@ -57,66 +57,23 @@ app.post('/admin/services/store', async (req, res) => {
     res.send(JSON.stringify({message: "저장 성공하였습니다.", status: "success"}))
 })
 
+app.post('/service_detail/:serviceId', async (req, res) => {
+    try {
+        const detail = await serviceService.serviceDetail(req.params.serviceId || 0)
 
+        res.render("assets/getServiceInfo", {
+            name: detail.name,
+            min: detail.min,
+            max: detail.max,
+            rate: detail.rate,
+            description: detail.description,
+        })
 
-
-
-
-
-// app.post('/admin/services/store', async (req, res) => {
-//     const {
-//         category, 
-//         add_type,
-//         api_provider_id,
-//         api_service_id,
-//         original_price,
-//         min, 
-//         max, 
-//         name,
-//         price, 
-//         status, 
-//         desc
-//     } = req.body
-
-//     try {
-//         if (name === "") throw new Error("name is required")
-
-//         const addServiceDto = AddServiceDto.builder()
-//             .setAddType(add_type)
-//             .setApiProviderId(api_provider_id)
-//             .setApiServiceId(api_service_id[1])
-//             .setCategory(category)
-//             .setDesc(desc)
-//             .setMax(max)
-//             .setMin(min)
-//             .setName(name)
-//             .setOriginalPrice(original_price)
-//             .setPrice(price)
-//             .setStatus(status)
-//             .build()
-
-//         await serviceService.saveService(addServiceDto)
-
-//         res.send(JSON.stringify({message: "저장 성공하였습니다.", status: "success"}))
-//     } catch(e) {
-//         if (!["name is required"].includes(e.toString().split("Error: ")[1]))
-//             console.error(e)
-            
-//         res.send(JSON.stringify({message: "저장 실패하였습니다.", status: "error"}))
-//     }
-// })
-
-// app.post('/add-order/get_service/:serviceId', async (req, res) => {
-//     try {
-//         const detail = await serviceService.serviceDetail(req.params.serviceId || 0)
-
-//         res.render("assets/ejs/getServiceInfo", detail)
-
-//     } catch(e) {
-//         console.error(e)
-//         res.send()
-//     }
-// })
+    } catch(e) {
+        console.error(e)
+        res.send()
+    }
+})
 
 // app.post('/admin/services/change_status/:id', async (req, res) => {
 //     const serviceId = req.params.id || null
