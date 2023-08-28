@@ -51,7 +51,15 @@ ex.findByCategoryIdFormat = async (categoryId) => {
 ex.saveService = async (addServiceDto) => {
     addServiceDto.desc = addServiceDto.desc.trim()
 
-    await serviceRepository.create(addServiceDto)
+    await serviceRepository.create({
+        ...addServiceDto,
+        providerId: addServiceDto.apiProviderId,
+        categoryId: addServiceDto.category,
+        type: addServiceDto.addType,
+        originalRate: addServiceDto.originalPrice,
+        rate: addServiceDto.price,
+        description: addServiceDto.desc
+    })
 }
 
 /**
@@ -165,13 +173,17 @@ ex.providerServices = async (providerId) => {
 
     const api = new ProviderApi(providerInfo.apiKey, providerInfo.apiUrl)
     let services = await api.getServices()
+    const result = {}
 
-    services = services.map(e => {
+    services.forEach(e => {
+        if (result[e.category] == undefined) result[e.category] = []
+        
         e.content = truncate(`ID${e.service} - (${e.rate}) - ${e.name}`, 75)
-        return e
+        result[e.category].push(e)
+
     })
     
-    return services
+    return result
 }
 
 /**
