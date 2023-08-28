@@ -22,7 +22,7 @@ Service.init({
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    api_service_id: {
+    apiServiceId: {
         field: "api_service_id",
         type: DataTypes.INTEGER,
         allowNull: false
