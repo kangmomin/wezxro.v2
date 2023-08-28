@@ -1,5 +1,4 @@
 const app = require("express").Router()
-const ProviderApi = require("../../../global/api/providerApi")
 const { NOT_ENOUGH_ARGS } = require("../../../global/error/ErrorCode")
 const serviceService = require('../service/serviceService')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
@@ -40,11 +39,9 @@ app.post('/admin/services/provider_services', async (req, res) => {
     
         if (!provider_id) throw new NOT_ENOUGH_ARGS()
     
-        const api = await serviceService.providerServices(provider_id)
+        const result = await serviceService.providerServices(provider_id)
     
-        return res.status(200).render("assets/service_list", {
-            services: api
-        })
+        return res.status(200).render("assets/service_list", { result })
     } catch(e) {
         ExceptionHandler(res, e)
     }
