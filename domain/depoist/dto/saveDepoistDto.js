@@ -1,16 +1,16 @@
 class SaveDepositDto {
     constructor(builder) {
-        this.user_id = builder.user_id,
+        this.userId = builder.user_id,
             this.rname = builder.rname,
             this.pay = builder.pay,
             this.type = builder.type,
             this.agree = builder.agree,
-            this.business_name = builder.business_name,
-            this.business_regno = builder.business_regno,
-            this.business_owner = builder.business_owner,
-            this.business_phone = builder.business_phone,
-            this.business_email = builder.business_email,
-            this.personal_phone = builder.personal_phone
+            this.businessName = builder.business_name,
+            this.businessRegno = builder.business_regno,
+            this.businessOwner = builder.business_owner,
+            this.businessPhone = builder.business_phone,
+            this.businessEmail = builder.business_email,
+            this.personalPhone = builder.personal_phone
     }
 
     static fromRequest(req) {
@@ -28,17 +28,17 @@ class SaveDepositDto {
         } = req.body;
 
         return new SaveDepositDto({
-            userId: null,
+            user_id: null,
             rname: payname,
             pay: payamount,
             type: type,
             agree: agree,
-            businessName: business_name,
-            businessRegno: business_regno,
-            businessOwner: business_owner,
-            businessPhone: business_phone,
-            businessEmail: business_email,
-            personalPhone: personal_phone,
+            business_name: business_name,
+            business_regno: business_regno,
+            business_owner: business_owner,
+            business_phone: business_phone,
+            business_email: business_email,
+            personal_phone: personal_phone,
         });
     }
 

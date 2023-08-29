@@ -53,6 +53,9 @@ Depoist.init({
     bussinessEmail: {
         type: DataTypes.STRING(255)
     },
+    personalPhone: {
+        type: DataTypes.STRING(30)
+    },
 }, {
     timestamps: true,
     sequelize: getSequelize(),

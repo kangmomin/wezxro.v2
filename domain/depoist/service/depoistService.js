@@ -3,6 +3,11 @@ const axios = require('axios')
 const DepoistRenderDto = require('../dto/depoistRenderDto')
 const SaveDepositDto = require('../dto/saveDepoistDto')
 const depoistRepository = require('../entity/depoist')
+const status = require('../entity/constant/status')
+const DepoistApplyExistException = require('../exception/DepoistApplyExistException')
+const formatDateTime = require('../../../global/util/formatDateTime')
+const Account = require('../../account/entity/account')
+const getSequelize = require('../../../global/config/getSequelize')
 
 /**
  * 
@@ -17,7 +22,7 @@ ex.depoistRender = async (user_id) => {
     })
 
     depoist.map(e => {
-        e.created = formatDateTime(e.created)
+        e.created = formatDateTime(e.createdAt)
         return e
     })
 
@@ -29,20 +34,14 @@ ex.depoistRender = async (user_id) => {
 * @param {SaveDepositDto} saveDepoistDto 
 */
 ex.reqDepoist = async (saveDepoistDto) => {
-    const conn = await new DB().getConn()
+    if (await depoistRepository.count({
+        where: {
+            userId: saveDepoistDto.userId,
+            status: status.pending
+        }
+    }) > 0) throw new DepoistApplyExistException()
 
-    try {
-        if (!await depoistRepository.isWaitDepoistExist(conn, saveDepoistDto.user_id))
-            throw new Error("depoist apply is exist")
-
-        await depoistRepository.saveDepoist(conn, saveDepoistDto)
-        await conn.commit()
-    } catch (e) {
-        await conn.rollback()
-        throw e
-    } finally {
-        conn.release()
-    }
+    await depoistRepository.create(saveDepoistDto)
 }
 
 /**
@@ -64,17 +63,33 @@ ex.checkCharge = async (RTP_URL, body) => {
         var pmoney = rdata.RPAY;	//입금금액
         var tall = rdata.RTEXT;	//전송 데이터 전문
 
-        const conn = await new DB().getConn()
+        const depoist = await depoistRepository.findOne({
+            where: {
+                status: status.pending,
+                rname: pname,
+                pay: pmoney,
+            },
+            attributes: ['userId']
+        })
 
-        try {
-            await depoistRepository.updateMoney(conn, pname, pmoney)
-            await conn.commit()
-        } catch (e) {
-            await conn.rollback()
-            // 정보가 없음에도 입금된 케이스 처리 로직
-        } finally {
-            conn.release()
-        }
+        Account.update({
+            money: getSequelize().literal(`money + ${pmoney}`)
+        }, {
+            where: {
+                userId: depoist.userId
+            }
+        })
+        
+        depoistRepository.update({
+            status: status.done
+        }, {
+            where: {
+                status: status.pending,
+                rname: pname,
+                pay: pmoney,
+            }
+        })
+        
     }
     resultArray.RCODE = rdata.RCODE;
     return resultArray

@@ -3,6 +3,7 @@ const app = express.Router()
 
 const depoistService = require('../service/depoistService')
 const SaveDepositDto = require('../dto/saveDepoistDto')
+const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 
 
 
@@ -11,21 +12,13 @@ app.post("/add-depoist", async (req, res) => {
         const userId = req.session.userId
         const saveDepoistDto = SaveDepositDto.fromRequest(req)
 
-        saveDepoistDto.user_id = userId
+        saveDepoistDto.userId = userId
 
         await depoistService.reqDepoist(saveDepoistDto)
 
         res.status(201).send("<script>alert('충전이 완료되었습니다.'); location.href='/add-order'</script>")
     } catch (e) {
-        const errInfo = new ErrInfo()
-
-        if (e.toString() == "Error: depoist apply is exist") {
-            errInfo.content = "완료되지 않은 주문이 있어 추가 주문을 할 수 없습니다."
-        } else {
-            console.error(e)
-        }
-
-        res.status(errInfo.status).render('error', errInfo)
+        ExceptionHandler(res, e)
     }
 })
 
