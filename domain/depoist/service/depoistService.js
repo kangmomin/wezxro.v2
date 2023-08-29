@@ -72,24 +72,25 @@ ex.checkCharge = async (RTP_URL, body) => {
             attributes: ['userId']
         })
 
-        Account.update({
-            money: getSequelize().literal(`money + ${pmoney}`)
-        }, {
-            where: {
-                userId: depoist.userId
-            }
-        })
-        
-        depoistRepository.update({
-            status: status.done
-        }, {
-            where: {
-                status: status.pending,
-                rname: pname,
-                pay: pmoney,
-            }
-        })
-        
+        if (depoist.userId !== undefined && depoist.userId !== null) {
+            Account.update({
+                money: getSequelize().literal(`money + ${pmoney}`)
+            }, {
+                where: {
+                    userId: depoist.userId
+                }
+            })
+            
+            depoistRepository.update({
+                status: status.done
+            }, {
+                where: {
+                    status: status.pending,
+                    rname: pname,
+                    pay: pmoney,
+                }
+            })
+        }
     }
     resultArray.RCODE = rdata.RCODE;
     return resultArray
