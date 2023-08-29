@@ -73,6 +73,8 @@ app.use((_,__,next) => {app.set('views', path.join(__dirname, "/global/view")); 
 app.get('/', (req, res) => res.status(200).render('index.ejs', {
     isLogin: req.session.userId !== undefined && req.session.userId !== null
 }))
+
+app.get("/statistics", (_, res) => res.redirect("/order"))
 // ================== index 페이지 렌더링 =====================
     
 // public static 파일 설정
