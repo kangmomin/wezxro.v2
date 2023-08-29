@@ -18,6 +18,7 @@ const providerRouter = require('./domain/provider/controller/router')
 const categoryRouter = require('./domain/category/controller/router')
 const serviceRouter = require('./domain/service/controller/router');
 const orderRouter = require('./domain/order/controller/router');
+const depoistRouter = require('./domain/depoist/controller/router');
 
 app.use(cp())
 app.use(cors({
@@ -65,6 +66,7 @@ app.use(serviceRouter)
 app.use((_,__,next) => customMiddleware(next, app, "order"))
 app.use(orderRouter)
 
+app.use((_,__,next) => customMiddleware(next, app, "depoist"), depoistRouter)
 
 // ================== index 페이지 렌더링 ===================== 
 app.use((_,__,next) => {app.set('views', path.join(__dirname, "/global/view")); next()})
