@@ -72,7 +72,7 @@ ex.checkCharge = async (RTP_URL, body) => {
             attributes: ['userId']
         })
 
-        if (!depoist && depoist.userId !== undefined && depoist.userId !== null) {
+        if (depoist && depoist.userId !== undefined && depoist.userId !== null) {
             Account.update({
                 money: getSequelize().literal(`money + ${pmoney}`)
             }, {
