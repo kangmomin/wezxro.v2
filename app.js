@@ -70,6 +70,7 @@ app.use((_,__,next) => customMiddleware(next, app, "depoist"), depoistRouter)
 
 // ================== index 페이지 렌더링 ===================== 
 app.use((_,__,next) => {app.set('views', path.join(__dirname, "/global/view")); next()})
+app.get("/admin", (_, res) => res.redirect('/admin/provider'))
 app.get('/', (req, res) => res.status(200).render('index.ejs', {
     isLogin: req.session.userId !== undefined && req.session.userId !== null
 }))
