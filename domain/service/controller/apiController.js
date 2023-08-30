@@ -22,39 +22,43 @@ app.get('/admin/services', async (req, res) => {
 })
 
 app.post('/admin/services/store', async (req, res) => {
-    const {
-        category, 
-        add_type,
-        api_provider_id,
-        api_service_id,
-        original_price,
-        min, 
-        max, 
-        name,
-        price, 
-        status, 
-        desc
-    } = req.body
-
-    if (name === "") throw new NOT_ENOUGH_ARGS()
-
-    const addServiceDto = AddServiceDto.builder()
-        .setAddType(add_type)
-        .setApiProviderId(api_provider_id)
-        .setApiServiceId(api_service_id[1])
-        .setCategory(category)
-        .setDesc(desc)
-        .setMax(max)
-        .setMin(min)
-        .setName(name)
-        .setOriginalPrice(original_price)
-        .setPrice(price)
-        .setStatus(status)
-        .build()
-
-    await serviceService.saveService(addServiceDto)
-
-    res.send(JSON.stringify({message: "저장 성공하였습니다.", status: "success"}))
+    try {
+        const {
+            category, 
+            add_type,
+            api_provider_id,
+            api_service_id,
+            original_price,
+            min, 
+            max, 
+            name,
+            price, 
+            status, 
+            desc
+        } = req.body
+    
+        if (name === "") throw new NOT_ENOUGH_ARGS()
+    
+        const addServiceDto = AddServiceDto.builder()
+            .setAddType(add_type)
+            .setApiProviderId(api_provider_id)
+            .setApiServiceId(api_service_id[1])
+            .setCategory(category)
+            .setDesc(desc)
+            .setMax(max)
+            .setMin(min)
+            .setName(name)
+            .setOriginalPrice(original_price)
+            .setPrice(price)
+            .setStatus(status)
+            .build()
+    
+        await serviceService.saveService(addServiceDto)
+    
+        res.send(JSON.stringify({message: "저장 성공하였습니다.", status: "success"}))
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
 })
 
 app.post('/service_detail/:serviceId', async (req, res) => {
