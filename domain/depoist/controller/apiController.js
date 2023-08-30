@@ -16,7 +16,7 @@ app.post("/add-depoist", async (req, res) => {
 
         await depoistService.reqDepoist(saveDepoistDto)
 
-        res.status(201).send("<script>alert('충전 신청이 완료되었습니다.'); location.href='/add-order'</script>")
+        res.redirect('transactions?result=success')
     } catch (e) {
         ExceptionHandler(res, e)
     }
