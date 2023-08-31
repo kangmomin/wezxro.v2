@@ -91,7 +91,7 @@ app.post('/services/sort/:categoryId', async (req, res) => {
             services
         })
     } catch(e) {
-        ExceptionHandler(e, res)
+        ExceptionHandler(res, e)
     }
 })
 
