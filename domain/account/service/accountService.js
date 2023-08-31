@@ -2,6 +2,7 @@ const accountRepository = require('../entity/account.js')
 const crypto = require('crypto')
 const NeedLoginException = require('../exception/NeedLoginException.js')
 const UserNotFoundException = require('../exception/UserNotFoundException.js')
+const status = require('../../../global/entity/status.js')
 
 const ex = module.exports = {}
 
@@ -74,6 +75,20 @@ ex.join = async (email, name, password) => {
         random: random,        
     })
 }
+
+ex.userList = async () => {
+    const users = await accountRepository.findAndCountAll()
+
+    const activeCnt = users.rows.filter(u => u.status === status.active).length
+    const deactiveCnt = users.rows.filter(u => u.status === status.deactive).length
+
+    return {
+        activeCnt,
+        deactiveCnt,
+        users
+    }
+}
+
 
 /**
  * 비밀번호 암호화

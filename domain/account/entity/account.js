@@ -1,4 +1,5 @@
 const { DataTypes, Model } = require('sequelize');
+const status = require('../../../global/entity/status');
 const sequelize = require('../../../global/config/getSequelize')()
 
 class Account extends Model {}
@@ -31,6 +32,11 @@ Account.init({
     type: DataTypes.DOUBLE,
     defaultValue: 0
   },
+  status: {
+    type: DataTypes.ENUM,
+    values: Object.values(status),
+    defaultValue: status.active
+  }
 }, {
   timestamps: true,
   sequelize,
