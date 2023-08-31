@@ -132,7 +132,7 @@
                   <td class="text-center w-15p"><%= a.createdAt %></td>
                   <td class="text-center w-5p"><label class="custom-switch">
                       <input type="checkbox" name="item_status" data-id="<%= a.userId %>"
-                        data-status="1" data-action="./users/change_status/"
+                        data-status="<%= a.status %>" data-action="./users/change_status/"
                         class="custom-switch-input ajaxToggleItemStatus" checked>
                       <span class="custom-switch-indicator"></span>
                     </label></td>
@@ -140,24 +140,42 @@
                     <div class="item-action dropdown">
                       <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i
                           class="fe fe-more-vertical"></i></a>
-                      <div class="dropdown-menu"><a href="./users/update/<%= a.userId %>"
-                          class="dropdown-item ajaxModal" data-confirm_ms=""><i class="dropdown-icon fe fe-edit"></i>
-                          Edit</a><a href="./users/view_user/<%= a.userId %>"
-                          class="dropdown-item ajaxViewUser" data-confirm_ms=""><i
-                            class="dropdown-icon fe fe-eye"></i> View User</a><a
-                          href="./users/add_funds/<%= a.userId %>" class="dropdown-item ajaxModal"
-                          data-confirm_ms=""><i class="dropdown-icon fe fe-dollar-sign"></i> Add Funds</a><a
-                          href="./users/edit_funds/<%= a.userId %>" class="dropdown-item ajaxModal"
-                          data-confirm_ms=""><i class="dropdown-icon fe fe-credit-card"></i> Set balance</a><a
-                          href="./users/set_password/<%= a.userId %>" class="dropdown-item ajaxModal"
-                          data-confirm_ms=""><i class="dropdown-icon fe fe-lock"></i> Set Password</a><a
-                          href="./users/mail/<%= a.userId %>" class="dropdown-item ajaxModal"
-                          data-confirm_ms=""><i class="dropdown-icon fe fe-mail"></i> Send Mail</a><a
-                          href="./users/info/<%= a.userId %>" class="dropdown-item ajaxModal"
-                          data-confirm_ms=""><i class="dropdown-icon fe fe-help-circle"></i> More detail</a><a
-                          href="./users/delete/<%= a.userId %>" class="dropdown-item ajaxDeleteItem"
-                          data-confirm_ms="Are you sure you want to delete this item"><i
-                            class="dropdown-icon fe fe-trash-2"></i> Delete</a></div>
+                      <div class="dropdown-menu">
+                        <a href="./users/update/<%= a.userId %>"
+                          class="dropdown-item ajaxModal" data-confirm_ms="">
+                          <i class="dropdown-icon fe fe-edit"></i>
+                          Edit
+                        </a>
+                        <a href="./users/view_user/<%= a.userId %>"
+                          class="dropdown-item ajaxViewUser" data-confirm_ms="">
+                          <i class="dropdown-icon fe fe-eye"></i> 
+                          View User
+                        </a>
+                        <a href="./users/add_funds/<%= a.userId %>" class="dropdown-item ajaxModal" data-confirm_ms="">
+                          <i class="dropdown-icon fe fe-dollar-sign"></i> 
+                          Add Funds
+                        </a>
+                        <a href="./users/edit_funds/<%= a.userId %>" class="dropdown-item ajaxModal" data-confirm_ms="">
+                          <i class="dropdown-icon fe fe-credit-card"></i> 
+                          Set balance
+                        </a>
+                        <a href="./users/set_password/<%= a.userId %>" class="dropdown-item ajaxModal" data-confirm_ms="">
+                          <i class="dropdown-icon fe fe-lock"></i> 
+                          Set Password
+                        </a>
+                        <a href="./users/mail/<%= a.userId %>" class="dropdown-item ajaxModal" data-confirm_ms="">
+                          <i class="dropdown-icon fe fe-mail"></i> 
+                          Send Mail
+                        </a>
+                        <a href="./users/info/<%= a.userId %>" class="dropdown-item ajaxModal" data-confirm_ms="">
+                          <i class="dropdown-icon fe fe-help-circle"></i> 
+                          More detail
+                        </a>
+                        <a href="./users/delete/<%= a.userId %>" class="dropdown-item ajaxDeleteItem" data-confirm_ms="Are you sure you want to delete this item">
+                          <i class="dropdown-icon fe fe-trash-2"></i> 
+                          Delete
+                        </a>
+                      </div>
                     </div>
                   </td>
                 </tr>

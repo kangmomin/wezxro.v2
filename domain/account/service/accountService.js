@@ -3,6 +3,7 @@ const crypto = require('crypto')
 const NeedLoginException = require('../exception/NeedLoginException.js')
 const UserNotFoundException = require('../exception/UserNotFoundException.js')
 const status = require('../../../global/entity/status.js')
+const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException.js')
 
 const ex = module.exports = {}
 
@@ -89,6 +90,14 @@ ex.userList = async () => {
     }
 }
 
+ex.infoById = async (accountId) => {
+    if (!accountId) throw new NotEngoughArgsException()
+
+    const user = await accountRepository.findByPk(accountId)
+    if (!user) throw new UserNotFoundException()
+
+    return user
+}
 
 /**
  * 비밀번호 암호화
