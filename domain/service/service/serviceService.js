@@ -7,6 +7,8 @@ const status = require("../../../global/entity/status")
 const ProviderApi = require("../../../global/util/providerApi")
 const truncate = require("../../../global/util/truncate")
 const Provider = require("../../provider/entity/provider")
+const NotEngoughArgsException = require("../../../global/error/exception/NotEnoughArgsException")
+const Category = require("../../category/entity/category")
 
 const ex = module.exports = {}
 
@@ -142,4 +144,32 @@ ex.providerServices = async (providerId) => {
     })
     
     return result
+}
+
+ex.serviceList = async (categoryId) => {
+    if (!categoryId) throw new NotEngoughArgsException()
+
+    const option = categoryId != 0 ? {
+        where: { categoryId }
+    } : {}
+
+    const services = await serviceRepository.findAll(option)
+
+    option.attributes = ['name']
+
+    const categoryName = await Category.findOne(option)
+
+    return [services, categoryName.name]
+}
+
+ex.mainServiceList = async () => {
+    const services = await serviceRepository.findAll({
+        where: {status: status.active},
+    })
+    const category = await categoryRepository.findAll({
+        where: {status: status.active},
+        attributes: ['categoryId', 'name']
+    })
+
+    return [services, category]
 }

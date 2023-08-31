@@ -1,6 +1,7 @@
 const app = require("express").Router()
 const { NOT_ENOUGH_ARGS } = require("../../../global/error/ErrorCode")
 const serviceService = require('../service/serviceService')
+const accountService = require('../../account/service/accountService')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 
 app.get('/admin/services', async (req, res) => {
@@ -14,6 +15,22 @@ app.get('/admin/services', async (req, res) => {
             services, 
             category: category,
             sort_by: categoryId
+        })
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
+app.get('/services', async (req, res) => {
+    try {
+        const user = await accountService.info(req)
+        const [services, category] = await serviceService.mainServiceList()
+        
+        res.render('services', {
+            path: "services",
+            ...user,
+            services,
+            category
         })
     } catch(e) {
         ExceptionHandler(res, e)

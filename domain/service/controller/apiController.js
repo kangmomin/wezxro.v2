@@ -2,6 +2,7 @@ const express = require('express')
 const app = express.Router()
 
 const serviceService = require('../service/serviceService')
+const accountService = require('../../account/service/accountService')
 const AddServiceDto = require('../dto/addServiceDto')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 
@@ -79,40 +80,19 @@ app.post('/service_detail/:serviceId', async (req, res) => {
     }
 })
 
-// app.post('/admin/services/change_status/:id', async (req, res) => {
-//     const serviceId = req.params.id || null
-//     const status = req.body.status == 1
+app.post('/services/sort/:categoryId', async (req, res) => {
+    try {
+        const user = await accountService.info(req)
+        const [services, categoryName] = await serviceService.serviceList(req.params.categoryId)
 
-//     try {
-//         if (isNaN(Number(serviceId))) throw new Error("service id is not number")
-
-//         await serviceService.updateStatus(serviceId, status)
-        
-//         res.send(JSON.stringify({ 
-//             message: "status가 업데이트 되었습니다.", 
-//             status: "success" 
-//         }))
-//     } catch(e) {
-//         let errMsg = "something wrong"
-
-//         const error404 = isSame(e.toString(),
-//             [
-//                 "Error: service is not exist",
-//                 "Error: service id is null",
-//                 "Error: service id is not number",
-//                 "Error: status is not number",
-//                 "Error: status is null"
-//             ], true)
-
-//         if (!error404) console.log(e)
-        
-//         res.send(JSON.stringify({
-//             message: error404 ?
-//                 e.toString().split("Error: ")[1] :
-//                 errMsg,
-//             status: "error"
-//         }))
-//     }
-// })
+        res.render('assets/user_service_list', {
+            ...user,
+            categoryName,
+            services
+        })
+    } catch(e) {
+        ExceptionHandler(e, res)
+    }
+})
 
 module.exports = app
