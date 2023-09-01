@@ -90,4 +90,22 @@ app.post("/admin/users/change_status/:userId", async (req, res) => {
     }
 })
 
+app.post("/admin/users/edit_funds/", async (req, res) => {
+    try {
+        const { ids, new_balance, secret_key } = req.body
+
+        if (!ids || new_balance === undefined || new_balance === null) throw new NotEngoughArgsException()
+        if (!secret_key) throw new NotEngoughArgsException()
+
+        await accountService.updateMoney(new_balance, ids, secret_key)
+
+        res.send(JSON.stringify({
+            message: `보유액을 ${new_balance}원으로 변경 했습니다.`,
+            status: "success"
+        }))
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 module.exports = app

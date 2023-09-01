@@ -34,7 +34,17 @@ ex.info = async (req) => {
  * @param {Number} money 
  * @param {Number} userId 
  */
-ex.updateMoney = async (money, userId) => {
+ex.updateMoney = async (money, userId, adminPwd = null) => {
+    if (adminPwd !== null) {
+        const admin = await accountRepository.findOne({
+            where: { userId }
+        })
+    
+        const result = crypto.createHash('sha512').update(adminPwd + admin.random).digest('base64')
+    
+        if (admin.password != result) throw new UserNotFoundException()
+    }
+
     await accountRepository.update({money}, {
         where: { userId }
     })
