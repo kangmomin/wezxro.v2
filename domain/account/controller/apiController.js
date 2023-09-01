@@ -124,4 +124,21 @@ app.post('/admin/users/set_password_process', isAdmin, async (req, res) => {
     }
 })
 
+app.post("/admin/users/view_user/:targetId", isAdmin, (req, res) => {
+    try {
+        const targetId = req.params.targetId
+        if (!targetId) throw new NotEngoughArgsException()
+        req.session.userId = targetId
+        req.isAdmin = false
+
+        res.cookie("sessionID", req.sessionID, { httpOnly: true, secure: false, maxAge: 600000 })
+        res.send(JSON.stringify({
+            message: "로그인 정보 수정 완료.",
+            status: "success"
+        }))
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 module.exports = app
