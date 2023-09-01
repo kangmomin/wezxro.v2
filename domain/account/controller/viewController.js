@@ -29,8 +29,8 @@ app.get("/admin/users/update/:accountId", async (req, res) => {
         const user = await accountService.infoById(req.params.accountId)
 
         res.render("assets/update_account", {
-            ...user
-        })
+            user,
+        })  
     } catch(e) {
         ExceptionHandler(res, e)
     }

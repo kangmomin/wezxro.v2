@@ -2,26 +2,26 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header bg-pantone">
-                <h4 class="modal-title"><i class="fa fa-edit"></i> Edit (didi@gmail.com)</h4>
+                <h4 class="modal-title"><i class="fa fa-edit"></i> Edit (<%= user.email %>)</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="/admin/users/store/" class="form actionForm"
                 data-redirect="/admin/users?field=email&query=didi%40gmail.com" method="POST"
                 accept-charset="utf-8">
-                <input type="hidden" name="ids" value="<%= userId %>" />
+                <input type="hidden" name="ids" value="<%= user.userId %>" />
                 <input type="hidden" name="token" value="bc3890551cfcfc40db392d6c9375c08d" />
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" name="name" value="<%= name %>" class="form-control" />
+                                <input type="text" name="name" value="<%= user.name %>" class="form-control" />
                             </div>
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" name="email" value="<%= email %>@gmail.com" class="form-control" />
+                                <input type="email" name="email" value="<%= user.email %>@gmail.com" class="form-control" />
 
                             </div>
                         </div>
@@ -29,8 +29,8 @@
                             <div class="form-group">
                                 <label>Status</label>
                                 <select name="status" class="form-control">
-                                    <option value="1" <%= status == "1" ? "selected" : "" %>>Active</option>
-                                    <option value="0" <%= status == "0" ? "selected" : "" %>>Deactive</option>
+                                    <option value="1" <%= user.status == "1" ? "selected" : "" %>>Active</option>
+                                    <option value="0" <%= user.status == "0" ? "selected" : "" %>>Deactive</option>
                                 </select>
 
                             </div>
