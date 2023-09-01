@@ -108,4 +108,19 @@ app.post("/admin/users/edit_funds/", async (req, res) => {
     }
 })
 
+app.post('/admin/users/set_password_process', async (req, res) => {
+    try {
+        const {password, secret_key, ids} = req.body
+
+        await accountService.setPassword(ids, password, secret_key, req.session.userId)
+
+        res.send(JSON.stringify({
+            message: "비밀번호를 재설정하였습니다.",
+            status: "success"
+        }))
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 module.exports = app

@@ -121,6 +121,24 @@ ex.updateStatus = async (status, userId) => {
     await accountRepository.update({ status }, { where: { userId } })
 }
 
+ex.setPassword = async (id, password, adminPwd, userId) => {
+    if (!id || !password || !userId) throw new NotEngoughArgsException()
+    
+    const admin = await accountRepository.findOne({
+        where: { userId }
+    })
+
+    const result = encrypter(adminPwd, admin.random)
+    if (admin.password != result) throw new UserNotFoundException()
+    
+    const random = crypto.randomBytes(10).toString('base64')
+    const encryptedPwd = encrypter(password, random)
+
+    await accountRepository.update({
+        password: encryptedPwd, random
+    }, { where: { userId: id } })
+}
+
 /**
  * 비밀번호 암호화
  * 

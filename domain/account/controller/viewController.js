@@ -60,4 +60,16 @@ app.get("/admin/users/edit_funds/:userId", async (req, res) => {
     }
 })
 
+app.get("/admin/users/set_password/:userId", async (req, res) => {
+    try {
+        const user = await accountService.infoById(req.params.userId)
+        
+        res.render("assets/set_password", {
+            user
+        })
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 module.exports = app
