@@ -99,6 +99,12 @@ ex.infoById = async (accountId) => {
     return user
 }
 
+ex.updateInfo = async (userId, {name, email, status}) => {
+    await accountRepository.update({
+        name, email, status
+    }, { where: {userId} })
+}
+
 /**
  * 비밀번호 암호화
  * 

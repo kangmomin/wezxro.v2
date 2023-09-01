@@ -1,3 +1,4 @@
+const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 const exceptionHandler = require('../../../global/error/ExceptionHandler')
 const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException')
 const accountService = require('../service/accountService')
@@ -49,6 +50,26 @@ app.post('/logout', async (req, res) => {
 
     res.clearCookie('loginSession');
     res.redirect('/login');
+})
+
+app.post("/admin/users/store/", async (req, res) => {
+    try {
+        const {
+            ids,
+            name,
+            email,
+            status
+        } = req.body
+
+        await accountService.updateInfo(id, {name, email, status})
+
+        res.send(JSON.stringify({
+            message: "유저 정보 수정을 완료했습니다.",
+            status: "success"
+        }))
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
 })
 
 module.exports = app
