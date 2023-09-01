@@ -129,7 +129,7 @@ app.post("/admin/users/view_user/:targetId", isAdmin, (req, res) => {
         const targetId = req.params.targetId
         if (!targetId) throw new NotEngoughArgsException()
         req.session.userId = targetId
-        req.isAdmin = false
+        req.session.isAdmin = false
 
         res.cookie("sessionID", req.sessionID, { httpOnly: true, secure: false, maxAge: 600000 })
         res.send(JSON.stringify({
