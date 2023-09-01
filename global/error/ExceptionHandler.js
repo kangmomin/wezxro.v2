@@ -8,8 +8,11 @@ const RenderForbiddenException = require("./exception/RenderForbiddenException")
  * @param {GenericException} error 
  */
 module.exports = (res, error) => {
-    if (error instanceof RenderAuthorizedException | RenderForbiddenException) 
+    if (error instanceof RenderAuthorizedException) 
         return res.redirect("/login")
+
+    if (error instanceof RenderForbiddenException) 
+        return res.redirect('/')
     
     if (error instanceof GenericException)
         return res.send(JSON.stringify({
