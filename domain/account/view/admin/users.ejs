@@ -133,7 +133,7 @@
                   <td class="text-center w-5p"><label class="custom-switch">
                       <input type="checkbox" name="item_status" data-id="<%= a.userId %>"
                         data-status="<%= a.status %>" data-action="./users/change_status/"
-                        class="custom-switch-input ajaxToggleItemStatus" checked>
+                        class="custom-switch-input ajaxToggleItemStatus" <%= a.status == 1 ? "selected" : "" %>>
                       <span class="custom-switch-indicator"></span>
                     </label></td>
                   <td class="text-center w-5p">

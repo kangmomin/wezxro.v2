@@ -72,4 +72,22 @@ app.post("/admin/users/store/", async (req, res) => {
     }
 })
 
+app.post("/admin/users/change_status/:userId", async (req, res) => {
+    try {
+        const { status } = req.body
+        const userId = req.params.userId
+
+        if (!userId || status === undefined || status === null) throw new NotEngoughArgsException()
+
+        await accountService.updateStatus(status, userId)
+
+        res.send(JSON.stringify({
+            message: "status를 업데이트 했습니다.",
+            status: "success"
+        }))
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 module.exports = app
