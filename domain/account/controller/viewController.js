@@ -36,4 +36,16 @@ app.get("/admin/users/update/:accountId", async (req, res) => {
     }
 })
 
+app.get("/admin/users/add_funds/:userId", async (req, res) => {
+    try {
+        const user = await accountService.infoById(req.params.userId)
+
+        res.render("assets/add_fund", {
+            user
+        })
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 module.exports = app
