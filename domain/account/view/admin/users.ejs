@@ -104,7 +104,7 @@
                 </tr>
               </thead>
               <tbody>
-                <% users.forEach(a => { %>
+                <% users.forEach((a, i) => { %>
                 <tr class="tr_<%= a.userId %>">
                   <th class="text-center w-1">
                     <div class="custom-controls-stacked">
@@ -114,7 +114,7 @@
                       </label>
                     </div>
                   </th>
-                  <td class="text-center text-muted"><%= a.userId %></td>
+                  <td class="text-center text-muted"><%= i + 1 %></td>
                   <td>
                     <div class="title">
                       <h6><%= a.name %></h6>
