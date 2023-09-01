@@ -1,3 +1,4 @@
+const isAdmin = require('../../../global/config/filter/isAdmin')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 const exceptionHandler = require('../../../global/error/ExceptionHandler')
 const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException')
@@ -52,7 +53,7 @@ app.post('/logout', async (req, res) => {
     res.redirect('/login');
 })
 
-app.post("/admin/users/store/", async (req, res) => {
+app.post("/admin/users/store/", isAdmin, async (req, res) => {
     try {
         const {
             ids,
@@ -72,7 +73,7 @@ app.post("/admin/users/store/", async (req, res) => {
     }
 })
 
-app.post("/admin/users/change_status/:userId", async (req, res) => {
+app.post("/admin/users/change_status/:userId", isAdmin, async (req, res) => {
     try {
         const { status } = req.body
         const userId = req.params.userId
@@ -90,7 +91,7 @@ app.post("/admin/users/change_status/:userId", async (req, res) => {
     }
 })
 
-app.post("/admin/users/edit_funds/", async (req, res) => {
+app.post("/admin/users/edit_funds/", isAdmin, async (req, res) => {
     try {
         const { ids, new_balance, secret_key } = req.body
 
@@ -108,7 +109,7 @@ app.post("/admin/users/edit_funds/", async (req, res) => {
     }
 })
 
-app.post('/admin/users/set_password_process', async (req, res) => {
+app.post('/admin/users/set_password_process', isAdmin, async (req, res) => {
     try {
         const {password, secret_key, ids} = req.body
 

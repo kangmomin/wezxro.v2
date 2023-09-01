@@ -1,3 +1,4 @@
+const renderIsAdmin = require('../../../global/config/filter/renderIsAdmin')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 const accountService = require('../../account/service/accountService')
 
@@ -6,7 +7,7 @@ const app = require('express').Router()
 app.get("/login", (_, res) => res.render("login"))
 app.get("/join", (_, res) => res.render("join"))
 
-app.get('/admin/users', async (req, res) => {
+app.get('/admin/users', renderIsAdmin, async (req, res) => {
     try {
         const user = await accountService.info(req)
         const {users, activeCnt, deactiveCnt} = await accountService.userList()
