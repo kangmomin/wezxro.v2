@@ -18,7 +18,7 @@ Depoist.init({
     },
     rname: {
         type: DataTypes.STRING(30),
-        unique: true,
+        unique: false,
         allowNull: false
     },
     pay: {

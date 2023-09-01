@@ -43,4 +43,19 @@ app.post("/depoist", async (req, res) => {
     res.send(JSON.stringify({ 'RCODE': '400', 'PCHK': '' }));
 })
 
+app.post("/admin/users/add_funds_process/", async (req, res) => {
+    try {
+        const { ids, payment_method, amount, secret_key } = req.body
+        
+        await depoistService.addFund(ids, amount, secret_key, payment_method, req.session.userId)
+
+        res.send(JSON.stringify({
+            message: "보유액을 추가했습니다.",
+            status: "success"
+        }))
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 module.exports = app

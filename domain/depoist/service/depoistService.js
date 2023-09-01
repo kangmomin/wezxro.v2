@@ -1,5 +1,6 @@
 const ex = module.exports = {}
 const axios = require('axios')
+const crypto = require('crypto')
 const DepoistRenderDto = require('../dto/depoistRenderDto')
 const SaveDepositDto = require('../dto/saveDepoistDto')
 const depoistRepository = require('../entity/depoist')
@@ -8,6 +9,7 @@ const DepoistApplyExistException = require('../exception/DepoistApplyExistExcept
 const formatDateTime = require('../../../global/util/formatDateTime')
 const Account = require('../../account/entity/account')
 const getSequelize = require('../../../global/config/getSequelize')
+const UserNotFoundException = require('../../account/exception/UserNotFoundException')
 
 /**
  * 
@@ -42,6 +44,34 @@ ex.reqDepoist = async (saveDepoistDto) => {
     }) > 0) throw new DepoistApplyExistException()
 
     await depoistRepository.create(saveDepoistDto)
+}
+
+ex.addFund = async (id, amount, secret_key, type, userId) => {
+    const admin = await Account.findOne({
+        where: { userId }
+    })
+
+    const result = crypto.createHash('sha512').update(secret_key + admin.random).digest('base64')
+
+    if (admin.password != result) throw new UserNotFoundException()
+    
+    const depoistDto = new SaveDepositDto.Builder()
+        .withUserId(Number(id))
+        .withPay(Number(amount))
+        .withRname("관리자")
+        .withType(type)
+        .build()
+
+    depoistDto.status = status.done
+    
+    await depoistRepository.create(depoistDto)
+    await Account.update({
+        money: getSequelize().literal(`money + ${amount}`)
+    }, {
+        where: {
+            userId: id
+        }
+    })
 }
 
 /**
