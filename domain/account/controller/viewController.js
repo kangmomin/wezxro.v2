@@ -73,4 +73,11 @@ app.get("/admin/users/set_password/:userId", async (req, res) => {
     }
 })
 
+app.get("/logout", async (req, res) => {
+    await req.session.destroy()
+
+    res.clearCookie('loginSession');
+    res.redirect('/login');
+})
+
 module.exports = app
