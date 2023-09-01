@@ -4,6 +4,7 @@ const NeedLoginException = require('../exception/NeedLoginException.js')
 const UserNotFoundException = require('../exception/UserNotFoundException.js')
 const status = require('../../../global/entity/status.js')
 const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException.js')
+const StatusDeactiveException = require('../../../global/error/exception/StatusDeactiveException.js')
 
 const ex = module.exports = {}
 
@@ -54,6 +55,7 @@ ex.login = async (email, password) => {
    
     // 비밀번호 매칭
     if (account.password != encryptedPwd) throw new UserNotFoundException()
+    if (account.status == status.deactive) throw new StatusDeactiveException()
 
     return account.userId
 }

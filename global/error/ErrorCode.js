@@ -9,4 +9,5 @@ module.exports = {
     FORBIDDEN: "접근 권한이 부족합니다.",
     CATEGORY_ID_NOT_FOUND: "카테고리를 찾을 수 없습니다.",
     DEPOIST_APPLY_EXIST: "미완료 충전 신청이 존재합니다.",
+    STATUS_DEACTIVE: "사용할 수 없는 상태입니다.",
 }
