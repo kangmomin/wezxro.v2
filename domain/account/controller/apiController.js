@@ -141,4 +141,17 @@ app.post("/admin/users/view_user/:targetId", isAdmin, (req, res) => {
     }
 })
 
+app.post("/admin/users/delete/:userId", isAdmin, async (req, res) => {
+    try {
+        await accountService.delete(req.params.userId)
+
+        res.send(JSON.stringify({
+            message: "유저를 삭제하였습니다.",
+            status: "success"            
+        }))
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 module.exports = app

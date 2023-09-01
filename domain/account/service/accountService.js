@@ -139,6 +139,14 @@ ex.setPassword = async (id, password, adminPwd, userId) => {
     }, { where: { userId: id } })
 }
 
+ex.delete = async (userId) => {
+    if (!userId) throw new NotEngoughArgsException()
+    
+    await accountRepository.destroy({
+        where: { userId }
+    })
+}
+
 /**
  * 비밀번호 암호화
  * 
