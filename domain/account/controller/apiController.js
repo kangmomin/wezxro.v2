@@ -61,7 +61,7 @@ app.post("/admin/users/store/", async (req, res) => {
             status
         } = req.body
 
-        await accountService.updateInfo(id, {name, email, status})
+        await accountService.updateInfo(ids, {name, email, status})
 
         res.send(JSON.stringify({
             message: "유저 정보 수정을 완료했습니다.",
