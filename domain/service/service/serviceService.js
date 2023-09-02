@@ -9,6 +9,7 @@ const truncate = require("../../../global/util/truncate")
 const Provider = require("../../provider/entity/provider")
 const NotEngoughArgsException = require("../../../global/error/exception/NotEnoughArgsException")
 const Category = require("../../category/entity/category")
+const { Op } = require("sequelize")
 
 const ex = module.exports = {}
 
@@ -94,11 +95,20 @@ ex.getServices = async (categoryId) => {
     const services = categoryId == 0 ? await serviceRepository.findAll()
                         : await serviceRepository.findAll({
                             where: {
+                                status: {
+                                    [Op.notLike]: status.deleted
+                                },
                                 categoryId
                             }
                         })
 
-    const category = await categoryRepository.findAll()
+    const category = await categoryRepository.findAll({
+        where: {
+            status: {
+                [Op.notLike]: status.deleted
+            }
+        },
+    })
 
     return [services, category]
 }
@@ -108,9 +118,19 @@ ex.getServices = async (categoryId) => {
  */
 ex.addServiceRender = async () => {
     const category = await categoryRepository.findAll({
+        where: {
+            status: {
+                [Op.notLike]: status.deleted
+            }
+        },
         attributes: ["categoryId", "name"]
     })
     const provider = await providerRepository.findAll({
+        where: {
+            status: {
+                [Op.notLike]: status.deleted
+            }
+        },
         attributes: ["providerId", "name"]
     })
     
@@ -150,8 +170,19 @@ ex.serviceList = async (categoryId) => {
     if (!categoryId) throw new NotEngoughArgsException()
 
     const option = categoryId != 0 ? {
-        where: { categoryId }
-    } : {}
+        where: { 
+            categoryId, 
+            status: {
+                [Op.notLike]: status.deleted
+            }
+        }
+    } : {
+        where: {
+            status: {
+                [Op.notLike]: status.deleted
+            }
+        }
+    }
 
     const services = await serviceRepository.findAll(option)
 
