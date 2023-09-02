@@ -5,7 +5,7 @@ const categoryRepository = require('../entity/category')
 const ex = module.exports = {}
 
 ex.findAllCategory = async () => {
-    const category = await categoryRepository.findAll()
+    const category = await categoryRepository.findAll({ order: [["sort", "ASC"]] })
     // active 상태인 카테고리의 수량
     let activeCnt = 0
     category.forEach(e => e.status == status.active ? activeCnt++ : null)
