@@ -20,4 +20,16 @@ app.post("/admin/provider/store", isAdmin, async (req, res) => {
     }
 })
 
+app.post('/admin/provider/delete/:providerId', isAdmin, async (req, res) => {
+    try {
+        await providerService.deleteProvider(req.params.providerId || null)
+        res.send(JSON.stringify({
+            messag: "도매처를 삭제하였습니다",
+            status: "success"
+        }))
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 module.exports = app

@@ -4,6 +4,7 @@ const providerRepository = require('../entity/provider')
 const SaveProviderDto = require('../dto/SaveProviderDto')
 const status = require('../../../global/entity/status')
 const UnknownProviderException = require('../exception/UnknownProviderException')
+const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException')
 
 const ex = module.exports = {}
 
@@ -80,4 +81,12 @@ ex.providerList = async () => {
     }))
 
     return providers
+}
+
+ex.deleteProvider = async (providerId) => {
+    if (!provideId) throw new NotEngoughArgsException()
+    
+    await providerRepository.update({
+        status: status.deleted
+    }, {where: { providerId }})
 }
