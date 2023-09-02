@@ -1,6 +1,6 @@
 const app = require('express').Router()
 const viewController = require("./viewController")
-const categoryController = require('./메ㅑController')
+const categoryController = require('./apiController')
 
 app.use(viewController)
 app.use(categoryController)
