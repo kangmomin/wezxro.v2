@@ -1,4 +1,5 @@
 const status = require('../../../global/entity/status')
+const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException')
 const categoryRepository = require('../entity/category')
 
 const ex = module.exports = {}
@@ -39,4 +40,12 @@ ex.addCategory = async ({ id, name, sort, status }) => {
             status
         })
     }
+}
+
+ex.deleteCategory = async (categoryId) => {
+    if (!categoryId) throw new NotEngoughArgsException()
+    
+    await categoryRepository.destroy({
+        where: { categoryId }
+    })
 }
