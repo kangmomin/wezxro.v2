@@ -51,21 +51,11 @@ app.set('view engine', 'ejs')
 app.engine('html', require('ejs').renderFile)
 app.use('*', bp.urlencoded({ extended: false }))
 
-// app.use((_,__,next) => customMiddleware(next, app, "account"))
 app.use((_,__,next) => customMiddleware(next, app, "account"), accountRouter)
-
-app.use((_,__,next) => customMiddleware(next, app, "provider"))
-app.use(providerRouter)
-
-app.use((_,__,next) => customMiddleware(next, app, "category"))
-app.use(categoryRouter)
-
-app.use((_,__,next) => customMiddleware(next, app, "service"))
-app.use(serviceRouter)
-
-app.use((_,__,next) => customMiddleware(next, app, "order"))
-app.use(orderRouter)
-
+app.use((_,__,next) => customMiddleware(next, app, "provider"), providerRouter)
+app.use((_,__,next) => customMiddleware(next, app, "category"), categoryRouter)
+app.use((_,__,next) => customMiddleware(next, app, "service"), serviceRouter)
+app.use((_,__,next) => customMiddleware(next, app, "order"), orderRouter)
 app.use((_,__,next) => customMiddleware(next, app, "depoist"), depoistRouter)
 
 // ================== index 페이지 렌더링 ===================== 
