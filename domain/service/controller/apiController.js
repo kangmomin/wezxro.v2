@@ -95,4 +95,18 @@ app.post('/services/sort/:categoryId', async (req, res) => {
     }
 })
 
+app.post('/admin/services/delete/:serviceId', async (req, res) => {
+    try {
+
+        await serviceService.deleteService(req.params.serviceId || null)
+
+        res.send(JSON.stringify({
+            message: "서비스를 삭제하였습니다.",
+            status: "success"
+        }))
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 module.exports = app
