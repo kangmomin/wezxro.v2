@@ -1,8 +1,8 @@
 const app = require('express').Router()
 const viewController = require('./viewController')
-const providerController = require('./providerController')
+const apiController = require('./apiController')
 
 app.use(viewController)
-app.use(providerController)
+app.use(apiController)
 
 module.exports = app
