@@ -1,3 +1,4 @@
+const { Op } = require('sequelize')
 const status = require('../../../global/entity/status')
 const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException')
 const categoryRepository = require('../entity/category')
@@ -5,7 +6,14 @@ const categoryRepository = require('../entity/category')
 const ex = module.exports = {}
 
 ex.findAllCategory = async () => {
-    const category = await categoryRepository.findAll({ order: [["sort", "ASC"]] })
+    const category = await categoryRepository.findAll({ 
+        where: {
+            status: {
+                [Op.notLike]: status.deleted
+            }
+        },
+        order: [["sort", "ASC"]] 
+    })
     // active 상태인 카테고리의 수량
     let activeCnt = 0
     category.forEach(e => e.status == status.active ? activeCnt++ : null)

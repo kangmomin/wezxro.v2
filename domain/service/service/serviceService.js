@@ -92,15 +92,21 @@ ex.updateStatus = async (serviceId, status) => {
  * @param {Number} categoryId 
  */
 ex.getServices = async (categoryId) => {
-    const services = categoryId == 0 ? await serviceRepository.findAll()
-                        : await serviceRepository.findAll({
-                            where: {
-                                status: {
-                                    [Op.notLike]: status.deleted
-                                },
-                                categoryId
-                            }
-                        })
+    const services = categoryId == 0 ? 
+        await serviceRepository.findAll({
+            where: {
+                status: {
+                    [Op.notLike]: status.deleted
+                },
+            }
+        }) : await serviceRepository.findAll({
+            where: {
+                status: {
+                    [Op.notLike]: status.deleted
+                },
+                categoryId
+            }
+        })
 
     const category = await categoryRepository.findAll({
         where: {
@@ -147,6 +153,9 @@ ex.providerServices = async (providerId) => {
     const providerInfo = await providerRepository.findOne({
         attributes: ["apiKey", "apiUrl"],
         where: {
+            status: {
+                [Op.notLike]: status.deleted
+            },
             providerId: providerId,
             status: status.active
         }
