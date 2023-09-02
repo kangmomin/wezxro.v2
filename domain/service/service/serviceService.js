@@ -177,7 +177,9 @@ ex.mainServiceList = async () => {
 ex.deleteService = async (serviceId) => {
     if (!serviceId) throw new NotEngoughArgsException()
 
-    await serviceRepository.destroy({
+    await serviceRepository.update({
+        status: status.deleted
+    }, {
         where: { serviceId }
     })
 }

@@ -45,7 +45,9 @@ ex.addCategory = async ({ id, name, sort, status }) => {
 ex.deleteCategory = async (categoryId) => {
     if (!categoryId) throw new NotEngoughArgsException()
     
-    await categoryRepository.destroy({
+    await categoryRepository.update({ 
+        status: status.deleted
+    }, {
         where: { categoryId }
     })
 }

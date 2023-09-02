@@ -142,7 +142,9 @@ ex.setPassword = async (id, password, adminPwd, userId) => {
 ex.delete = async (userId) => {
     if (!userId) throw new NotEngoughArgsException()
     
-    await accountRepository.destroy({
+    await accountRepository.update({
+        status: status.deleted
+    }, {
         where: { userId }
     })
 }
