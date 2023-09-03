@@ -3,6 +3,7 @@ const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 const exceptionHandler = require('../../../global/error/ExceptionHandler')
 const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException')
 const accountService = require('../service/accountService')
+const customRateService = require('../service/customRateService')
 const app = require('express').Router()
 
 app.post("/ajax_sign_up", async (req, res) => {
@@ -148,6 +149,23 @@ app.post("/admin/users/delete/:userId", isAdmin, async (req, res) => {
         res.send(JSON.stringify({
             message: "유저를 삭제하였습니다.",
             status: "success"            
+        }))
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
+app.post('/admin/users/form_custom_rates', async (req, res) => {
+    try {
+        const {ids} = req.body
+        const serviceInfo = JSON.parse(req.body["service-id"])
+        const rate = req.body["customRates[2][service_price]"]
+        
+        await customRateService.add(serviceInfo, ids, rate)
+
+        res.send(JSON.stringify({
+            message: "개별 가격을 적용하였습니다.",
+            status: "success"
         }))
     } catch(e) {
         ExceptionHandler(res, e)

@@ -29,20 +29,20 @@
                             <% cr.forEach(cr => { %>
                             <li class="list-separated-item s-item" id="item163">
                                 <div class="row align-items-center">
-                                    <div class="col"><strong><%= cr.customRateId %></strong></div>
-                                    <div class="col-md-7"><%= cr.s.name %></div>
+                                    <div class="col"><strong><%= cr.custom_rate_id %></strong></div>
+                                    <div class="col-md-7"><%= cr.name %></div>
                                     <div class="col-md-1">
                                         <div>
-                                            <span><%= cr.s.rate %></span>
-                                            <small class="d-block item-except text-sm text-muted h-1x"><%= cr.s.originalRate %></small>
+                                            <span><%= cr.rate %></span>
+                                            <small class="d-block item-except text-sm text-muted h-1x"><%= cr.originalRate %></small>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
-                                        <input type="hidden" name="customRates[<%= cr.customRateId %>][uid]" value="103">
-                                        <input type="hidden" class="form-control" name="customRates[<%= cr.customRateId %>][service_id]"
-                                            value="<%= cr.serviceId %>">
-                                        <input type="text" class="form-control" name="customRates[<%= cr.customRateId %>][service_price]"
-                                            value="<%= cr.rate %>">
+                                        <input type="hidden" name="customRates[<%= cr.custom_rate_id %>][uid]" value="103">
+                                        <input type="hidden" class="form-control" name="customRates[<%= cr.custom_rate_id %>][service_id]"
+                                            value="<%= cr.service_id %>">
+                                        <input type="text" class="form-control" name="customRates[<%= cr.custom_rate_id %>][service_price]"
+                                            value="<%= cr.customRate %>">
                                     </div>
                                     <div class="col-md-1">
                                         <button class="btn btn-secondary btn-remove-item" type="button"><i

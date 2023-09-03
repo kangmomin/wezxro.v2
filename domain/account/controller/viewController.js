@@ -2,6 +2,7 @@ const renderIsAdmin = require('../../../global/config/filter/renderIsAdmin')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 const accountService = require('../../account/service/accountService')
 const { allService } = require('../../service/service/serviceService')
+const { viewCustomRate } = require('../service/customRateService')
 
 const app = require('express').Router()
 
@@ -78,7 +79,7 @@ app.get("/admin/users/custom_rate/:userId", async (req, res) => {
     try {
         const userId = req.params.userId
         
-        const cr = await accountService.viewCustomRate(userId)
+        const cr = await viewCustomRate(userId)
         const u = await accountService.infoById(userId)
         const services = await allService()
 

@@ -154,30 +154,6 @@ ex.delete = async (userId) => {
     })
 }
 
-ex.viewCustomRate = async (userId = null) => {
-    if (!userId) throw new NotEngoughArgsException()
-
-    const cr = await getSequelize().query(`
-        SELECT 
-            * 
-        FROM 
-            custom_rate cr 
-        INNER JOIN
-            service s
-        ON
-            s.service_id = cr.service_id
-        WHERE
-            cr.user_id = ?
-        ORDER BY
-            cr.service_id ASC;
-    `, {
-        type: QueryTypes.SELECT,
-        replacements: [userId]
-    })
-    
-    return cr
-}
-
 /**
  * 비밀번호 암호화
  * 

@@ -1,18 +1,12 @@
 'use strict';
 
-const getSequelize = require('../global/config/getSequelize');
+const sequelize = require('../global/config/getSequelize')();
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, DataTypes) {
-    await queryInterface.addColumn("account", "custom_rate", {
-      field: "custom_rate",
-      type: DataTypes.FLOAT,
-      defaultValue: null,
-      allowNull: true,
-    })
-
-    await queryInterface.createTable("custom_rate", {
+    
+    queryInterface.createTable("custom_rate", {
       customRateId: {
         field: "custom_rate_id",
         type: DataTypes.INTEGER,
@@ -34,16 +28,34 @@ module.exports = {
       rate: {
         type: DataTypes.FLOAT,
         allowNull: false,
-      }
-    }, {
-      timestamp: true,
-      modelName: "custom_rate",
-      tableName: "custom_rate",
-      sequelize: getSequelize()
-    })
-  },
+      },
+      createdAt: {
+        type: "TIMESTAMP",
+        defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
+        allowNull: false,
+      },
+      updatedAt: {
+        type: "TIMESTAMP",
+        defaultValue: sequelize.literal(
+          "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+          ),
+          allowNull: false,
+        },
+      }, {
+        modelName: "custom_rate",
+        tableName: "custom_rate",
+        sequelize
+      })
 
+      queryInterface.addColumn("account", "custom_rate", {
+        type: DataTypes.FLOAT,
+        defaultValue: null,
+        allowNull: true,
+      })
+    },
+    
   async down(queryInterface, Sequelize) {
     queryInterface.dropTable("custom_rate")
+    queryInterface.removeColumn("account", "custom_rate")
   }
 };
