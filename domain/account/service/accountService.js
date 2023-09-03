@@ -78,7 +78,7 @@ ex.login = async (email, password, ip) => {
         }
     })
 
-    return userId
+    return account
 }
 
 /**
