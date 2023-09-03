@@ -36,6 +36,8 @@ ex.saveService = async (addServiceDto) => {
  * @returns {Service}
  */
 ex.serviceDetail = async (serviceId) => {
+    if (!serviceId) throw new NotEngoughArgsException()
+    
     const service = await serviceRepository.findByPk(serviceId)
 
     return service
