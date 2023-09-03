@@ -157,12 +157,19 @@ app.post("/admin/users/delete/:userId", isAdmin, async (req, res) => {
 
 app.post('/admin/users/form_custom_rates', async (req, res) => {
     try {
-        const {ids} = req.body
-        const serviceInfo = JSON.parse(req.body["service-id"])
-        const rate = req.body["customRates[2][service_price]"]
-        
-        await customRateService.add(serviceInfo, ids, rate)
+        const { ids } = req.body
+        const cr = parseCustomRates(req.body)
 
+        // customRateId가 없으면 add 있으면 delete
+        
+        for (id in cr) {
+            if (cr[id].uid == "") 
+                await customRateService.add(ids, cr[id])
+            
+        }
+
+        await customRateService.deleteRate(Object.keys(cr), ids)
+        
         res.send(JSON.stringify({
             message: "개별 가격을 적용하였습니다.",
             status: "success"
@@ -171,5 +178,27 @@ app.post('/admin/users/form_custom_rates', async (req, res) => {
         ExceptionHandler(res, e)
     }
 })
+
+function parseCustomRates(reqBody) {
+    const customRate = {};
+    for (let key in reqBody) {
+        // 정규표현식을 사용하여 키에서 인덱스와 프로퍼티 이름 추출
+        const match = key.match(/customRates\[(\d+)\]\[(\w+)\]/);
+        if (match) {
+            const index = match[1];  // 문자열로 처리
+            const property = match[2];
+
+            // 객체에 해당 인덱스의 객체가 없으면 새 객체를 추가
+            if (!customRate[index]) {
+                customRate[index] = {};
+            }
+
+            // 해당 프로퍼티에 값을 설정
+            customRate[index][property] = reqBody[key];
+        }
+    }
+    return customRate;
+}
+
 
 module.exports = app

@@ -4,7 +4,7 @@
             <h4 class="modal-title"></i> Edit Custom rate (<%= u.email %>)</h4>
             <button type="button" class="close" data-dismiss="modal"></button>
         </div>
-        <form action="/admin/users/form_custom_rates/" class="form actionForm" method="POST" accept-charset="utf-8">
+        <form action="/admin/users/form_custom_rates/" class="form actionForm" method="POST" accept-charset="utf-8" data-redirect="/admin/users">
             <input type="hidden" name="ids" value="<%= u.userId %>" />
             <div class="modal-body">
                 <div class="row">
@@ -15,7 +15,7 @@
                                 <% services.forEach((s, i)=> { %>
                                     <option
                                         value='{"service_id":"<%= s.serviceId %>","rate":<%= s.rate %>,"original_rate":<%= s.originalRate %>,"name":"<%= s.name %>"}'
-                                        data-rate="<%= i %>">
+                                        data-rate="<%= s.serviceId %>">
                                         <%= s.serviceId %> - <%= s.name %> [₩<%= s.rate %>]
                                     </option>
                                     <% }) %>
@@ -27,9 +27,9 @@
                     <ul class="list-unstyled list-separated services-group-items">
                         <div class="s-items">
                             <% cr.forEach(cr => { %>
-                            <li class="list-separated-item s-item" id="item163">
+                            <li class="list-separated-item s-item" id="item<%= cr.service_id %>">
                                 <div class="row align-items-center">
-                                    <div class="col"><strong><%= cr.custom_rate_id %></strong></div>
+                                    <div class="col"><strong><%= cr.service_id %></strong></div>
                                     <div class="col-md-7"><%= cr.name %></div>
                                     <div class="col-md-1">
                                         <div>
@@ -38,10 +38,11 @@
                                         </div>
                                     </div>
                                     <div class="col-md-2">
-                                        <input type="hidden" name="customRates[<%= cr.custom_rate_id %>][uid]" value="103">
-                                        <input type="hidden" class="form-control" name="customRates[<%= cr.custom_rate_id %>][service_id]"
+
+                                        <input type="hidden" name="customRates[<%= cr.service_id %>][uid]" value="<%= cr.custom_rate_id %>">
+                                        <input type="hidden" class="form-control" name="customRates[<%= cr.service_id %>][service_id]"
                                             value="<%= cr.service_id %>">
-                                        <input type="text" class="form-control" name="customRates[<%= cr.custom_rate_id %>][service_price]"
+                                        <input type="text" class="form-control" name="customRates[<%= cr.service_id %>][service_price]"
                                             value="<%= cr.customRate %>">
                                     </div>
                                     <div class="col-md-1">
@@ -66,7 +67,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-2">
-                                        <input type="hidden" name="customRates[__serviceID__][uid]" value="104">
+                                        <input type="hidden" name="customRates[__serviceID__][uid]" value="">
                                         <input type="hidden" class="form-control"
                                             name="customRates[__serviceID__][service_id]" value="__serviceID__">
                                         <input type="text" class="form-control"

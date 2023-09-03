@@ -1,15 +1,15 @@
-const { QueryTypes } = require("sequelize")
+const { QueryTypes, Op } = require("sequelize")
 const getSequelize = require("../../../global/config/getSequelize")
 const NotEngoughArgsException = require("../../../global/error/exception/NotEnoughArgsException")
 const CustomRate = require("../entity/customRate")
 
 const ex = module.exports = {}
 
-ex.add = async (serviceInfo, userId, rate) => {
+ex.add = async (userId, rate) => {
     await CustomRate.create({
         userId: Number(userId), 
-        rate: Number(rate), 
-        serviceId: Number(serviceInfo.service_id)
+        rate: Number(rate.service_price), 
+        serviceId: Number(rate.service_id)
     })
 }
 
@@ -35,4 +35,17 @@ ex.viewCustomRate = async (userId = null) => {
     })
     
     return cr
+}
+
+ex.deleteRate = async (serviceId, userId) => {
+    if (!serviceId) throw new NotEngoughArgsException()
+
+    await CustomRate.destroy({
+        where: { 
+            userId,
+            serviceId: {
+                [Op.notIn]: serviceId
+            }
+        }
+    })
 }
