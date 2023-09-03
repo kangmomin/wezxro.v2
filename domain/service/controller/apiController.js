@@ -5,6 +5,7 @@ const serviceService = require('../service/serviceService')
 const accountService = require('../../account/service/accountService')
 const AddServiceDto = require('../dto/addServiceDto')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
+const isAdmin = require('../../../global/config/filter/isAdmin')
 
 app.get('/admin/services', isAdmin, async (req, res) => {
     try {

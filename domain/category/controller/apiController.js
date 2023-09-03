@@ -1,3 +1,4 @@
+const isAdmin = require('../../../global/config/filter/isAdmin')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException')
 const { addCategory, deleteCategory } = require('../service/adminCategoryService')
