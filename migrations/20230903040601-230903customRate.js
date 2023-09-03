@@ -47,15 +47,27 @@ module.exports = {
         sequelize
       })
 
-      queryInterface.addColumn("account", "custom_rate", {
+      await queryInterface.addColumn("account", "custom_rate", {
         type: DataTypes.FLOAT,
         defaultValue: null,
         allowNull: true,
       })
+
+      for(let i = 1; i <= 100; i++) { // 예시로 1부터 10까지의 name_X 인덱스를 삭제합니다.
+        try {
+          await queryInterface.removeIndex('category', `name_${i}`)
+        } catch(e) {
+          continue
+        }
+      }
+      
+      try {
+        await queryInterface.removeIndex("category", "name")
+      } catch(e) {}
     },
     
-  async down(queryInterface, Sequelize) {
-    queryInterface.dropTable("custom_rate")
-    queryInterface.removeColumn("account", "custom_rate")
+  async down(queryInterface, DataTypes) {
+    await queryInterface.dropTable("custom_rate")
+    await queryInterface.removeColumn("account", "custom_rate")
   }
 };
