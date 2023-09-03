@@ -1,5 +1,5 @@
 const GenericException = require("./exception/GenericException")
-const { ValidationError } = require('sequelize')
+const { ValidationError, UniqueConstraintError } = require('sequelize')
 const RenderAuthorizedException = require("./exception/RenderUnAuthorizedException")
 const RenderForbiddenException = require("./exception/RenderForbiddenException")
 
@@ -17,6 +17,12 @@ module.exports = (res, error) => {
     if (error instanceof GenericException)
         return res.send(JSON.stringify({
             message: error.code,
+            status: "error"
+        }))
+
+    if (error instanceof UniqueConstraintError)
+        return res.send(JSON.stringify({
+            message: "일부 정보가 중복돼었습니다.",
             status: "error"
         }))
 
