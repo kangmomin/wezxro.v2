@@ -45,7 +45,7 @@ app.post('/order/get_services/:categoryId', async (req, res) => {
         
         const service = await orderService.findServiceByCategoryId(categoryId)
         
-        res.render("assets/service_list", {
+        res.render(__dirname + "/../view/assets/service_list", {
             result: service
         })
     } catch(e) {

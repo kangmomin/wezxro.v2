@@ -10,6 +10,6 @@ app.get('/admin/category', renderIsAdmin, async (req, res) => {
     })
 })
 
-app.get('/admin/category/update', async (_, res) => res.render("assets/category_update"))
+app.get('/admin/category/update', async (_, res) => res.render(__dirname + "/../view/assets/category_update"))
 
 module.exports = app

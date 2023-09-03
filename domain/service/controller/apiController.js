@@ -66,7 +66,7 @@ app.post('/service_detail/:serviceId', async (req, res) => {
     try {
         const detail = await serviceService.serviceDetail(req.params.serviceId || 0)
 
-        res.render("assets/getServiceInfo", {
+        res.render(__dirname + "/../view/assets/getServiceInfo", {
             name: detail.name,
             min: detail.min,
             max: detail.max,

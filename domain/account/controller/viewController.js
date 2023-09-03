@@ -31,7 +31,7 @@ app.get("/admin/users/update/:accountId", async (req, res) => {
     try {
         const user = await accountService.infoById(req.params.accountId)
 
-        res.render("assets/update_account", {
+        res.render(__dirname + "/../view/assets/update_account", {
             user,
         })  
     } catch(e) {
@@ -43,7 +43,7 @@ app.get("/admin/users/add_funds/:userId", async (req, res) => {
     try {
         const user = await accountService.infoById(req.params.userId)
 
-        res.render("assets/add_fund", {
+        res.render(__dirname + "/../view/assets/add_fund", {
             user
         })
     } catch(e) {
@@ -55,7 +55,7 @@ app.get("/admin/users/edit_funds/:userId", async (req, res) => {
     try {
         const user = await accountService.infoById(req.params.userId)
 
-        res.render("assets/set_balance", {
+        res.render(__dirname + "/../view/assets/set_balance", {
             user
         })
     } catch(e) {
@@ -67,7 +67,7 @@ app.get("/admin/users/set_password/:userId", async (req, res) => {
     try {
         const user = await accountService.infoById(req.params.userId)
         
-        res.render("assets/set_password", {
+        res.render(__dirname + "/../view/assets/set_password", {
             user
         })
     } catch(e) {
@@ -83,7 +83,7 @@ app.get("/admin/users/custom_rate/:userId", async (req, res) => {
         const u = await accountService.infoById(userId)
         const services = await allService()
 
-        res.render("assets/custom_rate", { cr, services, u })
+        res.render(__dirname + "/../view/assets/custom_rate", { cr, services, u })
     } catch(e) {
         ExceptionHandler(res, e)
     }

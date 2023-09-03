@@ -58,7 +58,7 @@ app.post('/admin/services/provider_services', async (req, res) => {
     
         const result = await serviceService.providerServices(provider_id)
     
-        return res.status(200).render("assets/service_list", { result })
+        return res.status(200).render(__dirname + "/../view/assets/service_list", { result })
     } catch(e) {
         ExceptionHandler(res, e)
     }
