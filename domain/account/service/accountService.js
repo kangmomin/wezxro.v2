@@ -73,7 +73,9 @@ ex.login = async (email, password, ip) => {
     if (account.status == status.deactive) throw new StatusDeactiveException()
 
     accountRepository.update({ ip }, {
-        userId: account.userId
+        where: {
+            userId: account.userId
+        }
     })
 
     return userId
