@@ -5,6 +5,11 @@ const UserNotFoundException = require('../exception/UserNotFoundException.js')
 const status = require('../../../global/entity/status.js')
 const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException.js')
 const StatusDeactiveException = require('../../../global/error/exception/StatusDeactiveException.js')
+const CustomRate = require('../entity/customRate.js')
+const Service = require('../../service/entity/service.js')
+const getSequelize = require('../../../global/config/getSequelize.js')
+const { QueryTypes } = require('sequelize')
+const Sequelize = require('../../../global/config/getSequelize.js')()
 
 const ex = module.exports = {}
 
@@ -147,6 +152,30 @@ ex.delete = async (userId) => {
     }, {
         where: { userId }
     })
+}
+
+ex.viewCustomRate = async (userId = null) => {
+    if (!userId) throw new NotEngoughArgsException()
+
+    const cr = await getSequelize().query(`
+        SELECT 
+            * 
+        FROM 
+            custom_rate cr 
+        INNER JOIN
+            service s
+        ON
+            s.service_id = cr.service_id
+        WHERE
+            cr.user_id = ?
+        ORDER BY
+            cr.service_id ASC;
+    `, {
+        type: QueryTypes.SELECT,
+        replacements: [userId]
+    })
+    
+    return cr
 }
 
 /**

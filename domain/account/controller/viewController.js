@@ -1,6 +1,7 @@
 const renderIsAdmin = require('../../../global/config/filter/renderIsAdmin')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 const accountService = require('../../account/service/accountService')
+const { allService } = require('../../service/service/serviceService')
 
 const app = require('express').Router()
 
@@ -68,6 +69,20 @@ app.get("/admin/users/set_password/:userId", async (req, res) => {
         res.render("assets/set_password", {
             user
         })
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
+app.get("/admin/users/custom_rate/:userId", async (req, res) => {
+    try {
+        const userId = req.params.userId
+        
+        const cr = await accountService.viewCustomRate(userId)
+        const u = await accountService.infoById(userId)
+        const services = await allService()
+
+        res.render("assets/custom_rate", { cr, services, u })
     } catch(e) {
         ExceptionHandler(res, e)
     }

@@ -10,6 +10,7 @@ const Provider = require("../../provider/entity/provider")
 const NotEngoughArgsException = require("../../../global/error/exception/NotEnoughArgsException")
 const Category = require("../../category/entity/category")
 const { Op } = require("sequelize")
+const { async } = require("fast-glob")
 
 const ex = module.exports = {}
 
@@ -221,5 +222,13 @@ ex.deleteService = async (serviceId) => {
         status: status.deleted
     }, {
         where: { serviceId }
+    })
+}
+
+ex.allService = async () => {
+    return await serviceRepository.findAll({
+        where: {
+            status: { [Op.notLike]: status.deleted }
+        }
     })
 }

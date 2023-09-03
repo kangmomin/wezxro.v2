@@ -1,0 +1,139 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title"></i> Edit Custom rate (<%= u.email %>)</h4>
+            <button type="button" class="close" data-dismiss="modal"></button>
+        </div>
+        <form action="/admin/users/form_custom_rates/" class="form actionForm" method="POST" accept-charset="utf-8">
+            <input type="hidden" name="ids" value="<%= u.userId %>" />
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <select name="service-id" class="select-service-item" class="form-control custom-select">
+                                <option value="1">Add Custom Rate</option>
+                                <% services.forEach((s, i)=> { %>
+                                    <option
+                                        value='{"service_id":"<%= s.serviceId %>","rate":<%= s.rate %>,"original_rate":<%= s.originalRate %>,"name":"<%= s.name %>"}'
+                                        data-rate="<%= i %>">
+                                        <%= s.serviceId %> - <%= s.name %> [₩<%= s.rate %>]
+                                    </option>
+                                    <% }) %>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="o-auto" style="height: 30rem; overflow: auto;">
+                    <ul class="list-unstyled list-separated services-group-items">
+                        <div class="s-items">
+                            <% cr.forEach(cr => { %>
+                            <li class="list-separated-item s-item" id="item163">
+                                <div class="row align-items-center">
+                                    <div class="col"><strong><%= cr.customRateId %></strong></div>
+                                    <div class="col-md-7"><%= cr.s.name %></div>
+                                    <div class="col-md-1">
+                                        <div>
+                                            <span><%= cr.s.rate %></span>
+                                            <small class="d-block item-except text-sm text-muted h-1x"><%= cr.s.originalRate %></small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="hidden" name="customRates[<%= cr.customRateId %>][uid]" value="103">
+                                        <input type="hidden" class="form-control" name="customRates[<%= cr.customRateId %>][service_id]"
+                                            value="<%= cr.serviceId %>">
+                                        <input type="text" class="form-control" name="customRates[<%= cr.customRateId %>][service_price]"
+                                            value="<%= cr.rate %>">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button class="btn btn-secondary btn-remove-item" type="button"><i
+                                                class="fe fe-trash-2"></i></button>
+                                    </div>
+                                </div>
+                            </li>
+                            <% }) %>
+                        </div>
+
+                        <div class="s-item-more d-none">
+                            <li class="list-separated-item s-item" id="item__serviceID__">
+                                <div class="row align-items-center">
+                                    <div class="col"> <strong>__serviceID__</strong> </div>
+                                    <div class="col-md-7">__serviceName__ </div>
+                                    <div class="col-md-1">
+                                        <div>
+                                            <span>__serviceRate__</spane>
+                                                <small
+                                                    class="d-block item-except text-sm text-muted h-1x">__serviceOriginalRate__</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="hidden" name="customRates[__serviceID__][uid]" value="104">
+                                        <input type="hidden" class="form-control"
+                                            name="customRates[__serviceID__][service_id]" value="__serviceID__">
+                                        <input type="text" class="form-control"
+                                            name="customRates[__serviceID__][service_price]" value="__serviceRate__">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button class="btn btn-secondary btn-remove-item" type="button"><i
+                                                class="fe fe-trash-2"></i></button>
+                                    </div>
+                                </div>
+                            </li>
+                        </div>
+
+                    </ul>
+                </div>
+
+            </div>
+            <div class="card-footer text-right">
+                <div class="d-flex">
+                    <a href="javascript:void(0)" class="btn btn-info btn-remove-items">Remove all</a>
+                    <button type="submit" class="btn btn-primary ml-auto mr-2">Save</button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.select-service-item').selectize();
+
+        $(document).on("change", ".select-service-item", function () {
+            var _serviceItem = $('select[name=service-id] option').filter(':selected'),
+                _serviceData = _serviceItem.val();
+
+            if (_serviceData !== null && _serviceData !== 1) {
+                _serviceData = JSON.parse(_serviceData);
+                var _itemID = "item" + _serviceData.service_id;
+                var _itemIdExists = document.getElementById(_itemID);
+                if (!_itemIdExists) {
+                    var extra_html = $(".services-group-items").find(".s-item-more").html();
+                    extra_html = extra_html.replace(/__serviceID__/gi, _serviceData.service_id);
+                    extra_html = extra_html.replace(/__serviceName__/gi, _serviceData.name);
+                    extra_html = extra_html.replace(/__serviceRate__/gi, _serviceData.rate);
+                    extra_html = extra_html.replace(/__serviceOriginalRate__/gi, _serviceData.original_rate);
+                    $(".services-group-items").find(".s-items").append(extra_html);
+                }
+            }
+        })
+
+        // Remove item
+        $(".services-group-items").each(function () {
+            var container = $(this);
+            $(this).on('click', '.btn-remove-item', function () {
+                $(this).closest(".s-item").remove();
+            });
+        });
+
+        $(document).on("click", ".btn-remove-items", function () {
+            if ($('.services-group-items .s-items .s-item').length > 0) {
+                if (!confirm_notice('deleteItems')) {
+                    return;
+                }
+                $('.services-group-items .s-items .s-item').remove();
+            }
+        })
+
+    });
+</script>
