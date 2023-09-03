@@ -1,53 +1,27 @@
-<div id="main-modal-content">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-pantone">
-                <h4 class="modal-title"><i class="fa fa-edit"></i> Send Mail (didi@gmail.com)</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="/admin/users/mail/" class="form actionForm"
-                data-redirect="/admin/users?field=email&query=didi%40gmail.com" method="POST"
-                accept-charset="utf-8">
-                <input type="hidden" name="ids" value="7626292008740d702662dcd81eb6f0b6" />
-                <input type="hidden" name="email_to" value="didi@gmail.com" />
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="form-group">
-                                <label>To</label>
-                                <input type="text" name="balance" value="didi@gmail.com" readonly="readonly"
-                                    class="form-control" />
-
-                            </div>
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title"></i> Edit Custom rate (<%= u.email %>)</h4>
+            <button type="button" class="close" data-dismiss="modal"></button>
+        </div>
+        <form action="/admin/users/staticRate/" class="form actionForm" method="POST" accept-charset="utf-8" data-redirect="/admin/users">
+            <input type="hidden" name="ids" value="<%= u.userId %>" />
+            <div class="modal-body">
+                <div class="o-auto" style="height: 10rem; overflow: auto;">
+                    <ul class="list-unstyled list-separated services-group-items">
+                        <div class="s-items">
+                            <input type="number" class="form-control" name="staticRate" value="<%= u.customRate %>">
                         </div>
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="form-group">
-                                <label>Subject</label>
-                                <input type="text" name="subject" value="" class="form-control" />
-
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Message</label>
-                                <textarea name="message" cols="40" rows="10"
-                                    class="form-control plugin_editor"></textarea>
-
-                            </div>
-                        </div>
-                    </div>
+                    </ul>
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-min-width mr-1 mb-1">Submit</button>
+
+            </div>
+            <div class="card-footer text-right">
+                <div class="d-flex">
+                    <button type="submit" class="btn btn-primary ml-auto mr-2">Save</button>
                     <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
-
-<script>
-    $(document).ready(function () {
-        plugin_editor('.plugin_editor', { height: 300 });
-    });
-</script>

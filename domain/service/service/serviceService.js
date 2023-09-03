@@ -35,10 +35,12 @@ ex.saveService = async (addServiceDto) => {
  * @param {Number} serviceId 
  * @returns {Service}
  */
-ex.serviceDetail = async (serviceId) => {
+ex.serviceDetail = async (serviceId, rate) => {
     if (!serviceId) throw new NotEngoughArgsException()
-    
+
     const service = await serviceRepository.findByPk(serviceId)
+
+    if (rate != null) service.rate = service.rate * rate / 100
 
     return service
 }

@@ -19,6 +19,7 @@ const categoryRouter = require('./domain/category/controller/router')
 const serviceRouter = require('./domain/service/controller/router');
 const orderRouter = require('./domain/order/controller/router');
 const depoistRouter = require('./domain/depoist/controller/router');
+const isAuthUser = require('./global/config/filter/isAuthUser');
 
 app.use(cp())
 app.use(cors({
@@ -52,11 +53,11 @@ app.engine('html', require('ejs').renderFile)
 app.use('*', bp.urlencoded({ extended: false }))
 
 app.use((_,__,next) => customMiddleware(next, app, "account"), accountRouter)
-app.use((_,__,next) => customMiddleware(next, app, "provider"), providerRouter)
-app.use((_,__,next) => customMiddleware(next, app, "category"), categoryRouter)
-app.use((_,__,next) => customMiddleware(next, app, "service"), serviceRouter)
-app.use((_,__,next) => customMiddleware(next, app, "order"), orderRouter)
-app.use((_,__,next) => customMiddleware(next, app, "depoist"), depoistRouter)
+app.use(isAuthUser, (_,__,next) => customMiddleware(next, app, "provider"), providerRouter)
+app.use(isAuthUser, (_,__,next) => customMiddleware(next, app, "category"), categoryRouter)
+app.use(isAuthUser, (_,__,next) => customMiddleware(next, app, "service"), serviceRouter)
+app.use(isAuthUser, (_,__,next) => customMiddleware(next, app, "order"), orderRouter)
+app.use(isAuthUser, (_,__,next) => customMiddleware(next, app, "depoist"), depoistRouter)
 
 // ================== index 페이지 렌더링 ===================== 
 app.use((_,__,next) => {app.set('views', path.join(__dirname, "/global/view")); next()})

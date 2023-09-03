@@ -18,6 +18,8 @@ app.post("/order/ajax_add_order", async (req, res) => {
       return
     }
     const info = await accountService.info(req)
+
+    if (req.session.rate !== null) total_charge = total_charge * req.session.rate / 100
     if (info.money < total_charge) {
       res.send(JSON.stringify({
         status: "error", 

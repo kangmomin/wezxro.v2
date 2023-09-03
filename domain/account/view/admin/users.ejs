@@ -96,6 +96,7 @@
                   <th class="text-center w-1">#</th>
                   <th class="">User Profile</th>
                   <th class="text-center">Balance</th>
+                  <th class="text-center">Static rate</th>
                   <th class="text-center">Custom rate</th>
                   <th class="text-center">Role</th>
                   <th class="text-center">Created</th>
@@ -125,9 +126,16 @@
                   </td>
                   <td class="text-center w-10p"><button type="button"
                       class="btn btn-square btn-outline-info btn-sm btnEditCustomRate"
+                      data-action="./users/static_rate/<%= a.userId %>">
+                      <i class="fe fe-plus mr-2"></i>Static Rate
+                    </button>
+                  </td>
+                  <td class="text-center w-10p"><button type="button"
+                      class="btn btn-square btn-outline-info btn-sm btnEditCustomRate"
                       data-action="./users/custom_rate/<%= a.userId %>">
                       <i class="fe fe-plus mr-2"></i>Custom Rate
-                    </button></td>
+                    </button>
+                  </td>
                   <td class="text-center text-muted w-5p">user</td>
                   <td class="text-center w-15p"><%= a.createdAt %></td>
                   <td class="text-center w-5p"><label class="custom-switch">

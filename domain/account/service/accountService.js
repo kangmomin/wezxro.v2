@@ -76,7 +76,7 @@ ex.login = async (email, password, ip) => {
         userId: account.userId
     })
 
-    return account.userId
+    return userId
 }
 
 /**
@@ -167,7 +167,17 @@ ex.detail = async (userId) => {
 
     return await accountRepository.findOne({
         where: { userId },
-        attributes: ["userId", "email", "ip", "pNumber"]
+        attributes: ["userId", "email", "ip", "pNumber", "customRate"]
+    })
+}
+
+ex.updateStaticRate = async (userId, staticRate = null) => {
+    if (!userId) throw new NotEngoughArgsException()
+
+    await accountRepository.update({
+        customRate: staticRate
+    }, { 
+        where: {userId}
     })
 }
 

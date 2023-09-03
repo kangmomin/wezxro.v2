@@ -9,6 +9,8 @@ const app = require('express').Router()
 app.get("/login", (_, res) => res.render("login"))
 app.get("/join", (_, res) => res.render("join"))
 
+app.use(isAuthUser)
+
 app.get('/admin/users', renderIsAdmin, async (req, res) => {
     try {
         const user = await accountService.info(req)
@@ -94,6 +96,16 @@ app.get("/admin/users/info/:userId", async (req, res) => {
         const u = await accountService.detail(req.params.userId)
 
         res.render(__dirname + "/../view/assets/detail", { u })
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
+app.get("/admin/users/static_rate/:userId", async (req, res) => {
+    try {
+        const u = await accountService.detail(req.params.userId)
+
+        res.render(__dirname + "/../view/assets/staticRate", { u })
     } catch(e) {
         ExceptionHandler(res, e)
     }

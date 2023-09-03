@@ -32,9 +32,10 @@ app.post("/ajax_sign_in", async (req, res) => {
     
         if (!email || !password) throw new NotEngoughArgsException()
     
-        const userId = await accountService.login(email, password, req.ip)
-        req.session.userId = userId
+        const user = await accountService.login(email, password, req.ip)
+        req.session.userId = user.userId
         req.session.isAdmin = email == `admin@${process.env.EN_NAME.toLocaleLowerCase()}.com`
+        req.session.rate = user.customRate
     
         res.cookie("sessionID", req.sessionID, { httpOnly: true, secure: false, maxAge: 600000 })
         res.setHeader('Content-Type', 'text/html; charset=utf-8')
@@ -173,6 +174,20 @@ app.post('/admin/users/form_custom_rates', isAdmin, async (req, res) => {
         
         res.send(JSON.stringify({
             message: "개별 가격을 적용하였습니다.",
+            status: "success"
+        }))
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
+app.post('/admin/users/staticRate/', isAdmin, async (req, res) => {
+    try {
+        const { ids, staticRate } = req.body
+        
+        await accountService.updateStaticRate(ids, staticRate)
+        res.send(JSON.stringify({
+            message: "전체 감가액을 설정하였습니다.",
             status: "success"
         }))
     } catch(e) {

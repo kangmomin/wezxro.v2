@@ -65,7 +65,7 @@ app.post('/admin/services/store', isAdmin, async (req, res) => {
 
 app.post('/service_detail/:serviceId', async (req, res) => {
     try {
-        const detail = await serviceService.serviceDetail(req.params.serviceId || 0)
+        const detail = await serviceService.serviceDetail(req.params.serviceId || null, req.session.rate)
 
         res.render(__dirname + "/../view/assets/getServiceInfo", {
             name: detail.name,
