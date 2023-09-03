@@ -1,3 +1,4 @@
+const isAuthUser = require('../../../global/config/filter/isAuthUser')
 const renderIsAdmin = require('../../../global/config/filter/renderIsAdmin')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 const accountService = require('../../account/service/accountService')
