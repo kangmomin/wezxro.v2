@@ -84,7 +84,7 @@ app.post('/service_detail/:serviceId', async (req, res) => {
 app.post('/services/sort/:categoryId', async (req, res) => {
     try {
         const user = await accountService.info(req)
-        const [services, categoryName] = await serviceService.serviceList(req.params.categoryId)
+        const [services, categoryName] = await serviceService.serviceList(req.params.categoryId, req.session.rate)
 
         res.render('assets/user_service_list', {
             ...user,

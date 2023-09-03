@@ -5,6 +5,8 @@ const orderRepository = require('../entity/order')
 const serviceRepository = require('../../service/entity/service')
 const providerRepository = require('../../provider/entity/provider')
 const CategoryIdNotFoundError = require("../exception/CategoryIdNotFoundException")
+const status = require("../../../global/entity/status")
+const { Op } = require("sequelize")
 
 const ex = module.exports = {}
 
@@ -39,7 +41,7 @@ ex.findByUserId = async (userId) => {
     
     const service = await serviceRepository.findAll({
         where: {
-            serviceId: serviceIds
+            serviceId: serviceIds,
         },
         attributes: ["name", "providerId"]
     })
@@ -73,16 +75,22 @@ ex.findByUserId = async (userId) => {
 /**
  * @param {Number} categoryId 
  */
-ex.findServiceByCategoryId = async (categoryId) => {
+ex.findServiceByCategoryId = async (categoryId, rate) => {
 
     if (categoryId === null) {
         throw new CategoryIdNotFoundError()
     }
-    const services = await serviceRepository.findAll({
+    let services = await serviceRepository.findAll({
         where: {
-            categoryId
+            categoryId,
+            status: status.active
         }
     })
 
+    services = services.map(s => {
+        if (rate != null) s.rate = s.rate * rate / 100
+        return s
+    })
+    
     return services
 }

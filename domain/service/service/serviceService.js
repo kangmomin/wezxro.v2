@@ -180,25 +180,26 @@ ex.providerServices = async (providerId) => {
     return result
 }
 
-ex.serviceList = async (categoryId) => {
+ex.serviceList = async (categoryId, rate) => {
     if (!categoryId) throw new NotEngoughArgsException()
 
     const option = categoryId != 0 ? {
         where: { 
             categoryId, 
-            status: {
-                [Op.notLike]: status.deleted
-            }
+            status: status.active
         }
     } : {
         where: {
-            status: {
-                [Op.notLike]: status.deleted
-            }
+            status: status.active
         }
     }
 
-    const services = await serviceRepository.findAll(option)
+    let services = await serviceRepository.findAll(option)
+
+    services = services.map(s => {
+        if (rate != null) s.rate = s.rate * rate / 100
+        return s
+    })
 
     option.attributes = ['name']
 
@@ -207,15 +208,20 @@ ex.serviceList = async (categoryId) => {
     return [services, categoryName.name]
 }
 
-ex.mainServiceList = async () => {
-    const services = await serviceRepository.findAll({
+ex.mainServiceList = async (rate) => {
+    let services = await serviceRepository.findAll({
         where: {status: status.active},
     })
     const category = await categoryRepository.findAll({
         where: {status: status.active},
         attributes: ['categoryId', 'name']
     })
-
+    
+    services = services.map(s => {
+        if (rate != null) s.rate = s.rate * rate / 100
+        return s
+    })
+    
     return [services, category]
 }
 

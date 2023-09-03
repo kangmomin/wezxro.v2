@@ -24,7 +24,7 @@ app.get('/admin/services', async (req, res) => {
 app.get('/services', async (req, res) => {
     try {
         const user = await accountService.info(req)
-        const [services, category] = await serviceService.mainServiceList()
+        const [services, category] = await serviceService.mainServiceList(req.session.rate)
         
         res.render('services', {
             path: "services",
