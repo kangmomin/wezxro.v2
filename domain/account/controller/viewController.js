@@ -89,6 +89,16 @@ app.get("/admin/users/custom_rate/:userId", async (req, res) => {
     }
 })
 
+app.get("/admin/users/info/:userId", async (req, res) => {
+    try {
+        const u = await accountService.detail(req.params.userId)
+
+        res.render(__dirname + "/../view/assets/detail", { u })
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 app.get("/logout", async (req, res) => {
     await req.session.destroy()
 

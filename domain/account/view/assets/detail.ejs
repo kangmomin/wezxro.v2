@@ -1,0 +1,46 @@
+<div id="main-modal-content">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-pantone">
+                <h4 class="modal-title"><i class="fa fa-edit"></i> More Informations (<%= u.email %>)</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/admin/users/store/" class="form actionForm"
+                data-redirect="/admin/users?field=email&query=<%= u.email %>" method="POST"
+                accept-charset="utf-8">
+                <input type="hidden" name="ids" value="<%= u.userId %>" />
+                <input type="hidden" name="store_type" value="user_information" />
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>대행사 여부 - 기본 값은 0이며 1로 입력할 경우 대행사입니다.</label>
+                                <input type="text" name="ref" value="사용하지 않는 기능입니다." class="form-control" />
+
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>마지막 접속 아이피</label>
+                                <input type="text" name="history_ip" value="<%= u.ip %>" readonly="true"
+                                    class="form-control" />
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>전화번호</label>
+                                <input type="text" name="pNumber" value="<%= u.pNumber %>" class="form-control" />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-min-width mr-1 mb-1">Save</button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

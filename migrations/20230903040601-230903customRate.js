@@ -68,11 +68,15 @@ module.exports = {
       await queryInterface.addColumn("account", "ip", {
         type: DataTypes.STRING
       })
+      await queryInterface.addColumn("account", "pNumber", {
+        type: DataTypes.STRING(11)
+      })
     },
     
   async down(queryInterface, DataTypes) {
     await queryInterface.dropTable("custom_rate")
     await queryInterface.removeColumn("account", "custom_rate")
     await queryInterface.removeColumn("account", "ip")
+    await queryInterface.removeColumn("account", "pNumber")
   }
 };

@@ -120,10 +120,14 @@ ex.infoById = async (accountId) => {
     return user
 }
 
-ex.updateInfo = async (userId, {name, email, status}) => {
-    await accountRepository.update({
-        name, email, status
-    }, { where: {userId} })
+ex.updateInfo = async (userId, {name, email, reqStatus, pNumber}) => {
+    const option = { email }
+
+    if (name) option.name = name
+    if (reqStatus in status) option.status = reqStatus
+    if (pNumber) option.pNumber = pNumber
+    
+    await accountRepository.update(option, { where: {userId} })
 }
 
 ex.updateStatus = async (status, userId) => {
@@ -155,6 +159,15 @@ ex.delete = async (userId) => {
         status: status.deleted
     }, {
         where: { userId }
+    })
+}
+
+ex.detail = async (userId) => {
+    if (!userId) throw new NotEngoughArgsException()
+
+    return await accountRepository.findOne({
+        where: { userId },
+        attributes: ["userId", "email", "ip", "pNumber"]
     })
 }
 

@@ -45,6 +45,9 @@ Account.init({
   },
   ip: {
     type: DataTypes.STRING,
+  },
+  pNumber: {
+    type: DataTypes.STRING(11),
   }
 }, {
   timestamps: true,
