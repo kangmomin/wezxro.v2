@@ -42,6 +42,9 @@ Account.init({
     type: DataTypes.FLOAT,
     defaultValue: null,
     allowNull: true,
+  },
+  ip: {
+    type: DataTypes.STRING,
   }
 }, {
   timestamps: true,

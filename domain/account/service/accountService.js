@@ -60,7 +60,7 @@ ex.updateMoney = async (money, userId, adminPwd = null) => {
  * @param {String} email 
  * @param {String} password
  */
-ex.login = async (email, password) => {
+ex.login = async (email, password, ip) => {
    const account = await accountRepository.findOne({
     where: { email }
    }) 
@@ -71,6 +71,10 @@ ex.login = async (email, password) => {
     // 비밀번호 매칭
     if (account.password != encryptedPwd) throw new UserNotFoundException()
     if (account.status == status.deactive) throw new StatusDeactiveException()
+
+    accountRepository.update({ ip }, {
+        userId: account.userId
+    })
 
     return account.userId
 }

@@ -32,7 +32,7 @@ app.post("/ajax_sign_in", async (req, res) => {
     
         if (!email || !password) throw new NotEngoughArgsException()
     
-        const userId = await accountService.login(email, password)
+        const userId = await accountService.login(email, password, req.ip)
         req.session.userId = userId
         req.session.isAdmin = email == `admin@${process.env.EN_NAME.toLocaleLowerCase()}.com`
     

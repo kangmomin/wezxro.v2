@@ -6,7 +6,7 @@ const sequelize = require('../global/config/getSequelize')();
 module.exports = {
   async up(queryInterface, DataTypes) {
     
-    queryInterface.createTable("custom_rate", {
+    await queryInterface.createTable("custom_rate", {
       customRateId: {
         field: "custom_rate_id",
         type: DataTypes.INTEGER,
@@ -64,10 +64,15 @@ module.exports = {
       try {
         await queryInterface.removeIndex("category", "name")
       } catch(e) {}
+
+      await queryInterface.addColumn("account", "ip", {
+        type: DataTypes.STRING
+      })
     },
     
   async down(queryInterface, DataTypes) {
     await queryInterface.dropTable("custom_rate")
     await queryInterface.removeColumn("account", "custom_rate")
+    await queryInterface.removeColumn("account", "ip")
   }
 };
