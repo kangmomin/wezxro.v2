@@ -10,4 +10,5 @@ module.exports = {
     CATEGORY_ID_NOT_FOUND: "카테고리를 찾을 수 없습니다.",
     DEPOIST_APPLY_EXIST: "미완료 충전 신청이 존재합니다.",
     STATUS_DEACTIVE: "사용할 수 없는 상태입니다.",
+    RATE_TOO_LOW: "0 이하의 수는 Rate로 설정할 수 없습니다.",
 }

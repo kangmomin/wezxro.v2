@@ -9,6 +9,7 @@ const CustomRate = require('../entity/customRate.js')
 const Service = require('../../service/entity/service.js')
 const getSequelize = require('../../../global/config/getSequelize.js')
 const { QueryTypes } = require('sequelize')
+const RateToolLowException = require('../exception/RateTooLowException.js')
 const Sequelize = require('../../../global/config/getSequelize.js')()
 
 const ex = module.exports = {}
@@ -175,6 +176,7 @@ ex.detail = async (userId) => {
 
 ex.updateStaticRate = async (userId, staticRate = null) => {
     if (!userId) throw new NotEngoughArgsException()
+    if (staticRate < 0) new RateToolLowException()
 
     await accountRepository.update({
         customRate: staticRate
