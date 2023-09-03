@@ -4,7 +4,7 @@ const { addCategory, deleteCategory } = require('../service/adminCategoryService
 
 const app = require('express').Router()
 
-app.post('/admin/category/store', async (req, res) => {
+app.post('/admin/category/store', isAdmin, async (req, res) => {
     let { id, name, sort, status } = req.body
 
     try {
@@ -22,7 +22,7 @@ app.post('/admin/category/store', async (req, res) => {
     }
 })
 
-app.post("/admin/category/delete/:categoryId", async (req, res) => {
+app.post("/admin/category/delete/:categoryId", isAdmin, async (req, res) => {
     const categoryId = req.params.categoryId || null
     
     try {

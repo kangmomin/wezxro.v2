@@ -43,7 +43,7 @@ app.post("/depoist", async (req, res) => {
     res.send(JSON.stringify({ 'RCODE': '400', 'PCHK': '' }));
 })
 
-app.post("/admin/users/add_funds_process/", async (req, res) => {
+app.post("/admin/users/add_funds_process/", isAdmin, async (req, res) => {
     try {
         const { ids, payment_method, amount, secret_key } = req.body
         

@@ -156,7 +156,7 @@ app.post("/admin/users/delete/:userId", isAdmin, async (req, res) => {
     }
 })
 
-app.post('/admin/users/form_custom_rates', async (req, res) => {
+app.post('/admin/users/form_custom_rates', isAdmin, async (req, res) => {
     try {
         const { ids } = req.body
         const cr = parseCustomRates(req.body)

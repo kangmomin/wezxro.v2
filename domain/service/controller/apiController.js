@@ -6,7 +6,7 @@ const accountService = require('../../account/service/accountService')
 const AddServiceDto = require('../dto/addServiceDto')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 
-app.get('/admin/services', async (req, res) => {
+app.get('/admin/services', isAdmin, async (req, res) => {
     try {
         const categoryId = req.query.sort_by || 0
         
@@ -22,7 +22,7 @@ app.get('/admin/services', async (req, res) => {
     }
 })
 
-app.post('/admin/services/store', async (req, res) => {
+app.post('/admin/services/store', isAdmin, async (req, res) => {
     try {
         const {
             category, 
@@ -95,7 +95,7 @@ app.post('/services/sort/:categoryId', async (req, res) => {
     }
 })
 
-app.post('/admin/services/delete/:serviceId', async (req, res) => {
+app.post('/admin/services/delete/:serviceId', isAdmin, async (req, res) => {
     try {
 
         await serviceService.deleteService(req.params.serviceId || null)
