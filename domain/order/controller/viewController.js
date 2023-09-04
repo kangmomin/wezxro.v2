@@ -15,7 +15,7 @@ app.get("/order", async (req, res) => {
             return e
         })
         
-        res.render('order', { orders, ...user, path: "order" })
+        res.render(__dirname + '/../view/order', { orders, ...user, path: "order" })
     } catch (e) {
         ExceptionHandler(res, e)
     }
@@ -27,7 +27,7 @@ app.get("/add-order", async (req, res) => {
         const { name, money } = await accountService.info(req)
         const category = await categoryService.findAllCategory()
         
-        res.render('addOrder', {
+        res.render(__dirname + '/../view/assets/addOrder', {
             name, money, category, path: "add-order"
         })
     } catch(e) {
