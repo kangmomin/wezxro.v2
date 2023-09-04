@@ -1,7 +1,7 @@
 const isAdmin = require('../../../global/config/filter/isAdmin')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException')
-const { addCategory, deleteCategory } = require('../service/adminCategoryService')
+const { addCategory, deleteCategory, updateSort } = require('../service/adminCategoryService')
 
 const app = require('express').Router()
 
@@ -31,6 +31,20 @@ app.post("/admin/category/delete/:categoryId", isAdmin, async (req, res) => {
 
         res.send(JSON.stringify({
             message: "카테고리를 삭제하였습니다.",
+            status: "success"
+        }))
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
+app.post("/admin/category/change_sort/:categoryId", async (req, res) => {
+    try {
+        const { sort } = req.body
+        await updateSort(req.params.categoryId, sort)
+
+        res.send(JSON.stringify({
+            message: "카테고리의 sort를 수정하였습니다.",
             status: "success"
         }))
     } catch(e) {

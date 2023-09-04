@@ -76,3 +76,12 @@ ex.getCategoryDetail = async (categoryId = null) => {
 
     return await categoryRepository.findByPk(categoryId)
 }
+
+ex.updateSort = async (categoryId = null, sort) => {
+    if (!categoryId) throw new CategoryIdNotFoundError()
+    if (isNaN(Number(sort))) throw new ValidationError("sort 값이 숫자가 아닙니다.")
+
+    await categoryRepository.update({ sort }, {
+        where: { categoryId }
+    })
+}
