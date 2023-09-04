@@ -52,4 +52,18 @@ app.post("/admin/category/change_sort/:categoryId", async (req, res) => {
     }
 })
 
+app.post("/admin/category/change_status/:categoryId", async (req, res) => {
+    try {
+        const { status } = req.body
+        await updateSort(req.params.categoryId, status)
+
+        res.send(JSON.stringify({
+            message: "카테고리의 status를 수정하였습니다.",
+            status: "success"
+        }))
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 module.exports = app    

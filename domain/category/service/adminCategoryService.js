@@ -85,3 +85,12 @@ ex.updateSort = async (categoryId = null, sort) => {
         where: { categoryId }
     })
 }
+
+ex.updateStatus = async (categoryId = null, cStatus) => {
+    if (!categoryId) throw new CategoryIdNotFoundError()
+    if (!cStatus in status) throw new ValidationError("status 값이 정상적이지 않습니다.")
+
+    await categoryRepository.update({ status: cStatus }, {
+        where: { categoryId }
+    })
+}
