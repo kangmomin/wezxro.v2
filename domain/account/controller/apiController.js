@@ -33,11 +33,36 @@ app.post("/ajax_sign_in", async (req, res) => {
         if (!email || !password) throw new NotEngoughArgsException()
     
         const user = await accountService.login(email, password, req.ip)
+        req.session.userId = undefined
+        req.session.isAdmin = undefined
+        req.session.rate = undefined
+        
         req.session.userId = user.userId
         req.session.isAdmin = email == `admin@${process.env.EN_NAME.toLocaleLowerCase()}.com`
         req.session.rate = user.customRate
     
         res.cookie("sessionID", req.sessionID, { httpOnly: true, secure: false, maxAge: 600000 })
+        res.setHeader('Content-Type', 'text/html; charset=utf-8')
+        res.send(JSON.stringify({
+            message: "로그인 성공",
+            status: "success"
+        }))
+    } catch(e) {
+        exceptionHandler(res, e)
+    }
+})
+
+app.get("/demo-login", async (req, res) => {
+    try {
+        const user = await accountService.login(`deno@${process.env.EN_NAME.toLowerCase()}`, "demoPassword", req.ip)
+        req.session.userId = undefined
+        req.session.isAdmin = undefined
+        req.session.rate = undefined
+        
+        req.session.userId = user.userId
+        req.session.isAdmin = false
+    
+        res.cookie("sessionID", req.sessionID, { httpOnly: true, secure: false, maxAge: 60000 })
         res.setHeader('Content-Type', 'text/html; charset=utf-8')
         res.send(JSON.stringify({
             message: "로그인 성공",
