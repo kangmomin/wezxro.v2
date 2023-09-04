@@ -2,6 +2,7 @@ const { Op, ValidationError } = require('sequelize')
 const status = require('../../../global/entity/status')
 const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException')
 const categoryRepository = require('../entity/category')
+const CategoryIdNotFoundError = require('../../order/exception/CategoryIdNotFoundException')
 
 const ex = module.exports = {}
 
@@ -37,19 +38,21 @@ ex.editCategory = async (categoryId) => {
  * 카테고리를 저장하거나 Id가 body에 같이 들어오면 업데이트 해줌
  */
 ex.addCategory = async ({ id, name, sort, status: updateStatus }) => {
-    const category = await categoryRepository.count({
-        where: {
-            status: { [Op.ne]: status.deleted }, name
-        }
-    })
-
-    if (category != 0) throw new ValidationError("카테고리의 이름은 중복될 수 없습니다.")
-    
     // id 값도 body에 같이 들어오면 update
     // 프론트가 이래 돼있었음,.,,
     if (id != null && id !== '') {
-        categoryRepository.update({ name, sort, status: updateStatus })
+        categoryRepository.update({ name, sort, status: updateStatus }, {
+            where: { categoryId: id }
+        })
     } else {
+        const category = await categoryRepository.count({
+            where: {
+                status: { [Op.ne]: status.deleted }, name
+            }
+        })
+    
+        if (category != 0) throw new ValidationError("카테고리의 이름은 중복될 수 없습니다.")
+
         id = categoryRepository.create({
             name, 
             sort, 
@@ -66,4 +69,10 @@ ex.deleteCategory = async (categoryId) => {
     }, {
         where: { categoryId }
     })
+}
+
+ex.getCategoryDetail = async (categoryId = null) => {
+    if (!categoryId) throw new CategoryIdNotFoundError()
+
+    return await categoryRepository.findByPk(categoryId)
 }

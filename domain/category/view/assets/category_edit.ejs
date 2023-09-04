@@ -7,8 +7,7 @@
       </div>
       <form action="/admin/category/store/" class="form actionForm"
         data-redirect="/admin/category" method="POST" accept-charset="utf-8" id="category_form">
-        <input type="hidden" name="id" value="<%= category_id %>" />
-        <input type="hidden" name="token" value="e6a5d1436773236a07377a652cf828e3" />
+        <input type="hidden" name="id" value="<%= categoryId %>" />
         <div class="modal-body">
           <div class="row justify-content-md-center">
             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -28,8 +27,8 @@
               <div class="form-group">
                 <label>Status</label>
                 <select name="status" class="form-control">
-                  <option value="1" <%= status == 'active' ? 'selected' : '' %>>Active</option>
-                  <option value="0" <%= status == 'deactive' ? 'selected' : '' %>>Deactive</option>
+                  <option value="1" <%= status == '1' ? 'selected' : '' %>>Active</option>
+                  <option value="0" <%= status == '0' ? 'selected' : '' %>>Deactive</option>
                 </select>
 
               </div>
