@@ -54,7 +54,7 @@ app.post("/ajax_sign_in", async (req, res) => {
 
 app.get("/demo-login", async (req, res) => {
     try {
-        const user = await accountService.login(`deno@${process.env.EN_NAME.toLowerCase()}.com`, "demoPassword", req.ip)
+        const user = await accountService.login(`demo@${process.env.EN_NAME.toLowerCase()}.com`, "demoPassword", req.ip)
         req.session.userId = undefined
         req.session.isAdmin = undefined
         req.session.rate = undefined
