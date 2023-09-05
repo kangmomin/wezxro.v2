@@ -64,10 +64,7 @@ app.get("/demo-login", async (req, res) => {
     
         res.cookie("sessionID", req.sessionID, { httpOnly: true, secure: false, maxAge: 60000 })
         res.setHeader('Content-Type', 'text/html; charset=utf-8')
-        res.send(JSON.stringify({
-            message: "로그인 성공",
-            status: "success"
-        }))
+        res.redirect("/order")
     } catch(e) {
         exceptionHandler(res, e)
     }
