@@ -11,6 +11,10 @@ app.get('/admin/category', renderIsAdmin, async (req, res) => {
     })
 })
 
+app.get('/admin/category/update', (_, res) => {
+    res.render(__dirname+"/../view/assets/category_store")
+})
+
 app.get('/admin/category/update/:categoryId', async (req, res) => {
     try {
         const category = await adminCategoryService.getCategoryDetail(req.params.categoryId)
