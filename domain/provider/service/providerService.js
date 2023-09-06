@@ -5,6 +5,7 @@ const SaveProviderDto = require('../dto/SaveProviderDto')
 const status = require('../../../global/entity/status')
 const UnknownProviderException = require('../exception/UnknownProviderException')
 const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException')
+const ApiException = require('../../../global/error/exception/ApiException')
 
 const ex = module.exports = {}
 
@@ -72,14 +73,22 @@ ex.providerList = async () => {
     })
 
     providers = await Promise.all(providers.map(async p => {
-        const providerUserInfo = await new ProviderApi(p.apiKey, p.apiUrl)
+        return await new ProviderApi(p.apiKey, p.apiUrl)
             .getUserBalance()
-
-        p.balance = providerUserInfo.balance
-        p.apiKey = undefined
-        p.apiUrl = p.apiUrl.split("/api")[0]
-
-        return p
+            .then(pi => {
+                p.balance = pi.balance
+                p.apiKey = undefined
+                p.apiUrl = p.apiUrl.split("/api")[0]
+        
+                return p
+            })
+            .catch(e => { 
+                p.balance = e.response.data.error
+                p.apiKey = undefined
+                p.apiUrl = p.apiUrl.split("/api")[0]
+        
+                return p
+            })
     }))
 
     return providers

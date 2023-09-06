@@ -61,13 +61,19 @@ ex.findByUserId = async (userId) => {
     let i = 0
     for (o of orders) {
         const api = new ProviderApi(provider[i].apiKey, provider[i].apiUrl)
+
         
-        try {
-            o.status = await api.getOrderStatus(o.apiOrderId)
-        } catch(e) {
-            throw new ApiException(e.response.data.error)
-        }
-        o.serviceName = service[i].name
+        o = await api.getOrderStatus(o.apiOrderId)
+        .then(order => {
+            o.status = order
+            o.serviceName = service[i].name
+            return order
+        })
+        .catch(e => { 
+            o.status = ""
+            o.serviceName = service[i].name + "[" + e.response.data.error + "]"
+            return o
+        })
         
         orderWithStatus.push(o)
 
