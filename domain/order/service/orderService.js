@@ -67,7 +67,7 @@ ex.findByUserId = async (userId) => {
         .then(order => {
             o.status = order
             o.serviceName = service[i].name
-            return order
+            return o
         })
         .catch(e => { 
             o.status = ""
