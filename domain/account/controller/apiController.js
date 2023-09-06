@@ -63,6 +63,7 @@ app.get("/demo-login", async (req, res) => {
         
         req.session.userId = user.userId
         req.session.isAdmin = false
+        req.session.isDemo = true
     
         res.cookie("sessionID", req.sessionID, { httpOnly: true, secure: false, maxAge: 60000 })
         res.setHeader('Content-Type', 'text/html; charset=utf-8')
