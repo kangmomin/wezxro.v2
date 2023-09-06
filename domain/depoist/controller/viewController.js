@@ -13,7 +13,8 @@ app.get('/transactions', async (req, res) => {
             result: req.query.result || "default",
             ...user,
             depoist: depoistList,
-            path: "transactions"
+            path: "transactions",
+            isDemo: req.session.isDemo
         })
     } catch (e) {
         ExceptionHandler(res, e)

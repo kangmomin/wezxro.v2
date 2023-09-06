@@ -36,10 +36,12 @@ app.post("/ajax_sign_in", async (req, res) => {
         req.session.userId = undefined
         req.session.isAdmin = undefined
         req.session.rate = undefined
+        req.session.isDemo = undefined
         
         req.session.userId = user.userId
         req.session.isAdmin = email == `admin@${process.env.EN_NAME.toLocaleLowerCase()}.com`
         req.session.rate = user.customRate
+        req.session.isDemo = email == `demo@${process.env.EN_NAME.toLocaleLowerCase()}.com`
     
         res.cookie("sessionID", req.sessionID, { httpOnly: true, secure: false, maxAge: 600000 })
         res.setHeader('Content-Type', 'text/html; charset=utf-8')
