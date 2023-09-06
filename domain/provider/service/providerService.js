@@ -27,7 +27,7 @@ const ex = module.exports = {}
 ex.findServices = async (providerId = null) => {
     if (providerId === null) throw new ProviderNotFoundException()
 
-    const res = await providerRepository.findP(providerId)
+    const res = await providerRepository.findByPk(providerId)
 
     const provider = new ProviderApi(res.api_key, res.api_url)
     const services = await provider.getServices()
