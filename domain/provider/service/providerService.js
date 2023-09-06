@@ -76,7 +76,7 @@ ex.providerList = async () => {
         return await new ProviderApi(p.apiKey, p.apiUrl)
             .getUserBalance()
             .then(pi => {
-                p.balance = pi.balance
+                p.balance = !pi.error ? pi.balance : pi.error
                 p.apiKey = undefined
                 p.apiUrl = p.apiUrl.split("/api")[0]
         

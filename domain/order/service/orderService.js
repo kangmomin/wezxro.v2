@@ -65,7 +65,7 @@ ex.findByUserId = async (userId) => {
         
         o = await api.getOrderStatus(o.apiOrderId)
         .then(order => {
-            o.status = order
+            o.status = !order.error ? order : order.error
             o.serviceName = service[i].name
             return o
         })
