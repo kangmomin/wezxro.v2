@@ -27,7 +27,7 @@ app.get("/add-order", async (req, res) => {
         const { name, money } = await accountService.info(req)
         const category = await categoryService.findAllCategory()
         
-        res.render(__dirname + '/../view/assets/addOrder', {
+        res.render(__dirname + '/../view/addOrder', {
             name, money, category, path: "add-order"
         })
     } catch(e) {
