@@ -53,6 +53,8 @@ ex.saveProvider = async (providerInfo, userId) => {
         throw new UnknownProviderException()
     }
 
+    if (!providerInfo.name) return NotEngoughArgsException()
+
     await providerRepository.create({
         userId: userId,
         name: providerInfo.name, 
