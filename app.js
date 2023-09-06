@@ -73,7 +73,7 @@ app.get("/statistics", (_, res) => res.redirect("/order"))
 app.use(express.static(__dirname + '/public'))
 
 // ================== error 페이지 렌더링 =====================
-app.get('*', (req, res) => res.render('error.ejs', { status: 404, title: "THE PAGE", content: "WAS NOT FOUND" }))
+app.get('*', (req, res) => res.render(__dirname + '/global/view/error.ejs', { status: 404, title: "THE PAGE", content: "WAS NOT FOUND" }))
 // ================== error 페이지 렌더링 =====================
 
 
