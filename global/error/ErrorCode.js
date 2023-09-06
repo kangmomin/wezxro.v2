@@ -11,4 +11,5 @@ module.exports = {
     DEPOIST_APPLY_EXIST: "미완료 충전 신청이 존재합니다.",
     STATUS_DEACTIVE: "사용할 수 없는 상태입니다.",
     RATE_TOO_LOW: "0 이하의 수는 Rate로 설정할 수 없습니다.",
+    DEFAULT_API_ERROR: "api 연동 중 문제가 발생하였습니다."
 }

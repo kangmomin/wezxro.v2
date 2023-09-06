@@ -7,6 +7,7 @@ const providerRepository = require('../../provider/entity/provider')
 const CategoryIdNotFoundError = require("../exception/CategoryIdNotFoundException")
 const status = require("../../../global/entity/status")
 const { Op } = require("sequelize")
+const ApiException = require("../../../global/error/exception/ApiException")
 
 const ex = module.exports = {}
 
@@ -61,7 +62,11 @@ ex.findByUserId = async (userId) => {
     for (o of orders) {
         const api = new ProviderApi(provider[i].apiKey, provider[i].apiUrl)
         
-        o.status = await api.getOrderStatus(o.apiOrderId)
+        try {
+            o.status = await api.getOrderStatus(o.apiOrderId)
+        } catch(e) {
+            throw new ApiException(e.response.data.error)
+        }
         o.serviceName = service[i].name
         
         orderWithStatus.push(o)
