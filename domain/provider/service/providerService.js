@@ -5,7 +5,6 @@ const SaveProviderDto = require('../dto/SaveProviderDto')
 const status = require('../../../global/entity/status')
 const UnknownProviderException = require('../exception/UnknownProviderException')
 const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException')
-const ApiException = require('../../../global/error/exception/ApiException')
 
 const ex = module.exports = {}
 
@@ -95,9 +94,18 @@ ex.providerList = async () => {
 }
 
 ex.deleteProvider = async (providerId) => {
-    if (!provideId) throw new NotEngoughArgsException()
+    if (!providerId) throw new NotEngoughArgsException()
     
     await providerRepository.update({
         status: status.deleted
     }, {where: { providerId }})
+}
+
+ex.updateStatus = async (providerId = null, cStatus) => {
+    if (!providerId) throw new NotEngoughArgsException()
+    if (!cStatus in status) throw new ValidationError("status 값이 정상적이지 않습니다.")
+
+    await providerRepository.update({ status: cStatus }, {
+        where: { providerId }
+    })
 }

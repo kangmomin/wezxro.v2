@@ -32,4 +32,19 @@ app.post('/admin/provider/delete/:providerId', isAdmin, async (req, res) => {
     }
 })
 
+app.post("/admin/provider/change_status/:providerId", isAdmin, async (req, res) => {
+    try {
+        const { status } = req.body
+        
+        await providerService.updateStatus(req.params.providerId, status)
+        
+        res.send(JSON.stringify({
+            message: "도매처의 status를 업데이트 했습니다.",
+            status: "success"
+        }))
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 module.exports = app

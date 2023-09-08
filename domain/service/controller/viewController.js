@@ -54,7 +54,7 @@ app.post('/admin/services/provider_services', async (req, res) => {
     try {
         const provider_id = req.body.provider_id | null
     
-        if (!provider_id) throw new NOT_ENOUGH_ARGS()
+        if (!provider_id) throw new NotEngoughArgsException()
     
         const result = await serviceService.providerServices(provider_id)
     

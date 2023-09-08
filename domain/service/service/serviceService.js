@@ -11,6 +11,7 @@ const NotEngoughArgsException = require("../../../global/error/exception/NotEnou
 const Category = require("../../category/entity/category")
 const { Op } = require("sequelize")
 const { async } = require("fast-glob")
+const ProviderNotFoundException = require("../../provider/exception/ProviderNotFoundException")
 
 const ex = module.exports = {}
 
@@ -97,17 +98,34 @@ ex.updateStatus = async (serviceId, status) => {
  * @param {Number} categoryId 
  */
 ex.getServices = async (categoryId) => {
+    const provider = await providerRepository.findAll({
+        attributes: ["providerId"],
+        where: {
+            status: status.deactive
+        }
+    })
+
+    const providerIds = provider.map(p => {
+        return p.providerId
+    })
+    
     const services = categoryId == 0 ? 
         await serviceRepository.findAll({
             where: {
                 status: {
-                    [Op.notLike]: status.deleted
+                    [Op.notLike]: status.deleted,
                 },
+                providerId: {
+                    [Op.ne]: providerIds
+                }
             }
         }) : await serviceRepository.findAll({
             where: {
                 status: {
                     [Op.notLike]: status.deleted
+                },
+                providerId: {
+                    [Op.ne]: providerIds
                 },
                 categoryId
             }
@@ -138,9 +156,7 @@ ex.addServiceRender = async () => {
     })
     const provider = await providerRepository.findAll({
         where: {
-            status: {
-                [Op.notLike]: status.deleted
-            }
+            status: status.active
         },
         attributes: ["providerId", "name"]
     })
@@ -165,6 +181,8 @@ ex.providerServices = async (providerId) => {
             status: status.active
         }
     })
+
+    if (!providerInfo) throw new ProviderNotFoundException()
 
     const api = new ProviderApi(providerInfo.apiKey, providerInfo.apiUrl)
     let services = await api.getServices()
