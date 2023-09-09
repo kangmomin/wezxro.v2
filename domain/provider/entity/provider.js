@@ -28,7 +28,7 @@ Provider.init({
     },
     apiKey: {
         field: "api_key",
-        type: DataTypes.STRING(50),
+        type: DataTypes.STRING,
         allowNull: false,
     },
     apiUrl: {
