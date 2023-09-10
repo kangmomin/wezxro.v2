@@ -1,4 +1,5 @@
-const axios = require('axios')
+const axios = require('axios');
+const FormData = require('form-data');
 
 class ProviderApi {
 
@@ -13,11 +14,24 @@ class ProviderApi {
   }
   
   async fetchApi(action, params = {}) {
-    const data = { key: this.API_KEY , action, ...params };
+    let data = { key: this.API_KEY , action, ...params };
     
     const headers = this.IsFormData ? {
       'Content-Type': 'multipart/form-data'
     } : {}
+
+    if (this.IsFormData) {
+      let fd = new FormData()
+
+      fd.append("key", this.API_KEY)
+      fd.append("action", action)
+
+      for (const key in params) {
+        fd.append(key, params[key])
+      }
+
+      data = fd
+    }
 
     const response = await axios.post(this.API_URL, data, headers);
     return response.data;

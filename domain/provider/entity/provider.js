@@ -40,6 +40,11 @@ Provider.init({
         type: DataTypes.ENUM,
         allowNull: false,
         values: Object.values(status)
+    },
+    type: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
 }, {
     timestamps: true,

@@ -6,6 +6,7 @@ const status = require('../../../global/entity/status')
 const UnknownProviderException = require('../exception/UnknownProviderException')
 const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException')
 const Service = require('../../service/entity/service')
+const type = require('../entity/constant/type')
 
 const ex = module.exports = {}
 
@@ -47,9 +48,17 @@ ex.findServices = async (providerId = null) => {
 
 /** @param {SaveProviderDto} providerInfo */
 ex.saveProvider = async (providerInfo, userId) => {
+    let isFormData = type.json
+    
     try {
-        await new ProviderApi(providerInfo.key, providerInfo.url)
+        let res = await new ProviderApi(providerInfo.key, providerInfo.url)
             .getUserBalance()
+
+        if (res.error) {
+            await new ProviderApi(providerInfo.key, providerInfo.url, true)
+                .getUserBalance().then(() => isFormData = type.formData)
+        }
+
     } catch (e) {
         throw new UnknownProviderException()
     }
@@ -62,18 +71,19 @@ ex.saveProvider = async (providerInfo, userId) => {
         description: providerInfo.description,
         apiKey: providerInfo.key,
         apiUrl: providerInfo.url,
-        status: providerInfo.status == 1 ? status.active : status.deactive
+        status: providerInfo.status == 1 ? status.active : status.deactive,
+        type: isFormData
     })
 }
 
 ex.providerList = async () => {
     let providers = await providerRepository.findAll({
         attributes: ["providerId", "name", "description", 
-            "status", "apiKey", "apiUrl"]
+            "status", "apiKey", "apiUrl", "type"]
     })
 
     providers = await Promise.all(providers.map(async p => {
-        return await new ProviderApi(p.apiKey, p.apiUrl)
+        return await new ProviderApi(p.apiKey, p.apiUrl, p.type)
             .getUserBalance()
             .then(pi => {
                 p.balance = !pi.error ? pi.balance : pi.error
