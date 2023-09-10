@@ -6,15 +6,20 @@ class ProviderApi {
    * @param {String} API_KEY 도매처 key
    * @param {String} API_URL 도매처 링크 
    */
-  constructor(API_KEY, API_URL) {
+  constructor(API_KEY, API_URL, IsFormData = false) {
     this.API_URL = API_URL
     this.API_KEY = API_KEY
+    this.IsFormData = IsFormData
   }
   
   async fetchApi(action, params = {}) {
     const data = { key: this.API_KEY , action, ...params };
     
-    const response = await axios.post(this.API_URL, data);
+    const headers = this.IsFormData ? {
+      'Content-Type': 'multipart/form-data'
+    } : {}
+
+    const response = await axios.post(this.API_URL, data, headers);
     return response.data;
   }
   
