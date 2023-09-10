@@ -5,6 +5,7 @@ const SaveProviderDto = require('../dto/SaveProviderDto')
 const status = require('../../../global/entity/status')
 const UnknownProviderException = require('../exception/UnknownProviderException')
 const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException')
+const Service = require('../../service/entity/service')
 
 const ex = module.exports = {}
 
@@ -107,5 +108,14 @@ ex.updateStatus = async (providerId = null, cStatus) => {
 
     await providerRepository.update({ status: cStatus }, {
         where: { providerId }
+    })
+
+    await Service.update({
+        status: status.deactive
+    }, {
+        where: {
+            status: status.active,
+            providerId
+        }
     })
 }

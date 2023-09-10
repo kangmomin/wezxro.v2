@@ -97,35 +97,18 @@ ex.updateStatus = async (serviceId, status) => {
  * 서비스 목록 출력
  * @param {Number} categoryId 
  */
-ex.getServices = async (categoryId) => {
-    const provider = await providerRepository.findAll({
-        attributes: ["providerId"],
-        where: {
-            status: status.deactive
-        }
-    })
-
-    const providerIds = provider.map(p => {
-        return p.providerId
-    })
-    
+ex.getServices = async (categoryId) => {    
     const services = categoryId == 0 ? 
         await serviceRepository.findAll({
             where: {
                 status: {
                     [Op.notLike]: status.deleted,
-                },
-                providerId: {
-                    [Op.ne]: providerIds
                 }
             }
         }) : await serviceRepository.findAll({
             where: {
                 status: {
                     [Op.notLike]: status.deleted
-                },
-                providerId: {
-                    [Op.ne]: providerIds
                 },
                 categoryId
             }
