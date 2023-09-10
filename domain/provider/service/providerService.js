@@ -110,12 +110,13 @@ ex.updateStatus = async (providerId = null, cStatus) => {
         where: { providerId }
     })
 
-    await Service.update({
-        status: status.deactive
-    }, {
-        where: {
-            status: status.active,
-            providerId
-        }
-    })
+    if (cStatus == status.deactive)
+        await Service.update({
+            status: status.deactive
+        }, {
+            where: {
+                status: status.active,
+                providerId
+            }
+        })
 }
