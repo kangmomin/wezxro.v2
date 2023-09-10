@@ -3,6 +3,7 @@ const status = require('../../../global/entity/status')
 const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException')
 const categoryRepository = require('../entity/category')
 const CategoryIdNotFoundError = require('../../order/exception/CategoryIdNotFoundException')
+const Service = require('../../service/entity/service')
 
 const ex = module.exports = {}
 
@@ -93,4 +94,14 @@ ex.updateStatus = async (categoryId = null, cStatus) => {
     await categoryRepository.update({ status: cStatus }, {
         where: { categoryId }
     })
+
+    if (cStatus == status.deactive) 
+        await Service.update({
+            status: status.deactive
+        }, {
+            where: {
+                status: status.active,
+                categoryId
+            }
+        })
 }
