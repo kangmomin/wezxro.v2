@@ -10,8 +10,8 @@ const Provider = require("../../provider/entity/provider")
 const NotEngoughArgsException = require("../../../global/error/exception/NotEnoughArgsException")
 const Category = require("../../category/entity/category")
 const { Op } = require("sequelize")
-const { async } = require("fast-glob")
 const ProviderNotFoundException = require("../../provider/exception/ProviderNotFoundException")
+const CannotChangeStatusException = require("../exception/CannotChangeStatusException")
 
 const ex = module.exports = {}
 
@@ -79,19 +79,29 @@ ex.addOrderInfo = async (serviceId) => {
  * @param {Number} serviceId 
  * @param {String} status 
  */
-ex.updateStatus = async (serviceId, status) => {
-    const conn = await new DB().getConn()
+ex.updateStatus = async (serviceId, cStatus) => {
+    if (!serviceId) throw new NotEngoughArgsException()
+    if (!cStatus in status) throw new ValidationError("status 값이 정상적이지 않습니다.")
+
+    if (cStatus == status.active) {
+        const service = await serviceRepository.findByPk(serviceId)
+        const category = await Category.findByPk(service.categoryId, {
+            attributes: ['status']
+        })
     
-    
-    try {
-        await serviceRepository.updateStatus(conn, serviceId, status)
-        await conn.commit()
-    } catch(e) {
-        await conn.rollback()
-        throw e
-    } finally {
-        conn.release()
+        if (category.status == status.deactive) 
+            throw new CannotChangeStatusException("카테고리가 비활성 상태입니다.")
+            
+        const provider = await Provider.findByPk(service.providerId, {
+            attributes: ["status"]
+        })
+        if (provider.status == status.deactive) 
+            throw new CannotChangeStatusException("도매처가 비활성 상태입니다.")
     }
+    
+    await serviceRepository.update({ status: cStatus }, {
+        where: { serviceId }
+    })
 }
 /**
  * 서비스 목록 출력

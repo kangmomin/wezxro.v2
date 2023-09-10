@@ -110,4 +110,18 @@ app.post('/admin/services/delete/:serviceId', isAdmin, async (req, res) => {
     }
 })
 
+app.post('/admin/services/change_status/:serviceId', isAdmin, async (req, res) => {
+    try {
+        const { status } = req.body
+        await serviceService.updateStatus(req.params.serviceId || null, status)
+
+        res.send(JSON.stringify({
+            message: "서비스를 업데이트하였습니다.",
+            status: "success"
+        }))
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 module.exports = app
