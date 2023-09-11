@@ -12,6 +12,7 @@ const Category = require("../../category/entity/category")
 const { Op } = require("sequelize")
 const ProviderNotFoundException = require("../../provider/exception/ProviderNotFoundException")
 const CannotChangeStatusException = require("../exception/CannotChangeStatusException")
+const { IteratorWithOperators } = require("iterare/lib/iterate")
 
 const ex = module.exports = {}
 
@@ -163,7 +164,7 @@ ex.addServiceRender = async () => {
  * @param {Number} providerId  
  * @returns {String} htmlCode
  */
-ex.providerServices = async (providerId) => {
+ex.providerServices = async (providerId, category) => {
     const providerInfo = await providerRepository.findOne({
         attributes: ["apiKey", "apiUrl", 'type'],
         where: {
@@ -192,7 +193,36 @@ ex.providerServices = async (providerId) => {
         return []
     }
     
-    return result
+    return result[category]
+}
+
+ex.providerCategory = async (providerId) => {
+    const providerInfo = await providerRepository.findOne({
+        attributes: ["apiKey", "apiUrl", 'type'],
+        where: {
+            status: {
+                [Op.notLike]: status.deleted
+            },
+            providerId: providerId,
+            status: status.active
+        }
+    })
+
+    if (!providerInfo) throw new ProviderNotFoundException()
+
+    const api = new ProviderApi(providerInfo.apiKey, providerInfo.apiUrl, providerInfo.type)
+    let services = await api.getServices()
+
+    let category = []
+    
+    try {
+        services.forEach(e => {
+            if (!category.includes(e.category)) category.push(e.category)
+        })
+        return category
+    } catch(e) {
+        return []
+    }
 }
 
 ex.serviceList = async (categoryId, rate) => {

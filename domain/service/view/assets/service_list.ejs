@@ -1,21 +1,17 @@
 <option value="0">Choose Service</option>
-<% Object.keys(result).forEach(category => { %>
-    <optgroup label="<%= category %>">
-        <% result[category].forEach(e => { %>
-        <option 
-            value="<%=e.service%>" 
-            data-service="<%=e.service%>" 
-            data-name="<%=e.name%>" 
-            data-type="<%=e.type%>" 
-            data-rate="<%=e.rate%>" 
-            data-min="<%=e.min%>" 
-            data-max="<%=e.max%>" 
-            data-dripfeed="<%=e.dripfeed%>" 
-            data-refill="0" 
-            data-cancel="<%=e.cancel%>" 
-            data-category="<%=e.category%>">
-            <%=e.content%>
-        </option>
-    <% }) %>
-</optgroup>
+<% result.forEach(e => { %>
+    <option 
+        value="<%=e.service%>" 
+        data-service="<%=e.service%>" 
+        data-name="<%=e.name%>" 
+        data-type="<%=e.type%>" 
+        data-rate="<%=e.rate%>" 
+        data-min="<%=e.min%>" 
+        data-max="<%=e.max%>" 
+        data-dripfeed="<%=e.dripfeed%>" 
+        data-refill="0" 
+        data-cancel="<%=e.cancel%>" 
+        data-category="<%=e.category%>">
+        <%=e.content%>
+    </option>
 <% }) %>
