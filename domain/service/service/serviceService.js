@@ -165,7 +165,7 @@ ex.addServiceRender = async () => {
  */
 ex.providerServices = async (providerId) => {
     const providerInfo = await providerRepository.findOne({
-        attributes: ["apiKey", "apiUrl"],
+        attributes: ["apiKey", "apiUrl", 'type'],
         where: {
             status: {
                 [Op.notLike]: status.deleted
@@ -177,16 +177,20 @@ ex.providerServices = async (providerId) => {
 
     if (!providerInfo) throw new ProviderNotFoundException()
 
-    const api = new ProviderApi(providerInfo.apiKey, providerInfo.apiUrl)
+    const api = new ProviderApi(providerInfo.apiKey, providerInfo.apiUrl, providerInfo.type)
     let services = await api.getServices()
     const result = {}
 
-    services.forEach(e => {
-        if (result[e.category] == undefined) result[e.category] = []
-        
-        e.content = truncate(`ID${e.service} - (${e.rate}) - ${e.name}`, 75)
-        result[e.category].push(e)
-    })
+    try {
+        services.forEach(e => {
+            if (result[e.category] == undefined) result[e.category] = []
+            
+            e.content = truncate(`ID${e.service} - (${e.rate}) - ${e.name}`, 75)
+            result[e.category].push(e)
+        })
+    } catch(e) {
+        return []
+    }
     
     return result
 }
