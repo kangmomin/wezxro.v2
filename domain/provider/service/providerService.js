@@ -119,14 +119,6 @@ ex.providerList = async () => {
     return providers
 }
 
-ex.deleteProvider = async (providerId) => {
-    if (!providerId) throw new NotEngoughArgsException()
-    
-    await providerRepository.update({
-        status: status.deleted
-    }, {where: { providerId }})
-}
-
 ex.updateStatus = async (providerId = null, cStatus) => {
     if (!providerId) throw new NotEngoughArgsException()
     if (!cStatus in status) throw new ValidationError("status 값이 정상적이지 않습니다.")
@@ -155,4 +147,12 @@ ex.providerInfo = async (providerId = null) => {
     if (!provider) throw new UnknownProviderException()
 
     return provider
+}
+
+ex.providerDelete = async (providerId = null) => {
+    if (!providerId) throw new NotEngoughArgsException()
+    
+    await providerRepository.destroy({
+        where: { providerId }
+    })
 }

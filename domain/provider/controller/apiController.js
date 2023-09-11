@@ -24,9 +24,9 @@ app.post("/admin/provider/store", isAdmin, async (req, res) => {
 
 app.post('/admin/provider/delete/:providerId', isAdmin, async (req, res) => {
     try {
-        await providerService.deleteProvider(req.params.providerId || null)
+        await providerService.providerDelete(req.params.providerId)
         res.send(JSON.stringify({
-            messag: "도매처를 삭제하였습니다",
+            message: "도매처를 삭제하였습니다",
             status: "success"
         }))
     } catch(e) {
@@ -42,6 +42,19 @@ app.post("/admin/provider/change_status/:providerId", isAdmin, async (req, res) 
         
         res.send(JSON.stringify({
             message: "도매처의 status를 업데이트 했습니다.",
+            status: "success"
+        }))
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
+app.post("/admin/provider/delete/:providerId", async (req, res) => {
+    try {
+        await providerService.deleteProvider(req.params.providerId)
+
+        res.send(JSON.stringify({
+            message: "도매처를 삭제하였습니다.",
             status: "success"
         }))
     } catch(e) {
