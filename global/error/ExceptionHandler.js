@@ -1,5 +1,5 @@
 const GenericException = require("./exception/GenericException")
-const { ValidationError, UniqueConstraintError } = require('sequelize')
+const { ValidationError, UniqueConstraintError, DatabaseError } = require('sequelize')
 const RenderAuthorizedException = require("./exception/RenderUnAuthorizedException")
 const RenderForbiddenException = require("./exception/RenderForbiddenException")
 
@@ -30,6 +30,11 @@ module.exports = (res, error) => {
         return res.send(JSON.stringify({
             message: `데이터가 저장 규칙에 맞지 않습니다. [${error.message}]`
         }))}
+    else if (error instanceof DatabaseError) {
+        return res.send(JSON.stringify({
+            message: error.message
+        }))
+    }
     else 
     res.send(JSON.stringify({
         message: "알 수 없는 에러 발생",
