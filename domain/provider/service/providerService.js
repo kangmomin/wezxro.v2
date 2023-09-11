@@ -65,15 +65,30 @@ ex.saveProvider = async (providerInfo, userId) => {
 
     if (!providerInfo.name) return NotEngoughArgsException()
 
-    await providerRepository.create({
-        userId: userId,
-        name: providerInfo.name, 
-        description: providerInfo.description,
-        apiKey: providerInfo.key,
-        apiUrl: providerInfo.url,
-        status: providerInfo.status == 1 ? status.active : status.deactive,
-        type: isFormData
-    })
+    if (providerInfo.id) {
+        await providerRepository.update({
+            name: providerInfo.name, 
+            description: providerInfo.description,
+            apiKey: providerInfo.key,
+            apiUrl: providerInfo.url,
+            status: providerInfo.status == 1 ? status.active : status.deactive,
+            type: isFormData    
+        }, {
+            where: {
+                providerId: providerInfo.id
+            }
+        })
+    } else {
+        await providerRepository.create({
+            userId: userId,
+            name: providerInfo.name, 
+            description: providerInfo.description,
+            apiKey: providerInfo.key,
+            apiUrl: providerInfo.url,
+            status: providerInfo.status == 1 ? status.active : status.deactive,
+            type: isFormData
+        })
+    }
 }
 
 ex.providerList = async () => {
@@ -129,4 +144,15 @@ ex.updateStatus = async (providerId = null, cStatus) => {
                 providerId
             }
         })
+}
+
+ex.providerInfo = async (providerId = null) => {
+
+    if (!providerId) throw new NotEngoughArgsException()
+
+    const provider = await providerRepository.findByPk(providerId)
+    
+    if (!provider) throw new UnknownProviderException()
+
+    return provider
 }

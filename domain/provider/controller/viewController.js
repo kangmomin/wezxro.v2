@@ -1,6 +1,6 @@
 const renderIsAdmin = require('../../../global/config/filter/renderIsAdmin')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
-const { providerList } = require('../service/providerService')
+const { providerList, providerInfo } = require('../service/providerService')
 
 const app = require('express').Router()
 
@@ -11,6 +11,18 @@ app.get('/admin/provider', renderIsAdmin, async (req, res) => {
         const providers = await providerList()
         res.render('admin/provider', {
             providers
+        })
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
+app.get('/admin/provider/update/:providerId', async (req, res) => {
+    try {
+        const provider = await providerInfo(req.params.providerId)
+        
+        res.render(__dirname + '/../view/assets/updateProvider.ejs', {
+            provider
         })
     } catch(e) {
         ExceptionHandler(res, e)

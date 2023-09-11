@@ -12,7 +12,9 @@ app.post("/admin/provider/store", isAdmin, async (req, res) => {
             new SaveProviderDto(req.body), 
             req.session.userId)
         res.send(JSON.stringify({
-            message: "도매처 추가 성공",
+            message: !req.body.id ? 
+                "도매처 추가 성공" : 
+                "도매처 업데이트 성공",
             status: "success"
         }))
     } catch(e) {
