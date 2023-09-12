@@ -4,8 +4,10 @@ const orderService = require('../service/orderService')
 const accountService = require('../../account/service/accountService')
 const categoryService = require('../../category/service/categoryService')
 const formatDateTime = require('../../../global/util/formatDateTime')
+const renderIsAdmin = require('../../../global/config/filter/renderIsAdmin')
+const isAuthUser = require('../../../global/config/filter/isAuthUser')
 
-app.get("/order", async (req, res) => {
+app.get("/order", isAuthUser, async (req, res) => {
     try {
         const orders = await orderService.findByUserId(req.session.userId)
         const user = await accountService.info(req)
@@ -21,7 +23,7 @@ app.get("/order", async (req, res) => {
     }
 })
 
-app.get("/add-order", async (req, res) => {
+app.get("/add-order", isAuthUser, async (req, res) => {
     try {
         
         const { name, money } = await accountService.info(req)
