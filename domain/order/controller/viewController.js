@@ -6,6 +6,7 @@ const categoryService = require('../../category/service/categoryService')
 const formatDateTime = require('../../../global/util/formatDateTime')
 const renderIsAdmin = require('../../../global/config/filter/renderIsAdmin')
 const isAuthUser = require('../../../global/config/filter/isAuthUser')
+const path = require('path')
 
 app.get("/order", isAuthUser, async (req, res) => {
     try {
@@ -31,6 +32,15 @@ app.get("/add-order", isAuthUser, async (req, res) => {
         
         res.render(__dirname + '/../view/addOrder', {
             name, money, category, path: "add-order"
+        })
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+app.get("/admin/order", isAuthUser, async (req, res) => {
+    try {
+        res.render(__dirname + '/../view/admin/order', {
+            path: "order"
         })
     } catch(e) {
         ExceptionHandler(res, e)
