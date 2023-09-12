@@ -37,7 +37,7 @@ module.exports = (res, error) => {
     }
     else 
     res.send(JSON.stringify({
-        message: "알 수 없는 에러 발생",
+        message: `에러 발생[${error.message}]`,
         status: "error"
     }))
 

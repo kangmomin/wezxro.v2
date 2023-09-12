@@ -5,6 +5,7 @@ const accountService = require('../../account/service/accountService')
 const orderService = require('../service/orderService')
 const SaveOrderDto = require('../dto/SaveOrderDto')
 const ProviderApi = require('../../../global/util/providerApi')
+const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 
 app.post("/order/ajax_add_order", async (req, res) => {
   const { category_id, service_id, link, quantity, total_charge } = req.body
@@ -56,15 +57,7 @@ app.post("/order/ajax_add_order", async (req, res) => {
       status: "success"
     }))
   } catch(e) {
-    if (e.toString() === "Error: neworder.error.not_enough_funds")
-    // TODO 관리자에게 메일 보내기
-      console.log()
-    else console.error(e)
-
-    res.send(JSON.stringify({
-      message: `주문에 실패하였습니다.`,
-      status: "error"
-    }))
+    ExceptionHandler(res, e)
   }
 })
 
