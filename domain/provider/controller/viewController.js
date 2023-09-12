@@ -9,7 +9,7 @@ app.get("/admin/provider/update", (req, res) => res.render('assets/addProvider')
 app.get('/admin/provider', renderIsAdmin, async (req, res) => {
     try {
         const providers = await providerList()
-        res.render('admin/provider', {
+        res.render(__dirname + '/../view/admin/provider', {
             providers
         })
     } catch(e) {

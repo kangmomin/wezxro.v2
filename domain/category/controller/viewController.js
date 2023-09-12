@@ -6,7 +6,7 @@ const adminCategoryService = require('../service/adminCategoryService')
 app.get('/admin/category', renderIsAdmin, async (req, res) => {
     const [category, activeCnt] = await adminCategoryService.findAllCategory()
     
-    res.render('admin/category', {
+    res.render(__dirname + '/../view/admin/category', {
         category, activeCnt
     })
 })

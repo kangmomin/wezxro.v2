@@ -11,7 +11,7 @@ app.get('/admin/services', async (req, res) => {
         
         const [services, category] = await serviceService.getServices(categoryId)
         
-        res.status(200).render('admin/services', {
+        res.status(200).render(__dirname + '/../view/admin/services', {
             path: "services",
             services, 
             category: category,
@@ -27,7 +27,7 @@ app.get('/services', async (req, res) => {
         const user = await accountService.info(req)
         const [services, category] = await serviceService.mainServiceList(req.session.rate)
         
-        res.render('services', {
+        res.render(__dirname + '/../view/services', {
             path: "services",
             ...user,
             services,
@@ -42,7 +42,7 @@ app.get('/admin/services/update', async (req, res) => {
     try {
         const [category, provider] = await serviceService.addServiceRender()
                     
-        return res.status(200).render('assets/services_update', {
+        return res.status(200).render(__dirname + '/../view/assets/services_update', {
             category, 
             providers: provider
         })

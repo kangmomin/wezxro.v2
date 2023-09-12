@@ -15,7 +15,7 @@ app.get('/admin/users', renderIsAdmin, async (req, res) => {
         const user = await accountService.info(req)
         const {users, activeCnt, deactiveCnt} = await accountService.userList()
 
-        res.render('admin/users', {
+        res.render(__dirname + '/../view/admin/users', {
             ...user,
             path: "users",
             users: users.rows,

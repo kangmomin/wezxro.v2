@@ -9,7 +9,7 @@ app.get('/transactions', async (req, res) => {
         const user = await info(req)
         const depoistList = await depoistRender(req.session.userId)
 
-        res.render('transactions', {
+        res.render(__dirname + '/../view/transactions', {
             result: req.query.result || "default",
             ...user,
             depoist: depoistList,

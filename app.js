@@ -52,12 +52,12 @@ app.set('view engine', 'ejs')
 app.engine('html', require('ejs').renderFile)
 app.use('*', bp.urlencoded({ extended: false }))
 
-app.use((_,__,next) => customMiddleware(next, app, "account"), accountRouter)
-app.use((_,__,next) => customMiddleware(next, app, "provider"), providerRouter)
-app.use((_,__,next) => customMiddleware(next, app, "category"), categoryRouter)
-app.use((_,__,next) => customMiddleware(next, app, "service"), serviceRouter)
-app.use((_,__,next) => customMiddleware(next, app, "order"), orderRouter)
-app.use((_,__,next) => customMiddleware(next, app, "depoist"), depoistRouter)
+app.use(accountRouter)
+app.use(providerRouter)
+app.use(categoryRouter)
+app.use(serviceRouter)
+app.use(orderRouter)
+app.use(depoistRouter)
 
 // ================== index 페이지 렌더링 ===================== 
 app.use((_,__,next) => {app.set('views', path.join(__dirname, "/global/view")); next()})
