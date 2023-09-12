@@ -8,6 +8,9 @@ const CategoryIdNotFoundError = require("../exception/CategoryIdNotFoundExceptio
 const status = require("../../../global/entity/status")
 const { Op } = require("sequelize")
 const ApiException = require("../../../global/error/exception/ApiException")
+const Account = require("../../account/entity/account")
+const Provider = require("../../provider/entity/provider")
+const Service = require("../../service/entity/service")
 
 const ex = module.exports = {}
 
@@ -104,4 +107,34 @@ ex.findServiceByCategoryId = async (categoryId, rate) => {
     })
     
     return services
+}
+
+ex.orders = async () => {
+    let orders = await orderRepository.findAll()
+
+    orders = await Promise.all(orders.map(async order => {    
+        const user = await Account.findByPk(order.userId, { attributes: ["email"] })
+        const service = await Service.findByPk(order.serviceId, { attributes: ["providerId"] })
+        const provider = await Provider.findByPk(service.providerId, {
+            attributes: ["providerId", "name", "apiKey", "apiUrl", "type"]
+        })
+
+        const orderStatus = await new ProviderApi(
+                provider.apiKey, 
+                provider.apiUrl, 
+                provider.type
+            ).getOrderStatus(order.apiOrderId)
+
+        order.email = user.email
+        order.provider = provider
+        order.status = orderStatus.status
+        order.remain = orderStatus.remains
+        order.startCount = orderStatus.start_count
+
+        return order
+    }))
+
+    
+
+    return orders
 }

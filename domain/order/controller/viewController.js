@@ -37,10 +37,13 @@ app.get("/add-order", isAuthUser, async (req, res) => {
         ExceptionHandler(res, e)
     }
 })
-app.get("/admin/order", isAuthUser, async (req, res) => {
+app.get("/admin/order", renderIsAdmin, async (req, res) => {
     try {
+        const orders = await orderService.orders()
+        
         res.render(__dirname + '/../view/admin/order', {
-            path: "order"
+            path: "order",
+            orders
         })
     } catch(e) {
         ExceptionHandler(res, e)
