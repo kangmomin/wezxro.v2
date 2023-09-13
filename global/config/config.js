@@ -10,6 +10,10 @@ module.exports = {
         charset: 'utf8mb4',
         dateStrings: true,
         typeCast: true,
+        ssl: {
+          require: true,
+          rejectUnauthorized: false // 인증서 확인 비활성화 (개발 환경에서만 사용)
+        }
     },
     timezone: '+09:00',
     pool: {
@@ -17,5 +21,5 @@ module.exports = {
         min: 0,
         acquire: 30000,
         idle: 10000
-    }
+    },
 };
