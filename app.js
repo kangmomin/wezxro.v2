@@ -11,15 +11,12 @@ const session = require('express-session')
 const sessionStore = require('express-mysql-session')(session)
 const path = require('path');
 
-const customMiddleware = require('./global/middleware/customViewMiddleware')
-
 const accountRouter = require('./domain/account/controller/router')
 const providerRouter = require('./domain/provider/controller/router')
 const categoryRouter = require('./domain/category/controller/router')
-const serviceRouter = require('./domain/service/controller/router');
-const orderRouter = require('./domain/order/controller/router');
-const depoistRouter = require('./domain/depoist/controller/router');
-const isAuthUser = require('./global/config/filter/isAuthUser');
+const serviceRouter = require('./domain/service/controller/router')
+const orderRouter = require('./domain/order/controller/router')
+const depoistRouter = require('./domain/depoist/controller/router')
 
 app.use(cp())
 app.use(cors({
