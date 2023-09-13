@@ -8,15 +8,18 @@ const port = process.env.PORT
 const bp = require('body-parser')
 const cp = require('cookie-parser')
 const session = require('express-session')
-const sessionStore = require('express-mysql-session')(session)
+const sessionStore = require('connect-pg-simple')(session)
 const path = require('path');
+const sessionPool = require('pg').Pool
+const config = require('./global/config/config')
 
 const accountRouter = require('./domain/account/controller/router')
 const providerRouter = require('./domain/provider/controller/router')
 const categoryRouter = require('./domain/category/controller/router')
 const serviceRouter = require('./domain/service/controller/router')
 const orderRouter = require('./domain/order/controller/router')
-const depoistRouter = require('./domain/depoist/controller/router')
+const depoistRouter = require('./domain/depoist/controller/router');
+const Session = require('./domain/session/entity/session');
 
 app.use(cp())
 app.use(cors({
@@ -29,11 +32,18 @@ app.use(cors({
 app.use(
     session({
         store: new sessionStore({
-            host: process.env.DB_HOST,
-            port: process.env.DB_PORT,
-            user: process.env.DB_USER,
-            password: process.env.DB_PASSWORD,
-            database: process.env.DB_NAME
+            pool: new sessionPool({
+                host: config.host,
+                port: 5432,
+                user: config.username,
+                password: config.password,
+                database: config.database,
+                max: 5,
+                min: 0,
+                acquire: 30000,
+                idle: 10000
+            }),
+            tableName: "session"
         }),
         secret: process.env.SESSION_SECRET,
         resave: true,
@@ -41,8 +51,11 @@ app.use(
         cookie: {
             maxAge: 1000 * 60 * 60 * 24 * 7
         }
-    }) 
-)
+    }), (_, __, n) => {
+        // session을 자동으로 sequelize가 만들어 주려면 사용을 해야해서
+        Session.getAttributes()
+        n()
+    })
 
 // ejs
 app.set('view engine', 'ejs')
@@ -57,7 +70,7 @@ app.use(orderRouter)
 app.use(depoistRouter)
 
 // ================== index 페이지 렌더링 ===================== 
-app.use((_,__,next) => {app.set('views', path.join(__dirname, "/global/view")); next()})
+app.use((_, __, next) => { app.set('views', path.join(__dirname, "/global/view")); next() })
 app.get("/admin", (_, res) => res.redirect('/admin/provider'))
 app.get('/', (req, res) => res.status(200).render('index.ejs', {
     isLogin: req.session.userId !== undefined && req.session.userId !== null
@@ -65,7 +78,7 @@ app.get('/', (req, res) => res.status(200).render('index.ejs', {
 
 app.get("/statistics", (_, res) => res.redirect("/order"))
 // ================== index 페이지 렌더링 =====================
-    
+
 // public static 파일 설정
 app.use(express.static(__dirname + '/public'))
 
@@ -75,7 +88,7 @@ app.get('*', (req, res) => res.render(__dirname + '/global/view/error.ejs', { st
 
 
 //force : 서버 실행 시 마다 테이블을 재생성 할 것인지 아닌지
-sequelize.sync({force: true}).then(() => {
+sequelize.sync({ force: true }).then(() => {
     console.log('DB Sync complete.');
     app.listen(port, () => { console.log(`server is running on ${port || 3000}`) })
 })
