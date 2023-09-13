@@ -8,10 +8,8 @@ const port = process.env.PORT
 const bp = require('body-parser')
 const cp = require('cookie-parser')
 const session = require('express-session')
-const sessionStore = require('connect-pg-simple')(session)
+const sessionStore = require('connect-session-sequelize')(session.Store)
 const path = require('path');
-const sessionPool = require('pg').Pool
-const config = require('./global/config/config')
 
 const accountRouter = require('./domain/account/controller/router')
 const providerRouter = require('./domain/provider/controller/router')
@@ -19,7 +17,7 @@ const categoryRouter = require('./domain/category/controller/router')
 const serviceRouter = require('./domain/service/controller/router')
 const orderRouter = require('./domain/order/controller/router')
 const depoistRouter = require('./domain/depoist/controller/router');
-const Session = require('./domain/session/entity/session');
+const getSequelize = require('./global/config/getSequelize');
 
 app.use(cp())
 app.use(cors({
@@ -32,37 +30,20 @@ app.use(cors({
 app.use(
     session({
         store: new sessionStore({
-            pool: new sessionPool({
-                host: config.host,
-                port: 5432,
-                user: config.username,
-                password: config.password,
-                database: config.database,
-                max: 5,
-                min: 0,
-                acquire: 30000,
-                idle: 10000,
-                ssl: {
-                    require: true,
-                    rejectUnauthorized: false
-                }
-            }),
-            tableName: "session"
+            db: getSequelize(),
+            checkExpirationInterval: 15 * 60 * 1000,
+            expiration: 7 * 24 * 60 * 60 * 1000
         }),
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
+        proxy: true,
         cookie: {
-            secure: true,
             httpOnly: true,
-            sameSite: 'strict',
-            maxAge: 60 * 60 * 1000
+            maxAge: 60 * 60 * 500
         }
-    }), (_, __, n) => {
-        // session을 자동으로 sequelize가 만들어 주려면 사용을 해야해서
-        Session.getAttributes()
-        n()
     })
+)
 
 // ejs
 app.set('view engine', 'ejs')
