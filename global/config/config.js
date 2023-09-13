@@ -1,4 +1,5 @@
 require('dotenv').config();
+const { Pool } = require('pg')
 
 module.exports = {
     host: process.env.POSTGRES_HOST,
@@ -16,10 +17,10 @@ module.exports = {
         }
     },
     timezone: '+09:00',
-    pool: {
+    pool: new Pool({
       max: 5,
-        min: 0,
-        acquire: 30000,
-        idle: 10000
-    },
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+    }),
 };
