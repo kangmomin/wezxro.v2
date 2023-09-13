@@ -52,8 +52,7 @@ Service.init({
         type: DataTypes.STRING(200),
     },
     status: {
-        type: DataTypes.ENUM,
-        values: Object.values(status),
+        type: DataTypes.ENUM(Object.values(status)),
         defaultValue: status.deactive
     },
     originalRate: {

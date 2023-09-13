@@ -22,9 +22,8 @@ Category.init({
         defaultValue: 0,
     },
     status: {
-        type: DataTypes.ENUM,
+        type: DataTypes.ENUM(Object.values(status)),
         allowNull: false,
-        values: Object.values(status)
     }
 }, {
     timestamps: true,

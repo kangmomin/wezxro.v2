@@ -11,7 +11,7 @@ ex.findAllCategory = async () => {
     const category = await categoryRepository.findAll({ 
         where: {
             status: {
-                [Op.notLike]: status.deleted
+                [Op.ne]: status.deleted
             }
         },
         order: [["sort", "ASC"]] 

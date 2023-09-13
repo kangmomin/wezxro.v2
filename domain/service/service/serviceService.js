@@ -113,13 +113,13 @@ ex.getServices = async (categoryId) => {
         await serviceRepository.findAll({
             where: {
                 status: {
-                    [Op.notLike]: status.deleted,
+                    [Op.ne]: status.deleted,
                 }
             }
         }) : await serviceRepository.findAll({
             where: {
                 status: {
-                    [Op.notLike]: status.deleted
+                    [Op.ne]: status.deleted
                 },
                 categoryId
             }
@@ -128,7 +128,7 @@ ex.getServices = async (categoryId) => {
     const category = await categoryRepository.findAll({
         where: {
             status: {
-                [Op.notLike]: status.deleted
+                [Op.ne]: status.deleted
             }
         },
     })
@@ -143,7 +143,7 @@ ex.addServiceRender = async () => {
     const category = await categoryRepository.findAll({
         where: {
             status: {
-                [Op.notLike]: status.deleted
+                [Op.ne]: status.deleted
             }
         },
         attributes: ["categoryId", "name"]
@@ -169,7 +169,7 @@ ex.providerServices = async (providerId, category) => {
         attributes: ["apiKey", "apiUrl", 'type'],
         where: {
             status: {
-                [Op.notLike]: status.deleted
+                [Op.ne]: status.deleted
             },
             providerId: providerId,
             status: status.active
@@ -201,7 +201,7 @@ ex.providerCategory = async (providerId) => {
         attributes: ["apiKey", "apiUrl", 'type'],
         where: {
             status: {
-                [Op.notLike]: status.deleted
+                [Op.ne]: status.deleted
             },
             providerId: providerId,
             status: status.active
@@ -283,7 +283,7 @@ ex.deleteService = async (serviceId) => {
 ex.allService = async () => {
     return await serviceRepository.findAll({
         where: {
-            status: { [Op.notLike]: status.deleted }
+            status: { [Op.ne]: status.deleted }
         }
     })
 }

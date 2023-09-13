@@ -26,8 +26,7 @@ Depoist.init({
         allowNull: false
     },
     status: {
-        type: DataTypes.ENUM,
-        values: Object.values(status),
+        type: DataTypes.ENUM(Object.values(status)),
         defaultValue: status.pending
     },
     type: {

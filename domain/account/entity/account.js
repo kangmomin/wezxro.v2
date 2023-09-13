@@ -33,8 +33,7 @@ Account.init({
     defaultValue: 0
   },
   status: {
-    type: DataTypes.ENUM,
-    values: Object.values(status),
+    type: DataTypes.ENUM(Object.values(status)),
     defaultValue: status.active
   },
   customRate: {

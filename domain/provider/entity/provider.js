@@ -37,9 +37,8 @@ Provider.init({
         allowNull: false,
     },
     status: {
-        type: DataTypes.ENUM,
+        type: DataTypes.ENUM(Object.values(status)),
         allowNull: false,
-        values: Object.values(status)
     },
     type: {
         type: DataTypes.BOOLEAN,
