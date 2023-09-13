@@ -11,5 +11,8 @@
             "src": "/(.*)",
             "dest": "app.json"
         }
+    ],
+    "rewrites":  [
+        {"source": "/(.*)", "destination": "/"}
     ]
 }
