@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 module.exports = {
-  development: {
     host: process.env.POSTGRES_HOST,
     username: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
@@ -19,5 +18,4 @@ module.exports = {
         acquire: 30000,
         idle: 10000
     }
-  },
 };
