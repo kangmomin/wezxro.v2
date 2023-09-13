@@ -7,8 +7,8 @@ const { viewCustomRate } = require('../service/customRateService')
 
 const app = require('express').Router()
 
-app.get("/login", (_, res) => res.render("login"))
-app.get("/join", (_, res) => res.render("join"))
+app.get("/login", (_, res) => res.render(__dirname + "/../view/login"))
+app.get("/join", (_, res) => res.render(__dirname + "/../view/join"))
 
 app.get('/admin/users', renderIsAdmin, async (req, res) => {
     try {
