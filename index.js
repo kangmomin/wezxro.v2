@@ -42,10 +42,10 @@ app.use(
                 min: 0,
                 acquire: 30000,
                 idle: 10000,
-                ssl: {
-                    require: true,
-                    rejectUnauthorized: false
-                }
+                // ssl: {
+                //     require: true,
+                //     rejectUnauthorized: false
+                // }
             }),
             tableName: "session"
         }),
@@ -84,7 +84,7 @@ app.get("/statistics", (_, res) => res.redirect("/order"))
 // ================== index 페이지 렌더링 =====================
 
 // public static 파일 설정
-app.use(express.static(__dirname + '/public'))
+app.use(express.static('public'))
 
 // ================== error 페이지 렌더링 =====================
 app.get('*', (req, res) => res.render(__dirname + '/global/view/error.ejs', { status: 404, title: "THE PAGE", content: "WAS NOT FOUND" }))
