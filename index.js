@@ -84,7 +84,7 @@ app.get("/statistics", (_, res) => res.redirect("/order"))
 // ================== index 페이지 렌더링 =====================
 
 // public static 파일 설정
-app.use(express.static('public'))
+app.use("/public", express.static('public'))
 
 // ================== error 페이지 렌더링 =====================
 app.get('*', (req, res) => res.render(__dirname + '/global/view/error.ejs', { status: 404, title: "THE PAGE", content: "WAS NOT FOUND" }))
