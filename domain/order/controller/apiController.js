@@ -6,6 +6,7 @@ const orderService = require('../service/orderService')
 const SaveOrderDto = require('../dto/SaveOrderDto')
 const ProviderApi = require('../../../global/util/providerApi')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
+const AddOrderException = require('../exception/AddOrderException')
 
 app.post("/order/ajax_add_order", async (req, res) => {
   const { category_id, service_id, link, quantity, total_charge } = req.body
@@ -36,7 +37,7 @@ app.post("/order/ajax_add_order", async (req, res) => {
                 quantity, total_charge)
                 
     if (data.error !== undefined) {
-      throw new Error(data.error)
+      throw new AddOrderException(data.error)
     }
 
     const saveOrderDto = SaveOrderDto.builder()
