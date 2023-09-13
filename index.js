@@ -42,18 +42,21 @@ app.use(
                 min: 0,
                 acquire: 30000,
                 idle: 10000,
-                ssl: {
-                    require: true,
-                    rejectUnauthorized: false
-                }
+                // ssl: {
+                //     require: true,
+                //     rejectUnauthorized: false
+                // }
             }),
             tableName: "session"
         }),
         secret: process.env.SESSION_SECRET,
-        resave: true,
+        resave: false,
         saveUninitialized: true,
         cookie: {
-            maxAge: 1000 * 60 * 60 * 24 * 7
+            secure: true,
+            httpOnly: true,
+            sameSite: 'strict',
+            maxAge: 60 * 60 * 1000
         }
     }), (_, __, n) => {
         // session을 자동으로 sequelize가 만들어 주려면 사용을 해야해서
