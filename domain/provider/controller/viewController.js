@@ -4,7 +4,7 @@ const { providerList, providerInfo } = require('../service/providerService')
 
 const app = require('express').Router()
 
-app.get("/admin/provider/update", (req, res) => res.render('assets/addProvider'))
+app.get("/admin/provider/update", (req, res) => res.render(__dirname + '/../view/assets/addProvider'))
 
 app.get('/admin/provider', renderIsAdmin, async (req, res) => {
     try {
