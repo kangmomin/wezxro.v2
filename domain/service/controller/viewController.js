@@ -55,10 +55,11 @@ app.post('/admin/services/provider_services', async (req, res) => {
     try {
         const provider_id = req.body.provider_id || null
         const category_id = req.body.category_id || null
+        const serviceId = req.body.serviceId || null
     
-        if (!provider_id || !category_id) throw new NotEngoughArgsException()
+        if (!provider_id) throw new NotEngoughArgsException()
     
-        const result = await serviceService.providerServices(provider_id, category_id)
+        const result = await serviceService.providerServices(provider_id, category_id, serviceId)
     
         return res.status(200).render(__dirname + "/../view/assets/service_list", { result })
     } catch(e) {

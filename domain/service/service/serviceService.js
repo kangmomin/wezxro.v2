@@ -164,7 +164,7 @@ ex.addServiceRender = async () => {
  * @param {Number} providerId  
  * @returns {String} htmlCode
  */
-ex.providerServices = async (providerId, category) => {
+ex.providerServices = async (providerId, category, serviceId) => {
     const providerInfo = await providerRepository.findOne({
         attributes: ["apiKey", "apiUrl", 'type'],
         where: {
@@ -172,7 +172,7 @@ ex.providerServices = async (providerId, category) => {
                 [Op.ne]: status.deleted
             },
             providerId: providerId,
-            status: status.active
+            status: status.active,
         }
     })
 
@@ -180,8 +180,18 @@ ex.providerServices = async (providerId, category) => {
 
     const api = new ProviderApi(providerInfo.apiKey, providerInfo.apiUrl, providerInfo.type)
     let services = await api.getServices()
+
+    if (serviceId) {
+        const filtedService = services.filter(s => s.service == serviceId)
+
+        filtedService[0].content = truncate(`ID${filtedService[0].service} - (${filtedService[0].rate}) - ${filtedService[0].name}`, 75)
+
+        return filtedService
+    }
+    
     const result = {}
 
+    if (!category) throw new NotEngoughArgsException()
     try {
         services.forEach(e => {
             if (result[e.category] == undefined) result[e.category] = []
