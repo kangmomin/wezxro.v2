@@ -6,6 +6,7 @@ const accountService = require('../../account/service/accountService')
 const AddServiceDto = require('../dto/addServiceDto')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 const isAdmin = require('../../../global/config/filter/isAdmin')
+const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException')
 
 app.get('/admin/services', isAdmin, async (req, res) => {
     try {
@@ -39,7 +40,7 @@ app.post('/admin/services/store', isAdmin, async (req, res) => {
             desc
         } = req.body
     
-        if (name === "") throw new NOT_ENOUGH_ARGS()
+        if (name === "") throw new NotEngoughArgsException()
     
         const addServiceDto = AddServiceDto.builder()
             .setAddType(add_type)
