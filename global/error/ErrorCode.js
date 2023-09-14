@@ -12,5 +12,6 @@ module.exports = {
     STATUS_DEACTIVE: "사용할 수 없는 상태입니다.",
     RATE_TOO_LOW: "0 이하의 수는 Rate로 설정할 수 없습니다.",
     DEFAULT_API_ERROR: "api 연동 중 문제가 발생하였습니다.",
-    ADD_ORDER_ERROR: "주문에 실패하였습니다."
+    ADD_ORDER_ERROR: "주문에 실패하였습니다.",
+    DEPOIST_NOT_FOUND_ERROR: "충전 내역이 없습니다."
 }

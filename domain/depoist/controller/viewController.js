@@ -37,4 +37,14 @@ app.get('/admin/transactions', renderIsAdmin, async (req, res) => {
     }
 })
 
+app.get('/admin/transactions/update/:depoistId', async (req, res) => {
+    try {
+        const depoist = await findForUpdate(req.params.depoistId)
+
+        res.render(__dirname + '/../view/assets/updateTransaction', { d: depoist })
+    } catch (e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 module.exports = app

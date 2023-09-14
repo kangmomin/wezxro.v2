@@ -1,0 +1,60 @@
+<div id="main-modal-content">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-pantone">
+                <h4 class="modal-title"><i class="fa fa-edit"></i> Edit Transaction (<%= d.depoistId %>)</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/admin/transactions/store/" class="form actionForm"
+                data-redirect="/admin/transactions?field=transaction_id&query=" method="POST"
+                accept-charset="utf-8">
+                <input type="hidden" name="ids" value="<%= d.depoistId %>" />
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label>Transaction ID</label>
+                                <input type="text" name="balance" value="" readonly="readonly" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label>Amount</label>
+                                <input type="text" name="amount" value="<%= d.pay %>" readonly="readonly"
+                                    class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label>Payment Method</label>
+                                <input type="text" name="new_balance" value="manual" readonly="readonly"
+                                    class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select name="status" class="form-control">
+                                    <option value="-1" <%- d.status == "-1" ? "selected" : "" %>>취소</option>
+                                    <option value="1" <%- d.status == "1" ? "selected" : "" %>>결제완료</option>
+                                    <option value="0" <%- d.status == "0" ? "selected" : "" %>>결제대기</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label>Note</label>
+                                <input type="text" name="note" value="<%= d.note %>" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-min-width mr-1 mb-1">Save</button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

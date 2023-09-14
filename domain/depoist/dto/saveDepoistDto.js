@@ -1,20 +1,22 @@
 class SaveDepositDto {
     constructor(builder) {
-        this.userId = builder.user_id,
-            this.rname = builder.rname,
-            this.pay = builder.pay,
-            this.type = builder.type,
-            this.agree = builder.agree,
-            this.businessName = builder.business_name,
-            this.businessRegno = builder.business_regno,
-            this.businessOwner = builder.business_owner,
-            this.businessPhone = builder.business_phone,
-            this.businessEmail = builder.business_email,
-            this.personalPhone = builder.personal_phone
+        this.depoist_id = builder.ids
+        this.userId = builder.user_id
+        this.rname = builder.rname
+        this.pay = builder.pay
+        this.type = builder.type
+        this.agree = builder.agree
+        this.businessName = builder.business_name
+        this.businessRegno = builder.business_regno
+        this.businessOwner = builder.business_owner
+        this.businessPhone = builder.business_phone
+        this.businessEmail = builder.business_email
+        this.personalPhone = builder.personal_phone
     }
 
     static fromRequest(req) {
         const {
+            ids,
             payname,
             payamount,
             type,
@@ -28,6 +30,7 @@ class SaveDepositDto {
         } = req.body;
 
         return new SaveDepositDto({
+            ids,
             user_id: null,
             rname: payname,
             pay: payamount,

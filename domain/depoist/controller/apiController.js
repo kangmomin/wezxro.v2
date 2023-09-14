@@ -59,4 +59,22 @@ app.post("/admin/users/add_funds_process/", isAdmin, async (req, res) => {
     }
 })
 
+app.post("/admin/transactions/store", isAdmin, async (req, res) => {
+    try {
+        const userId = req.session.userId
+        const saveDepoistDto = SaveDepositDto.fromRequest(req)
+
+        saveDepoistDto.userId = userId
+
+        await depoistService.reqDepoist(saveDepoistDto)
+        
+        res.send(JSON.stringify({
+            message: "주문 내역을 수정하였습니다.",
+            status: "success"
+        }))
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 module.exports = app

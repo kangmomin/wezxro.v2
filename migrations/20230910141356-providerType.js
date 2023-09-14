@@ -5,13 +5,12 @@ const type = require('../domain/provider/entity/constant/type');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.addColumn("provider", "type", {
-      type: Sequelize.BOOLEAN,
-      defaultValue: type.json
+    await queryInterface.addColumn("depoist", "note", {
+      type: Sequelize.TEXT
     })
   },
 
   async down (queryInterface, Sequelize) {
-    queryInterface.removeColumn("provider", "type")
+    queryInterface.removeColumn("depoist", "note")
   }
 };

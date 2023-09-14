@@ -10,6 +10,8 @@ const formatDateTime = require('../../../global/util/formatDateTime')
 const Account = require('../../account/entity/account')
 const getSequelize = require('../../../global/config/getSequelize')
 const UserNotFoundException = require('../../account/exception/UserNotFoundException')
+const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException')
+const DepoistNotFoundException = require('../exception/DepoistNotFoundException')
 
 /**
  * 
@@ -36,14 +38,18 @@ ex.depoistRender = async (user_id) => {
 * @param {SaveDepositDto} saveDepoistDto 
 */
 ex.reqDepoist = async (saveDepoistDto) => {
-    if (await depoistRepository.count({
-        where: {
-            userId: saveDepoistDto.userId,
-            status: status.pending
-        }
-    }) > 0) throw new DepoistApplyExistException()
-
-    await depoistRepository.create(saveDepoistDto)
+    if (!saveDepoistDto.depoist_id) {
+        if (await depoistRepository.count({
+            where: {
+                userId: saveDepoistDto.userId,
+                status: status.pending
+            }
+        }) > 0) throw new DepoistApplyExistException()
+    
+        await depoistRepository.create(saveDepoistDto)
+    } else {
+        await depoistRepository.update(saveDepoistDto)
+    }
 }
 
 ex.addFund = async (id, amount, secret_key, type, userId) => {
@@ -125,6 +131,19 @@ ex.checkCharge = async (RTP_URL, body) => {
     resultArray.RCODE = rdata.RCODE;
     return resultArray
 }
+
+ex.findForUpdate = async (depoistId = null) => {
+    if (!depoistId) throw new NotEngoughArgsException()
+
+    const depoist = await depoistRepository.findByPk(depoistId, {
+        attributes: ["note", "pay", "depoistId", "status"]
+    })
+
+    if (!depoist) throw new DepoistNotFoundException()
+
+    return depoist
+}
+
 ex.allDepoist = async () => {
     let depoists = await depoistRepository.findAll()
     const ids = depoists.map(d => d.userId)

@@ -33,6 +33,9 @@ Depoist.init({
         type: DataTypes.STRING(30),
         allowNull: false,
     },
+    note: {
+        type: DataTypes.TEXT
+    },
     agree: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
