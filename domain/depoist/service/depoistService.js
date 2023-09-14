@@ -125,3 +125,24 @@ ex.checkCharge = async (RTP_URL, body) => {
     resultArray.RCODE = rdata.RCODE;
     return resultArray
 }
+ex.allDepoist = async () => {
+    let depoists = await depoistRepository.findAll()
+    const ids = depoists.map(d => d.userId)
+
+    const user = await Account.findAll({
+        where: {
+            userId: ids
+        }
+    })
+
+    depoists = depoists.map((d, idx) => {
+        if (d.userId == user[idx].userId) d.email = user[idx].email
+        else d.email = "deleted user"
+        
+        d.created = formatDateTime(d.createdAt)
+
+        return d
+    })
+
+    return depoists
+}
