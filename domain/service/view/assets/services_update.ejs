@@ -2,22 +2,22 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header bg-pantone">
-        <h4 class="modal-title"><i class="fa fa-edit"></i> Add new</h4>
+        <h4 class="modal-title"><i class="fa fa-edit"></i> <%- isUpdate ? `Edit Service[${s.serviceId}]` : "Add new" %></h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
       </div>
       <form action="../admin/services/store/" class="form actionForm" method="POST" accept-charset="utf-8">
-        <input type="hidden" name="id" value="" />
-        <input type="hidden" name="api_service_id" value="" />
-        <input type="hidden" name="api_service_type" value="" />
-        <input type="hidden" name="api_service_dripfeed" value="" />
-        <input type="hidden" name="api_service_refill" value="" />
+        <input type="hidden" name="id" value="<%= isUpdate ? s.serviceId : "" %>" />
+        <input type="hidden" name="api_service_id" value="<%= isUpdate ? s.apiServiceId : "" %>" />
+        <input type="hidden" name="api_service_type" value="<%= isUpdate ? s.type : "" %>" />
+        <input type="hidden" name="api_service_dripfeed" value="<%= isUpdate ? s.dripfeed : "" %>" />
+        <input type="hidden" name="api_service_refill" value="<%= isUpdate ? s.refill : "" %>" />
         <input type="hidden" name="token" value="b989dc5e884ce27d39a2f0b964a6e4bc" />
         <div class="modal-body">
           <div class="row justify-content-md-center">
             <div class="col-md-12 col-sm-12 col-xs-12 emoji-picker-container">
               <div class="form-group">
                 <label>Service name</label>
-                <input type="text" name="name" value="" class="form-control" data-emojiable="true" />
+                <input type="text" name="name" value="<%= isUpdate ? s.name : "" %>" class="form-control" data-emojiable="true" />
 
               </div>
             </div>
@@ -26,7 +26,7 @@
                 <label>Category</label>
                 <select name="category" class="form-control">
                   <% category.forEach(e=> { %>
-                    <option value="<%= e.categoryId %>">
+                    <option value="<%= e.categoryId %>" <%= isUpdate ? (s.categoryId == e.categoryId ? "selected" : "") : "" %>>
                       <%= e.name %>
                     </option>
                     <% }) %>
@@ -38,21 +38,22 @@
               <div class="form-group">
                 <label>Mode</label>
                 <select name="add_type" class="form-control">
-                  <option value="manual">Manual</option>
-                  <option value="api">API</option>
+                  <!-- <option value="manual">Manual</option> -->
+                  <option value="api" selected>API</option>
                 </select>
 
               </div>
             </div>
             <div class="col-md-12">
-              <fieldset class="form-fieldset api-mode d-none">
+              <fieldset class="form-fieldset api-mode">
                 <div class="">
                   <div class="form-group">
                     <label>Provider</label>
                     <select name="api_provider_id" class="ajaxGetCategoryFromAPI form-control">
                       <option value="0">Choose Provider</option>
                       <% providers.forEach(e=> { %>
-                        <option value="<%= e.providerId %>">
+                        <option value="<%= e.providerId %>" 
+                          <%= isUpdate ? (s.providerId == e.providerId ? "selected" : "") : "" %> >
                           <%= e.name %>
                         </option>
                         <% }) %>
@@ -66,7 +67,14 @@
                     <div class="dimmer-content">
                       <label>Category</label>
                       <select name="api_category_id" class="form-control ajaxGetServicesFromCategory">
-                        <option value="0">Choose category</option>
+                        <% if (isUpdate) { %>
+                          <option value="0">Choose category</option>
+                          <% providerCategory.forEach(c => { %>
+                            <option value="<%= c %>"><%= c %></option>
+                          <% }) %>
+                        <% } else { %>
+                          <option value="0">Choose category</option>
+                        <% } %>
                       </select>
                     </div>
                   </div>
@@ -103,7 +111,7 @@
                   </div>
                 </div>
               </fieldset>
-              <fieldset class="form-fieldset manual-mode ">
+              <fieldset class="form-fieldset manual-mode d-none">
                 <div class="">
                   <div class="form-group">
                     <label>Service Type</label>
@@ -169,8 +177,9 @@
             <div class="col-md-12">
               <div class="form-group">
                 <label>Description</label>
-                <textarea name="desc" cols="40" rows="10" class="form-control text-emoji"></textarea>
-
+                <textarea name="desc" cols="40" rows="10" class="form-control text-emoji">
+                  <%= isUpdate ? s.sescription : "" %>
+                </textarea>
               </div>
             </div>
           </div>
@@ -245,11 +254,12 @@
     $('.provider-services-list .dimmer').addClass('active');
 
     var providerId = $('select[name=api_provider_id]').val();
+    let serviceId = $("input[name=api_service_id]").val()
     if (providerId == "" || providerId == 0) return;
 
     var categoryId = $(this).val();
 
-    var data = $.param({ provider_id: providerId, category_id: categoryId });
+    var data = $.param({ provider_id: providerId, category_id: categoryId, service_id: serviceId });
 
     $.post(pathGetProviderServicesURL, data, function (_result) {
       setTimeout(function () {
@@ -327,6 +337,7 @@
   // });
 
   $(document).ready(function () {
+    if ("<%= isUpdate %>" == true) return
     var id = $('select[name=api_provider_id]').val();
     if (id == "" || id == 0) return;
 

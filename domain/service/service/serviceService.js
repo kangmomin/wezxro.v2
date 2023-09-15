@@ -47,6 +47,12 @@ ex.serviceDetail = async (serviceId, rate) => {
     return service
 }
 
+ex.serviceById = async (serviceId = null) => {
+    if (!serviceId) throw new NotEngoughArgsException()
+
+    return await serviceRepository.findByPk(serviceId)
+}
+
 /**
  * 서비스로 provider 정보 추출
  * @param {Number} serviceId 
@@ -164,7 +170,7 @@ ex.addServiceRender = async () => {
  * @param {Number} providerId  
  * @returns {String} htmlCode
  */
-ex.providerServices = async (providerId, category, serviceId) => {
+ex.providerServices = async (providerId, category) => {
     const providerInfo = await providerRepository.findOne({
         attributes: ["apiKey", "apiUrl", 'type'],
         where: {
@@ -180,23 +186,17 @@ ex.providerServices = async (providerId, category, serviceId) => {
 
     const api = new ProviderApi(providerInfo.apiKey, providerInfo.apiUrl, providerInfo.type)
     let services = await api.getServices()
-
-    if (serviceId) {
-        const filtedService = services.filter(s => s.service == serviceId)
-
-        filtedService[0].content = truncate(`ID${filtedService[0].service} - (${filtedService[0].rate}) - ${filtedService[0].name}`, 75)
-
-        return filtedService
-    }
     
     const result = {}
 
-    if (!category) throw new NotEngoughArgsException()
+    services = services.map(e => e.content = truncate(`ID${e.service} - (${e.rate}) - ${e.name}`, 75))
+
+    if (!category) services
+    // TODO: 이쪽 category 없으면 forEach 안된다고 버그 뜸
     try {
         services.forEach(e => {
             if (result[e.category] == undefined) result[e.category] = []
             
-            e.content = truncate(`ID${e.service} - (${e.rate}) - ${e.name}`, 75)
             result[e.category].push(e)
         })
     } catch(e) {
@@ -229,7 +229,7 @@ ex.providerCategory = async (providerId) => {
         services.forEach(e => {
             if (!category.includes(e.category)) category.push(e.category)
         })
-        return category
+        return [category, services]
     } catch(e) {
         return []
     }

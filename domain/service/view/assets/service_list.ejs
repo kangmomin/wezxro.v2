@@ -11,7 +11,8 @@
         data-dripfeed="<%=e.dripfeed%>" 
         data-refill="0" 
         data-cancel="<%=e.cancel%>" 
-        data-category="<%=e.category%>">
+        data-category="<%=e.category%>"
+        <%= serviceId == e.service ? "selected" : "" %>>
         <%=e.content%>
     </option>
 <% }) %>

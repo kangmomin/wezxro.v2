@@ -39,13 +39,32 @@ app.get('/services', isAuthUser, async (req, res) => {
     }
 })
 
-app.get('/admin/services/update', renderIsAdmin, async (req, res) => {
+app.get('/admin/services/update', async (req, res) => {
     try {
         const [category, provider] = await serviceService.addServiceRender()
                     
         return res.status(200).render(__dirname + '/../view/assets/services_update', {
+            isUpdate: false,
             category, 
             providers: provider
+        })
+    } catch (e) {
+        ExceptionHandler(res, e)
+    }
+})
+app.get('/admin/services/update/:serviceId', async (req, res) => {
+    try {
+        const [category, provider] = await serviceService.addServiceRender()
+        const serviceDetail = await serviceService.serviceById(req.params.serviceId)
+        const [categoryOfProvider, apiService] = await serviceService.providerCategory(serviceDetail.providerId)
+                    
+        return res.status(200).render(__dirname + '/../view/assets/services_update', {
+            isUpdate: true,
+            s: serviceDetail,
+            category, 
+            providers: provider,
+            providerCategory: categoryOfProvider,
+            apiService
         })
     } catch (e) {
         ExceptionHandler(res, e)
@@ -56,13 +75,13 @@ app.post('/admin/services/provider_services', async (req, res) => {
     try {
         const provider_id = req.body.provider_id || null
         const category_id = req.body.category_id || null
-        const serviceId = req.body.serviceId || null
+        const serviceId = req.body.service_id || null
     
         if (!provider_id) throw new NotEngoughArgsException()
+
+        const result = await serviceService.providerServices(provider_id, category_id)
     
-        const result = await serviceService.providerServices(provider_id, category_id, serviceId)
-    
-        return res.status(200).render(__dirname + "/../view/assets/service_list", { result })
+        return res.status(200).render(__dirname + "/../view/assets/service_list", { result, serviceId })
     } catch(e) {
         ExceptionHandler(res, e)
     }
@@ -74,7 +93,7 @@ app.post('/admin/services/provider_category', async (req, res) => {
     
         if (!provider_id) throw new NotEngoughArgsException()
     
-        const result = await serviceService.providerCategory(provider_id)
+        const [result] = await serviceService.providerCategory(provider_id)
     
         return res.status(200).render(__dirname + "/../view/assets/categoryList", { result })
     } catch(e) {
