@@ -1,11 +1,12 @@
 const app = require("express").Router()
-const { NOT_ENOUGH_ARGS } = require("../../../global/error/ErrorCode")
 const serviceService = require('../service/serviceService')
 const accountService = require('../../account/service/accountService')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 const NotEngoughArgsException = require("../../../global/error/exception/NotEnoughArgsException")
+const renderIsAdmin = require("../../../global/config/filter/renderIsAdmin")
+const isAuthUser = require("../../../global/config/filter/isAuthUser")
 
-app.get('/admin/services', async (req, res) => {
+app.get('/admin/services', renderIsAdmin, async (req, res) => {
     try {
         const categoryId = req.query.sort_by || 0
         
@@ -22,7 +23,7 @@ app.get('/admin/services', async (req, res) => {
     }
 })
 
-app.get('/services', async (req, res) => {
+app.get('/services', isAuthUser, async (req, res) => {
     try {
         const user = await accountService.info(req)
         const [services, category] = await serviceService.mainServiceList(req.session.rate)
@@ -38,7 +39,7 @@ app.get('/services', async (req, res) => {
     }
 })
 
-app.get('/admin/services/update', async (req, res) => {
+app.get('/admin/services/update', renderIsAdmin, async (req, res) => {
     try {
         const [category, provider] = await serviceService.addServiceRender()
                     
