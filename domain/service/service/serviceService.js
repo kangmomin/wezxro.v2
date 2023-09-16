@@ -189,9 +189,13 @@ ex.providerServices = async (providerId, category) => {
     
     const result = {}
 
-    services = services.map(e => e.content = truncate(`ID${e.service} - (${e.rate}) - ${e.name}`, 75))
-
-    if (!category) services
+    services = services.map(e => {
+        e.content = truncate(`ID${e.service} - (${e.rate}) - ${e.name}`, 75)
+        
+        return e
+    })
+    
+    if (!category) return services
     // TODO: 이쪽 category 없으면 forEach 안된다고 버그 뜸
     try {
         services.forEach(e => {
