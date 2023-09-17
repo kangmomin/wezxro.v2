@@ -7,9 +7,19 @@ const SaveOrderDto = require('../dto/SaveOrderDto')
 const ProviderApi = require('../../../global/util/providerApi')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 const AddOrderException = require('../exception/AddOrderException')
+const OrderMaxException = require('../exception/OrderMaxException')
+const OrderMinException = require('../exception/OrderMinException')
 
 app.post("/order/ajax_add_order", async (req, res) => {
-  const { category_id, service_id, link, quantity, total_charge } = req.body
+  const { 
+    category_id, 
+    service_id, 
+    link, 
+    quantity, 
+    total_charge,
+    service_max,
+    service_min 
+  } = req.body
 
   try {
     if (!isValid(service_id, link, quantity, total_charge)) {
@@ -19,6 +29,9 @@ app.post("/order/ajax_add_order", async (req, res) => {
       }))
       return
     }
+    if (service_max < quantity) throw new OrderMaxException()
+    if (service_min > quantity) throw new OrderMinException()
+
     const info = await accountService.info(req)
 
     if (req.session.rate !== null) total_charge = total_charge * req.session.rate / 100

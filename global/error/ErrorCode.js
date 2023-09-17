@@ -13,5 +13,7 @@ module.exports = {
     RATE_TOO_LOW: "0 이하의 수는 Rate로 설정할 수 없습니다.",
     DEFAULT_API_ERROR: "api 연동 중 문제가 발생하였습니다.",
     ADD_ORDER_ERROR: "주문에 실패하였습니다.",
-    DEPOIST_NOT_FOUND_ERROR: "충전 내역이 없습니다."
+    DEPOIST_NOT_FOUND_ERROR: "충전 내역이 없습니다.",
+    ORDER_MIN_ERROR: "최소 주문 수량보다 작습니다.",
+    ORDER_MAX_ERROR: "최대 주문 수량보다 큽니다."
 }
