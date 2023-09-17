@@ -38,18 +38,26 @@ ex.depoistRender = async (user_id) => {
 * @param {SaveDepositDto} saveDepoistDto 
 */
 ex.reqDepoist = async (saveDepoistDto) => {
-    if (!saveDepoistDto.depoist_id) {
-        if (await depoistRepository.count({
-            where: {
-                userId: saveDepoistDto.userId,
-                status: status.pending
-            }
-        }) > 0) throw new DepoistApplyExistException()
-    
-        await depoistRepository.create(saveDepoistDto)
-    } else {
-        await depoistRepository.update(saveDepoistDto)
-    }
+    if (await depoistRepository.count({
+        where: {
+            userId: saveDepoistDto.userId,
+            status: status.pending
+        }
+    }) > 0) throw new DepoistApplyExistException()
+
+    await depoistRepository.create(saveDepoistDto)
+}
+
+/**
+ * 
+ * @param {UpdateDepositDto} updateDepostDto 
+*/
+ex.updateDepoist = async (updateDepostDto) => {
+    await depoistRepository.update(updateDepostDto, {
+        where: {
+            depoistId: updateDepostDto.ids
+        }
+    })
 }
 
 ex.addFund = async (id, amount, secret_key, type, userId) => {

@@ -5,6 +5,7 @@ const depoistService = require('../service/depoistService')
 const SaveDepositDto = require('../dto/saveDepoistDto')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 const isAdmin = require('../../../global/config/filter/isAdmin')
+const UpdateDepositDto = require('../dto/UpdateDepoistDto,')
 
 
 
@@ -61,12 +62,9 @@ app.post("/admin/users/add_funds_process/", isAdmin, async (req, res) => {
 
 app.post("/admin/transactions/store", isAdmin, async (req, res) => {
     try {
-        const userId = req.session.userId
-        const saveDepoistDto = SaveDepositDto.fromRequest(req)
+        const updateDepoistDto = new UpdateDepositDto(req.body)
 
-        saveDepoistDto.userId = userId
-
-        await depoistService.reqDepoist(saveDepoistDto)
+        await depoistService.updateDepoist(updateDepoistDto)
         
         res.send(JSON.stringify({
             message: "주문 내역을 수정하였습니다.",
