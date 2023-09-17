@@ -136,7 +136,7 @@
                     <td>
                       <div class="title">
                         <div class="title">
-                          <h6><%= order.serviceId %> -
+                          <h6><%= order.serviceId %> - <%=order.name%>
                         </div>
                         <div>
                           <ul style="margin: 0px;">
@@ -145,7 +145,7 @@
                                 target="_blank"><%= order.link %></a></li>
                             <li>Quantity: <%= order.quantity %></li>
                             <li>Charge: ₩<%= order.totalCharge %> (0.0098 / <span class="text-info">199.9902</span>)</li>
-                            <li>Start counter: <%= order.startCount %></li>
+                            <li>Start counter: <%= order.startCnt %></li>
                             <li>Remain: <%= order.remain %></li>
                           </ul>
                         </div>

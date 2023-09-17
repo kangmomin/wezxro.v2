@@ -123,33 +123,42 @@ ex.orders = async () => {
 
     // provider 나눠서 multiple status 로 변환 가능할 것 같음
     orders = await Promise.all(orders.map(async order => {
-        const service = await Service.findByPk(order.serviceId, { attributes: ["providerId"] })
+        const service = await Service.findByPk(order.serviceId, { 
+            attributes: ["providerId", "name"] 
+        })
+
+        order.name = service.name
+        
         const provider = await Provider.findByPk(service.providerId, {
             attributes: ["providerId", "name", "apiKey", "apiUrl", "type"]
         })
+        order.provider = provider
+        const user = await Account.findByPk(order.userId, {
+            attributes: ["email"]
+        })
+        order.email = user.email
 
-        const apiOrderStatus = await new ProviderApi(
+        return await new ProviderApi(
             provider.apiKey,
             provider.apiUrl,
             provider.type
         ).getOrderStatus(order.apiOrderId)
-        .then(order => {
+        .then(apiOrderStatus => {
+            
             if (order.error) {
-                o.status = order.error
-                return o
+                order.status = order.error
+                return order
             }
     
             if (!order.remain) order.remain = apiOrderStatus.remains
             if (!order.startCnt) order.startCnt = apiOrderStatus.start_count
             if (!order.status) order.status = apiOrderStatus.status
-            return o
+            return order
         })
         .catch(e => {
-            o.status = "api 에러"
-            return o
+            order.status = "api 에러"
+            return order
         })
-
-        return order
     }))
 
 
