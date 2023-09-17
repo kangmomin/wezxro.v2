@@ -306,9 +306,7 @@ ex.mainServiceList = async (rate) => {
 ex.deleteService = async (serviceId) => {
     if (!serviceId) throw new NotEngoughArgsException()
 
-    await serviceRepository.update({
-        status: status.deleted
-    }, {
+    await serviceRepository.destroy({
         where: { serviceId }
     })
 }
