@@ -39,7 +39,8 @@ ex.findByUserId = async (userId) => {
         },
         attributes: [
             "orderId", "serviceId", "totalCharge",
-            "quantity", "link", "createdAt", "apiOrderId"
+            "quantity", "link", "createdAt", "apiOrderId",
+            "remain", "startCnt"
         ]
     })
 
@@ -67,11 +68,17 @@ ex.findByUserId = async (userId) => {
     for (o of orders) {
         const api = new ProviderApi(provider[i].apiKey, provider[i].apiUrl)
 
-
         o = await api.getOrderStatus(o.apiOrderId)
             .then(order => {
-                o.status = !order.error ? order : order.error
                 o.serviceName = service[i].name
+                if (order.error) {
+                    o.status = order.error
+                    return o
+                }
+        
+                if (!o.remain) o.remain = order.remains
+                if (!o.startCnt) o.startCnt = order.start_count
+                if (!o.status) o.status = order.status
                 return o
             })
             .catch(e => {
@@ -116,7 +123,6 @@ ex.orders = async () => {
 
     // provider 나눠서 multiple status 로 변환 가능할 것 같음
     orders = await Promise.all(orders.map(async order => {
-        const user = await Account.findByPk(order.userId, { attributes: ["email"] })
         const service = await Service.findByPk(order.serviceId, { attributes: ["providerId"] })
         const provider = await Provider.findByPk(service.providerId, {
             attributes: ["providerId", "name", "apiKey", "apiUrl", "type"]
@@ -127,13 +133,21 @@ ex.orders = async () => {
             provider.apiUrl,
             provider.type
         ).getOrderStatus(order.apiOrderId)
-
-        order.email = user.email
-        order.provider = provider
-
-        if (!order.remain) order.remain = apiOrderStatus.remains
-        if (!order.startCnt) order.startCnt = apiOrderStatus.start_count
-        if (!order.startCnt) order.status = apiOrderStatus.status
+        .then(order => {
+            if (order.error) {
+                o.status = order.error
+                return o
+            }
+    
+            if (!order.remain) order.remain = apiOrderStatus.remains
+            if (!order.startCnt) order.startCnt = apiOrderStatus.start_count
+            if (!order.status) order.status = apiOrderStatus.status
+            return o
+        })
+        .catch(e => {
+            o.status = "api 에러"
+            return o
+        })
 
         return order
     }))

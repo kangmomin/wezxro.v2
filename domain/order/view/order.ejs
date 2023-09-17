@@ -110,8 +110,8 @@
                                 <%= e.link %>
                               </a><br>주문 수량 | <%= e.quantity %><br>
                               주문 금액 | <%= e.totalCharge %>원<br>
-                              시작 수량 | <%= e.status.start_count || 0 %> <br>
-                              남은 수량 | <%= e.status.remains %><br>
+                              시작 수량 | <%= e.startCnt %> <br>
+                              남은 수량 | <%= e.remain %><br>
                             </div>
                           </div>
                         </td>
@@ -119,7 +119,7 @@
                           <%= e.created %>
                         </td>
                         <td class="text-center w-10p"><span class="badge bg-green">
-                          <%= e.status.status %>
+                          <%= e.status %>
                         </span></td>
                       </tr>
                       <% }) %>
