@@ -195,7 +195,7 @@ ex.providerServices = async (providerId, category) => {
         return e
     })
     
-    if (!category) return services
+    if (!category || category == "0") return services
     // TODO: 이쪽 category 없으면 forEach 안된다고 버그 뜸
     try {
         services.forEach(e => {

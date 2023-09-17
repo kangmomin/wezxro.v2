@@ -75,7 +75,7 @@ app.post('/admin/services/provider_services', async (req, res) => {
     try {
         const provider_id = req.body.provider_id || null
         const category_id = req.body.category_id || null
-        const serviceId = req.body.serviceId || null
+        const serviceId = req.body.service_id || null
     
         if (!provider_id) throw new NotEngoughArgsException()
 

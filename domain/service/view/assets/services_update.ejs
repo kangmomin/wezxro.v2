@@ -289,7 +289,7 @@
 
     var serviceId = $(".ajaxGetServicesFromServiceIdVal").val();
 
-    var data = $.param({ provider_id: providerId, serviceId });
+    var data = $.param({ provider_id: providerId, service_id: serviceId });
 
     $.post(pathGetProviderServicesURL, data, function (_result) {
       setTimeout(function () {
