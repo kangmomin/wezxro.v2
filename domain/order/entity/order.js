@@ -1,4 +1,5 @@
 const { Model, DataTypes } = require("sequelize");
+const status = require("./constants/status");
 const sequelize = require("../../../global/config/getSequelize")()
 
 class Order extends Model {}
@@ -43,6 +44,15 @@ Order.init({
     link: {
         type: DataTypes.TEXT,
         allowNull: false
+    },
+    remain: {
+        type: DataTypes.INTEGER
+    },
+    startCnt: {
+        type: DataTypes.INTEGER
+    },
+    status: {
+        type: DataTypes.ENUM(Object.values(status))
     }
 }, {
     sequelize: sequelize,

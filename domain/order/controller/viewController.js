@@ -68,4 +68,22 @@ app.post('/order/get_services/:categoryId', async (req, res) => {
     }
 })
 
+app.get("/admin/order/update/:orderId", async (req, res) => {
+    try {
+        const o = await orderService.orderDetail(req.params.orderId)
+
+        res.render(__dirname + "/../view/assets/editOrder", {
+            status: o.status,
+            orderId: o.orderId,
+            quantity: o.quantity,
+            totalCharge: o.totalCharge,
+            link: o.link,
+            remain: o.remain,
+            startCnt: o.startCnt,
+        })
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 module.exports = app

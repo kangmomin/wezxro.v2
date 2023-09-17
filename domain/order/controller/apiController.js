@@ -9,6 +9,7 @@ const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 const AddOrderException = require('../exception/AddOrderException')
 const OrderMaxException = require('../exception/OrderMaxException')
 const OrderMinException = require('../exception/OrderMinException')
+const UpdateOrderDto = require('../dto/UpdateOrderDto')
 
 app.post("/order/ajax_add_order", async (req, res) => {
   const { 
@@ -68,6 +69,20 @@ app.post("/order/ajax_add_order", async (req, res) => {
   
     res.send(JSON.stringify({
       message: `주문이 성공적으로 완료되었습니다. 잔액[${info.money - total_charge}원]`,
+      status: "success"
+    }))
+  } catch(e) {
+    ExceptionHandler(res, e)
+  }
+})
+
+app.post("/admin/order/store/", async (req, res) => {
+  try {
+    const updateOrderDto = new UpdateOrderDto(req.body)
+    await orderService.updateOrder(updateOrderDto)
+    
+    res.send(JSON.stringify({
+      message: "주문을 수정하였습니다.",
       status: "success"
     }))
   } catch(e) {

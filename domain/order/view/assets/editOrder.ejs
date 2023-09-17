@@ -1,0 +1,61 @@
+<div id="main-modal-content">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-pantone">
+        <h4 class="modal-title"><i class="fa fa-edit"></i> Edit Order (<%= orderId %>)</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="/admin/order/store/" class="form actionForm" data-redirect="/admin/order?field=id&query=14" method="POST" accept-charset="utf-8">
+        <input type="hidden" name="id" value="<%= orderId %>" />
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label>Quantity</label>
+                <input type="text" name="quantity" value="<%= quantity %>" readonly="readonly" class="form-control" />
+              </div>
+            </div> <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label>Charge</label>
+                <input type="text" name="charge" value="<%= totalCharge %>" readonly="readonly" class="form-control" />
+              </div>
+            </div> <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label>Start Counter</label>
+                <input type="number" name="start_counter" value="<%= startCnt %>" class="form-control" />
+              </div>
+            </div> <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label>Remains</label>
+                <input type="number" name="remains" value="<%= remain %>" class="form-control" />
+              </div>
+            </div> <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label>Status</label>
+                <select name="status" class="form-control">
+                  <option value="completed" <%=status == "completed" ? "selected" : ""%>>완료됨</option>
+                  <option value="processing" <%=status == "processing" ? "selected" : ""%>>처리중</option>
+                  <option value="inprogress" <%=status == "inprogress" ? "selected" : ""%>>대기중</option>
+                  <option value="pending" <%=status == "pending" ? "selected" : ""%>>접수중</option>
+                  <option value="partial" <%=status == "partial" ? "selected" : ""%>>부분완료됨</option>
+                  <option value="canceled" <%=status == "canceled" ? "selected" : ""%>>취소됨</option>
+                </select>
+
+              </div>
+            </div> <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label>Link</label>
+                <input type="text" name="link" value="<%= link %>" class="form-control" />
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary btn-min-width mr-1 mb-1">Save</button>
+          <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
