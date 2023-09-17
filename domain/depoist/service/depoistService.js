@@ -173,3 +173,11 @@ ex.allDepoist = async () => {
 
     return depoists
 }
+
+ex.delete = async (depoistId = null) => {
+    if (!depoistId) throw new NotEngoughArgsException()
+
+    await depoistRepository.destroy({
+        where: { depoistId }
+    })
+}

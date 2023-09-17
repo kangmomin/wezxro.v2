@@ -75,4 +75,17 @@ app.post("/admin/transactions/store", isAdmin, async (req, res) => {
     }
 })
 
+app.post("/admin/transactions/delete/:depoistId", async (req, res) => {
+    try {
+        await depoistService.delete(req.params.depoistId)
+        
+        res.send(JSON.stringify({
+            message: "충전 내역을 삭제하였습니다.",
+            status: "success"
+        }))
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 module.exports = app
