@@ -34,6 +34,25 @@ ex.saveService = async (addServiceDto) => {
 }
 
 /**
+ * @param {AddServiceDto} addServiceDto 
+ */
+ex.updateService = async (addServiceDto, id) => {
+    addServiceDto.desc = addServiceDto.desc.trim()
+
+    await serviceRepository.update({
+        ...addServiceDto,
+        providerId: addServiceDto.apiProviderId,
+        categoryId: addServiceDto.category,
+        type: addServiceDto.addType,
+        originalRate: addServiceDto.originalPrice,
+        rate: addServiceDto.price,
+        description: addServiceDto.desc
+    }, {
+        where: { serviceId: id }
+    })
+}
+
+/**
  * @param {Number} serviceId 
  * @returns {Service}
  */

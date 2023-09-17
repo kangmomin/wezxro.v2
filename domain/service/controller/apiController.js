@@ -27,6 +27,7 @@ app.get('/admin/services', isAdmin, async (req, res) => {
 app.post('/admin/services/store', isAdmin, async (req, res) => {
     try {
         const {
+            id,
             category, 
             add_type,
             api_provider_id,
@@ -40,7 +41,15 @@ app.post('/admin/services/store', isAdmin, async (req, res) => {
             desc
         } = req.body
     
-        if (name === "") throw new NotEngoughArgsException()
+        if (
+            name === "" || 
+            api_provider_id === "" || 
+            api_service_id === "" ||
+            status === "" ||
+            !price || !min || !max || !original_price ||
+            add_type === "" ||
+            category === ""
+        ) throw new NotEngoughArgsException()
     
         const addServiceDto = AddServiceDto.builder()
             .setAddType(add_type)
@@ -55,8 +64,10 @@ app.post('/admin/services/store', isAdmin, async (req, res) => {
             .setPrice(price)
             .setStatus(status)
             .build()
+
+        if (id == "" || !id) await serviceService.saveService(addServiceDto)
+        else await serviceService.updateService(addServiceDto, id)
     
-        await serviceService.saveService(addServiceDto)
     
         res.send(JSON.stringify({message: "저장 성공하였습니다.", status: "success"}))
     } catch(e) {
