@@ -49,6 +49,7 @@ Order.init({
         type: DataTypes.INTEGER
     },
     startCnt: {
+        field: "start_count",
         type: DataTypes.INTEGER
     },
     status: {
