@@ -11,13 +11,13 @@ ex.userDetails = async (userId = null) => {
         attributes: ['money']
     })
 
-    const totalCharge = await Order.sum("totalCharge", {
+    const totalCharge = (await Order.sum("totalCharge", {
         where: { userId }
-    }).then(val => val?.toLocaleString()) || 0
+    }))?.toLocaleString() || 0
 
-    const totalOrder = await Order.count({
+    const totalOrder = (await Order.count({
         where: { userId }
-    }).then(val => val?.toLocaleString()) || 0
+    }))?.toLocaleString() || 0
 
     return {
         userDetails,
