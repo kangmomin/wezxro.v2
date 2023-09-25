@@ -18,6 +18,7 @@ const serviceRouter = require('./domain/service/controller/router')
 const orderRouter = require('./domain/order/controller/router')
 const depoistRouter = require('./domain/depoist/controller/router');
 const getSequelize = require('./global/config/getSequelize');
+const dashBoardRouter = require('./domain/dashboard/controller/viewController')
 
 app.use(cp())
 app.use(cors({
@@ -56,6 +57,7 @@ app.use(categoryRouter)
 app.use(serviceRouter)
 app.use(orderRouter)
 app.use(depoistRouter)
+app.use(dashBoardRouter)
 
 // ================== index 페이지 렌더링 ===================== 
 app.use((_, __, next) => { app.set('views', path.join(__dirname, "/global/view")); next() })
@@ -76,7 +78,7 @@ app.get('*', (req, res) => res.render(__dirname + '/global/view/error.ejs', { st
 
 
 //force : 서버 실행 시 마다 테이블을 재생성 할 것인지 아닌지
-sequelize.sync({force:false}).then(() => {
+sequelize.sync({alter:false}).then(() => {
     console.log('DB Sync complete.');
     app.listen(port, () => { console.log(`server is running on ${port || 3000}`) })
 })

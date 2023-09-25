@@ -126,6 +126,16 @@
         <ul class="navbar-nav mb-md-4" id="menu">
 
           <li class="nav-item">
+            <a class="nav-link <%- path == "statistics" ? "active" : "" %>" href="./statistics" data-toggle="tooltip" data-placement="right" title="대시보드">
+              <span class="nav-icon">
+                <i class="fe fe-bar-chart"></i>
+              </span>
+              <span class="nav-text <%- path == "statistics" ? "active" : "" %>">
+                대시보드
+              </span>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link <%- path == "order" ? "active" : "" %>" href="./order" data-toggle="tooltip" data-placement="right" title="주문 내역">
               <span class="nav-icon">
                 <i class="fe fe-calendar"></i>
