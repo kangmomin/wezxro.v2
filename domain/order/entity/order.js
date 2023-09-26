@@ -55,7 +55,8 @@ Order.init({
         defaultValue: 0
     },
     status: {
-        type: DataTypes.ENUM(Object.values(status))
+        type: DataTypes.ENUM(Object.values(status)),
+        defaultValue: status.대기
     }
 }, {
     sequelize: sequelize,
