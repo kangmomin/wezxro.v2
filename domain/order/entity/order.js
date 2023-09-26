@@ -46,11 +46,13 @@ Order.init({
         allowNull: false
     },
     remain: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        defaultValue: 0
     },
     startCnt: {
         field: "start_count",
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        defaultValue: 0
     },
     status: {
         type: DataTypes.ENUM(Object.values(status))
