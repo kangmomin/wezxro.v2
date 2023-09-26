@@ -30,8 +30,8 @@ app.post("/order/ajax_add_order", async (req, res) => {
       }))
       return
     }
-    if (service_max < quantity) throw new OrderMaxException()
-    if (service_min > quantity) throw new OrderMinException()
+    if (Number(service_max[0].replaceAll(",", "")) < quantity) throw new OrderMaxException()
+    if (Number(service_min[0].replaceAll(",", "")) > quantity) throw new OrderMinException()
 
     const info = await accountService.info(req)
 
