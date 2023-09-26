@@ -91,9 +91,80 @@
             </div>
             <script>
                 $(document).ready(function () {
-                    Chart_template.chart_spline('#orders_chart_spline', { "time": ["2023-09-16", "2023-09-17", "2023-09-18", "2023-09-19", "2023-09-20", "2023-09-21", "2023-09-22"], "완료됨": [0, 0, 0, 0, 0, 0, 0], "처리중": [0, 0, 0, 0, 0, 0, 0], "취소됨": [0, 0, 0, 0, 0, 0, 0], "대기중": [0, 0, 0, 0, 0, 0, 0], "부분완료됨": [0, 0, 0, 0, 0, 0, 0], "대기중": [0, 0, 0, 0, 0, 0, 0] });
-                    Chart_template.chart_pie('#orders_chart_pie', { "완료됨": 0, "처리중": 0, "취소됨": 0, "대기중": "5", "부분완료됨": 0, "대기중": 0 });
+                    const data = {}
+                    const status = {
+                        completed: 0,
+                        processing: 0,
+                        canceled: 0,
+                        processing: 0,
+                        ingrogress: 0,
+                        partials: 0
+                    }
+
+                    const orderDetails = JSON.parse(`<%- JSON.stringify(orderDetails) %>`)
+                    const orderStatus = JSON.parse(`<%- JSON.stringify(orderStatus) %>`)
+
+
+                    orderDetails.forEach(val => {
+                        data[val.dayly] = status
+                        data[val.dayly][val.status] = val.count
+                    })
+
+                    const time = getPastWeekDates()
+
+                    let chartData = {
+                        "time": time,
+                        "완료됨": [0, 0, 0, 0, 0, 0, 0], 
+                        "처리중": [0, 0, 0, 0, 0, 0, 0], 
+                        "취소됨": [0, 0, 0, 0, 0, 0, 0], 
+                        "대기중": [0, 0, 0, 0, 0, 0, 0], 
+                        "부분완료됨": [0, 0, 0, 0, 0, 0, 0], 
+                        "접수중": [0, 0, 0, 0, 0, 0, 0] 
+                    }
+
+                    for (const singleData in data) {
+                        const idx = time.indexOf(singleData)
+                        
+                        chartData.완료됨[idx] = data[singleData].completed
+                        chartData.처리중[idx] = data[singleData].processing
+                        chartData.취소됨[idx] = data[singleData].inprogress
+                        chartData.대기중[idx] = data[singleData].pending
+                        chartData.부분완료됨[idx] = data[singleData].partials
+                        chartData.취소됨[idx] = data[singleData].canceled
+                    }
+
+                    Chart_template.chart_spline('#orders_chart_spline', chartData);
+                    Chart_template.chart_pie('#orders_chart_pie', { 
+                        "완료됨": orderStatus.completed || 0,
+                        "처리중": orderStatus.processing || 0, 
+                        "취소됨": orderStatus.canceled || 0, 
+                        "대기중": orderStatus.pending || 0,
+                        "부분완료됨": orderStatus.partials || 0, 
+                        "접수중": orderStatus.inprogress || 0
+                    });
                 });
+
+                function getPastWeekDates() {
+                    const dates = [];
+                    
+                    for (let i = 0; i < 7; i++) {
+                        const date = new Date();
+                        date.setDate(date.getDate() - i);
+                        
+                        const year = date.getFullYear();
+                        let month = (date.getMonth() + 1).toString();
+                        let day = date.getDate().toString();
+
+                        // 월과 일이 한 자리 수일 경우 앞에 '0'을 붙여 두 자리로 만듭니다.
+                        month = month.length === 1 ? `0${month}` : month;
+                        day = day.length === 1 ? `0${day}` : day;
+
+                        dates.push(`${year}-${month}-${day}`)
+                        dates.sort()
+                    }
+                    
+                    return dates;
+                }
             </script>
 
             <!-- Orders Logs -->
@@ -122,7 +193,7 @@
                                 </span>
                                 <div class="d-flex order-lg-2 ml-auto">
                                     <div class="ml-2 d-lg-block text-right">
-                                        <h4 class="m-0 text-right number">0</h4>
+                                        <h4 class="m-0 text-right number"><%= orderStatus.completed || 0 %></h4>
                                         <small class="text-muted ">완료됨</small>
                                     </div>
                                 </div>
@@ -137,7 +208,7 @@
                                 </span>
                                 <div class="d-flex order-lg-2 ml-auto">
                                     <div class="ml-2 d-lg-block text-right">
-                                        <h4 class="m-0 text-right number">0</h4>
+                                        <h4 class="m-0 text-right number"><%= orderStatus.processing || 0 %></h4>
                                         <small class="text-muted ">처리중</small>
                                     </div>
                                 </div>
@@ -152,8 +223,8 @@
                                 </span>
                                 <div class="d-flex order-lg-2 ml-auto">
                                     <div class="ml-2 d-lg-block text-right">
-                                        <h4 class="m-0 text-right number">0</h4>
-                                        <small class="text-muted ">대기중</small>
+                                        <h4 class="m-0 text-right number"><%= orderStatus.inprogress || 0 %></h4>
+                                        <small class="text-muted ">접수중</small>
                                     </div>
                                 </div>
                             </div>
@@ -167,7 +238,7 @@
                                 </span>
                                 <div class="d-flex order-lg-2 ml-auto">
                                     <div class="ml-2 d-lg-block text-right">
-                                        <h4 class="m-0 text-right number">5</h4>
+                                        <h4 class="m-0 text-right number"><%= orderStatus.pending || 0 %></h4>
                                         <small class="text-muted ">대기중</small>
                                     </div>
                                 </div>
@@ -182,7 +253,7 @@
                                 </span>
                                 <div class="d-flex order-lg-2 ml-auto">
                                     <div class="ml-2 d-lg-block text-right">
-                                        <h4 class="m-0 text-right number">0</h4>
+                                        <h4 class="m-0 text-right number"><%= orderStatus.partial || 0 %></h4>
                                         <small class="text-muted ">부분완료됨</small>
                                     </div>
                                 </div>
@@ -197,23 +268,8 @@
                                 </span>
                                 <div class="d-flex order-lg-2 ml-auto">
                                     <div class="ml-2 d-lg-block text-right">
-                                        <h4 class="m-0 text-right number">0</h4>
+                                        <h4 class="m-0 text-right number"><%= orderStatus.canceled || 0 %></h4>
                                         <small class="text-muted ">취소됨</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3 item">
-                        <div class="card p-3">
-                            <div class="d-flex align-items-center">
-                                <span class="stamp stamp-md text-primary mr-3">
-                                    <i class="fe fe-rotate-ccw"></i>
-                                </span>
-                                <div class="d-flex order-lg-2 ml-auto">
-                                    <div class="ml-2 d-lg-block text-right">
-                                        <h4 class="m-0 text-right number">0</h4>
-                                        <small class="text-muted ">환불됨</small>
                                     </div>
                                 </div>
                             </div>
