@@ -35,19 +35,19 @@ ex.userDetails = async (userId = null) => {
     }))
 
     const endDate = getLastWeekDate()
-    const truncWithIntervalLiteral = literal("DATE_TRUNC('day', \"updatedAt\")::date");
+    const truncWithIntervalLiteral = literal("DATE_TRUNC('day', \"createdAt\")::date");
 
     const orderDetails = (await Order.findAll({
         where: { 
             userId,
-            updatedAt: {
+            createdAt: {
                 [Op.gte]: endDate,
             }
          },
         attributes: [
             "status", 
             [truncWithIntervalLiteral, "dayly"],
-            [sequelize.fn('COUNT', sequelize.fn('DISTINCT', sequelize.col('updatedAt'))), 'count'],
+            [sequelize.fn('COUNT', sequelize.fn('DISTINCT', sequelize.col('createdAt'))), 'count'],
         ],
         group: ["dayly", "status"],
         raw: true
@@ -92,18 +92,18 @@ ex.adminDashboard = async () => {
     }))
 
     const endDate = getLastWeekDate()
-    const truncWithIntervalLiteral = literal("DATE_TRUNC('day', \"updatedAt\")::date");
+    const truncWithIntervalLiteral = literal("DATE_TRUNC('day', \"createdAt\")::date");
 
     const orderDetails = (await Order.findAll({
         where: { 
-            updatedAt: {
+            createdAt: {
                 [Op.gte]: endDate,
             }
          },
         attributes: [
             "status", 
             [truncWithIntervalLiteral, "dayly"],
-            [sequelize.fn('COUNT', sequelize.fn('DISTINCT', sequelize.col('updatedAt'))), 'count'],
+            [sequelize.fn('COUNT', sequelize.fn('DISTINCT', sequelize.col('createdAt'))), 'count'],
         ],
         group: ["dayly", "status"],
         raw: true
