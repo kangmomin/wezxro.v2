@@ -143,23 +143,33 @@
                             <span class="custom-switch-indicator"></span>
                           </label></td>
                         <td class="text-center w-20p">
-                          <div class="btn-group"><a href="./provider/update/<%= p.providerId %>"
+                          <div class="btn-group">
+                            <a href="./provider/update/<%= p.providerId %>"
                               class="btn btn-icon btn-outline-info ajaxModal" data-confirm_ms="" data-toggle="tooltip"
                               data-placement="bottom" title="Edit">
                               <i class="fe fe-edit"></i>
-                            </a><a href="./provider/sync_services/<%= p.providerId %>"
+                            </a>
+                            <a href="/admin/provider/balance/<%= p.providerId %>" 
+                              class="btn btn-icon btn-outline-info ajaxUpdateApiProvider" data-confirm_ms="" data-toggle="tooltip" 
+                              data-placement="bottom" title="" data-original-title="Update balance">
+                              <i class="fe fe-dollar-sign"></i>
+                            </a>
+                            <a href="./provider/sync_services/<%= p.providerId %>"
                               class="btn btn-icon btn-outline-info ajaxModal" data-confirm_ms="" data-toggle="tooltip"
                               data-placement="bottom" title="Sync services">
                               <i class="fe fe-refresh-cw"></i>
-                            </a><a href="./provider/services/<%= p.providerId %>" class="btn btn-icon btn-outline-info "
+                            </a>
+                            <a href="./provider/services/<%= p.providerId %>" class="btn btn-icon btn-outline-info "
                               data-confirm_ms="" data-toggle="tooltip" data-placement="bottom" title="Services Lists">
                               <i class="fe fe-list"></i>
-                            </a><a href="./provider/delete/<%= p.providerId %>"
+                            </a>
+                            <a href="./provider/delete/<%= p.providerId %>"
                               class="btn btn-icon btn-outline-info ajaxDeleteItem"
                               data-confirm_ms="Are you sure you want to delete this item" data-toggle="tooltip"
                               data-placement="bottom" title="Delete">
                               <i class="fe fe-trash-2"></i>
-                            </a></div>
+                            </a>
+                          </div>
                         </td>
                       </tr>
                       <% }) %>

@@ -49,6 +49,19 @@ app.post("/admin/provider/change_status/:providerId", isAdmin, async (req, res) 
     }
 })
 
+app.post("/admin/provider/balance/:providerId", isAdmin, async (req, res) => {
+    try {        
+        await providerService.updateBalance(req.params.providerId)
+        
+        res.send(JSON.stringify({
+            message: "도매처의 보유액을 업데이트 했습니다.",
+            status: "success"
+        }))
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 app.post("/admin/provider/delete/:providerId", async (req, res) => {
     try {
         await providerService.deleteProvider(req.params.providerId)

@@ -7,6 +7,9 @@ const UnknownProviderException = require('../exception/UnknownProviderException'
 const NotEngoughArgsException = require('../../../global/error/exception/NotEnoughArgsException')
 const Service = require('../../service/entity/service')
 const type = require('../entity/constant/type')
+const Provider = require('../entity/provider')
+const ApiException = require('../../../global/error/exception/ApiException')
+const { sequelize } = require('../..')
 
 const ex = module.exports = {}
 
@@ -103,26 +106,25 @@ ex.providerList = async () => {
         order: sequelize.col("providerId")
     })
 
-    providers = await Promise.all(providers.map(async p => {
-        return await new ProviderApi(p.apiKey, p.apiUrl, p.type)
-            .getUserBalance()
-            .then(pi => {
-                p.balance = !pi.error ? pi.balance : pi.error
-                p.apiKey = undefined
-                p.apiUrl = p.apiUrl.split("/api")[0]
-        
-                return p
-            })
-            .catch(e => { 
-                p.balance = e.response.data.error
-                p.apiKey = undefined
-                p.apiUrl = p.apiUrl.split("/api")[0]
-        
-                return p
-            })
-    }))
-
     return providers
+}
+
+ex.updateBalance = async (providerId) => {
+
+    const apiInfo = await Provider.findByPk(providerId, {
+        attributes: ["apiKey", "apiUrl", "type"]
+    })
+
+    const provider = new ProviderApi(apiInfo.apiKey, apiInfo.apiUrl, apiInfo.type)
+    const balance = await provider.getUserBalance()
+
+    if (balance.error) {
+        throw new ApiException()
+    }
+
+    await Provider.update({ balance: balance.balance }, {
+        where: { providerId }
+    })
 }
 
 ex.updateStatus = async (providerId = null, cStatus) => {
