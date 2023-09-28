@@ -44,37 +44,32 @@ ex.findByUserId = async (userId) => {
         ]
     })
 
-    const serviceIds = orders.map(o => o.serviceId);
-
-    const service = await serviceRepository.findAll({
-        where: {
-            serviceId: serviceIds,
-        },
-        attributes: ["name", "providerId"]
-    })
-
-    const providerIds = service.map(s => s.providerId);
-
-    const provider = await providerRepository.findAll({
-        where: {
-            providerId: providerIds
-        },
-        attributes: ["apiKey", "apiUrl"]
-    })
-
     let orderWithStatus = []
 
     let i = 0
     for (o of orders) {
-        const api = new ProviderApi(provider[i].apiKey, provider[i].apiUrl)
+        const service = await serviceRepository.findByPk(o.serviceId, {
+            attributes: ["name", "providerId"]
+        })
+        const provider = await providerRepository.findByPk(service.providerId, {
+            attributes: ["apiKey", "apiUrl", "type"]
+        })
+
+        const api = new ProviderApi(provider.apiKey, provider.apiUrl, provider.type)
 
         o = await api.getOrderStatus(o.apiOrderId)
             .then(order => {
-                o.serviceName = service[i].name
+                o.serviceName = service.name
                 if (order.error) {
                     o.status = order.error
                     return o
                 }
+
+                orderRepository.update({ 
+                    status: order.status.toLocaleLowerCase()
+                }, {
+                    where: { orderId: o.orderId }
+                })
         
                 if (!o.remain) o.remain = order.remains
                 if (!o.startCnt) o.startCnt = order.start_count
@@ -83,7 +78,7 @@ ex.findByUserId = async (userId) => {
             })
             .catch(e => {
                 o.status = ""
-                o.serviceName = service[i].name + "[" + e.response.data.error + "]"
+                o.serviceName = service.name + "[" + e.response.data.error + "]"
                 return o
             })
 
