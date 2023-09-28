@@ -48,6 +48,7 @@ app.use(
 
 // ejs
 app.set('view engine', 'ejs')
+app.set('trust proxy', true)
 app.engine('html', require('ejs').renderFile)
 app.use('*', bp.urlencoded({ extended: false }))
 
