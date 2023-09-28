@@ -99,7 +99,8 @@ ex.saveProvider = async (providerInfo, userId) => {
 ex.providerList = async () => {
     let providers = await providerRepository.findAll({
         attributes: ["providerId", "name", "description", 
-            "status", "apiKey", "apiUrl", "type"]
+            "status", "apiUrl", "type", "balance"],
+        order: sequelize.col("providerId")
     })
 
     providers = await Promise.all(providers.map(async p => {
