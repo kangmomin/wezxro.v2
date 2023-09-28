@@ -1,4 +1,5 @@
 const isAuthUser = require('../../../global/config/filter/isAuthUser')
+const renderIsAdmin = require('../../../global/config/filter/renderIsAdmin')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 const accountService = require('../../account/service/accountService')
 const dashboardService = require('../service/dashboardService')
@@ -15,6 +16,22 @@ app.get("/statistics", isAuthUser, async (req, res) => {
             ...u, 
             path: "statistics",
             ...userDetails
+        })
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
+app.get("/admin/statistics", renderIsAdmin, async (req, res) => {
+    try {
+        
+        const u = await accountService.info(req)
+        const dashboardData = await dashboardService.adminDashboard(req.session.userId)
+
+        res.render(__dirname + "/../view/admin/dashboard", {
+            ...u, 
+            path: "statistics",
+            ...dashboardData
         })
     } catch(e) {
         ExceptionHandler(res, e)
