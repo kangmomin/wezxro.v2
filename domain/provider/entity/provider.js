@@ -44,6 +44,11 @@ Provider.init({
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false
+    },
+    balance: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+        defaultValue: 0
     }
 }, {
     timestamps: true,

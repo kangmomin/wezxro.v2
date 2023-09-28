@@ -49,14 +49,17 @@ ex.findServices = async (providerId = null) => {
 /** @param {SaveProviderDto} providerInfo */
 ex.saveProvider = async (providerInfo, userId) => {
     let isFormData = type.json
+    let balance
     
     try {
         let res = await new ProviderApi(providerInfo.key, providerInfo.url)
             .getUserBalance()
 
         if (res.error) {
-            await new ProviderApi(providerInfo.key, providerInfo.url, true)
+            balance = await new ProviderApi(providerInfo.key, providerInfo.url, true)
                 .getUserBalance().then(() => isFormData = type.formData)
+        } else {
+            balance = res.balance
         }
 
     } catch (e) {
@@ -72,6 +75,7 @@ ex.saveProvider = async (providerInfo, userId) => {
             apiKey: providerInfo.key,
             apiUrl: providerInfo.url,
             status: providerInfo.status == 1 ? status.active : status.deactive,
+            balance: balance,
             type: isFormData    
         }, {
             where: {
@@ -86,7 +90,8 @@ ex.saveProvider = async (providerInfo, userId) => {
             apiKey: providerInfo.key,
             apiUrl: providerInfo.url,
             status: providerInfo.status == 1 ? status.active : status.deactive,
-            type: isFormData
+            type: isFormData,
+            balance: balance
         })
     }
 }
