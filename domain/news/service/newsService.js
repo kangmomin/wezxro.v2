@@ -16,8 +16,8 @@ ex.getNews = async () => {
     news.map(val => {
         val.status == newsStatus.active ? statusCnt.activeCnt++ : statusCnt.deactiveCnt++
 
-        val.createdAt = formatDateTime(val.createdAt)
-        val.updatedAt = formatDateTime(val.updatedAt)
+        val.created = formatDateTime(val.start)
+        val.updated = formatDateTime(val.end)
 
         return val
     })
@@ -33,6 +33,11 @@ ex.getNews = async () => {
  * @param {AddNewsDto} addNewsDto 
  */
 ex.addNews = async (addNewsDto) => {
+    const start = addNewsDto.start.split("/")
+    const end = addNewsDto.start.split("/")
+    News.start = new Date(start[2], start[1], start[0])
+    News.end = new Date(end[2], end[1], end[0])
+    
     const news = await News.create(addNewsDto)
 
     return news
