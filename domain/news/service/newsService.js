@@ -1,5 +1,6 @@
 const status = require("../../../global/entity/status")
 const formatDateTime = require("../../../global/util/formatDateTime")
+const newsStatus = require("../entity/constant/newsStatus")
 const News = require("../entity/news")
 
 const ex = module.exports = {}
@@ -7,13 +8,13 @@ const ex = module.exports = {}
 ex.getNews = async () => {
     const news = await News.findAll()
     
-    const stautsCnt = {
+    const statusCnt = {
         activeCnt: 0,
         deactiveCnt: 0
     }
     
     news.map(val => {
-        val.stauts == status.active ? stautsCnt.activeCnt++ : stautsCnt.deactiveCnt++
+        val.status == newsStatus.active ? statusCnt.activeCnt++ : statusCnt.deactiveCnt++
 
         val.createdAt = formatDateTime(val.createdAt)
         val.updatedAt = formatDateTime(val.updatedAt)
@@ -23,6 +24,6 @@ ex.getNews = async () => {
 
     return {
         news,
-        ...stautsCnt
+        ...statusCnt
     }
 }
