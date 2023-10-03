@@ -36,4 +36,17 @@ app.get("/admin/news/update/:newsId", async (req, res) => {
     }
 })
 
+app.get("/admin/news/view/:newsId", async (req, res) => {
+    try {
+        const newsDetail = await newsService.newses(req.params.newsId)
+
+
+        res.render(__dirname + "/../view/news", {
+            news: newsDetail
+        })
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 module.exports = app

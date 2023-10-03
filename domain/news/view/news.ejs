@@ -1,0 +1,28 @@
+<div id="main-modal-content" class="news_announcement">
+    <div class="modal-right">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-pantone">
+                    <h4 class="modal-title"><i class="fe fe-award"></i>공지</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body o-auto">
+                    <% news.forEach(n => {%>
+                        <div class="news-item">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title btn round btn-lime btn-sm text-uppercase"><%= n.type %></h3>
+                                    <small class="text-muted m-l-5"><%= n.start %> - <%= n.end %></small>
+                                </div>
+                                <div class="card-body desc">
+                                    <p><%- n.description %></p>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

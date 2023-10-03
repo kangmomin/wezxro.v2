@@ -64,3 +64,20 @@ ex.delete = async (newsId = null) => {
         where: { newsId }
     })
 }
+
+ex.newses = async () => {
+    const news = await News.findAll({
+        where: {
+            status: newsStatus.active
+        }
+    })
+
+    news.map(val => {
+        val.created = formatDateTime(val.start)
+        val.updated = formatDateTime(val.end)
+
+        return val
+    })
+
+    return news
+}
