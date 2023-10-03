@@ -5,19 +5,20 @@
                 <h4 class="modal-title">수정 또는 추가</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/admin/news/store/" class="form actionForm"
-                data-redirect="/admin/news" method="POST" accept-charset="utf-8">
-                <input type="hidden" name="id" value="" />
+            <form action="https://console.prvad.com/admin/news/store/1" class="form actionForm"
+                data-redirect="https://console.prvad.com/admin/news" method="POST" accept-charset="utf-8">
+                <input type="hidden" name="id" value="1" />
+                <input type="hidden" name="token" value="6750e95bdb76f1cab68154eccf1f6df9" />
                 <div class="modal-body">
                     <div class="row justify-content-md-center">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>구분</label>
                                 <select name="type" class="form-control">
-                                    <option value="새로운 서비스" <%= n.type == "새로운 서비스" ? "selected" : "" %>>새로운 서비스</option>
-                                    <option value="서비스 비활성화" <%= n.type == "서비스 활성화" ? "selected" : "" %>>서비스 비활성화</option>
-                                    <option value="서비스 업데이트" <%= n.type == "서비스 업데이트" ? "selected" : "" %>>서비스 업데이트</option>
-                                    <option value="알림" <%= n.type == "알림" ? "selected" : "" %>>알림</option>
+                                    <option value="new_services" selected="selected">New services</option>
+                                    <option value="disabled_services">Disabled services</option>
+                                    <option value="updated_services">Updated services</option>
+                                    <option value="announcement">Announcement</option>
                                 </select>
 
                             </div>
@@ -25,7 +26,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>시작</label>
-                                <input type="text" name="start" value="<%= n.created %>" onkeydown="return false"
+                                <input type="text" name="start" value="12/06/2022" onkeydown="return false"
                                     class="form-control datepicker" />
 
                             </div>
@@ -33,7 +34,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>종료</label>
-                                <input type="text" name="end" value="<%= n.updated %>" onkeydown="return false"
+                                <input type="text" name="expiry" value="18/06/2024" onkeydown="return false"
                                     class="form-control datepicker" />
 
                             </div>
@@ -42,18 +43,18 @@
                             <div class="form-group">
                                 <label>내용</label>
                                 <textarea name="description" cols="40" rows="10"
-                                    class="form-control plugin_editor">
-                                    <%- n.description %>
-                                </textarea>
+                                    class="form-control plugin_editor">&lt;p&gt;테스트 공지사항&lt;/p&gt;</textarea>
+
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>상태</label>
                                 <select name="status" class="form-control">
-                                    <option value="활성화" <%= n.status == "활성화" ? "selected" : "" %>>활성화</option>
-                                    <option value="비활성화" <%= n.status == "비활성화" ? "selected" : "" %>>비활성화</option>
+                                    <option value="1">Active</option>
+                                    <option value="0" selected="selected">Deactive</option>
                                 </select>
+
                             </div>
                         </div>
                     </div>
@@ -80,7 +81,6 @@
             orientation: 'bottom',
             autoclose: true,
         });
-        $(".datepicker").datepicker().datepicker("setDate", new Date());
         function truncateDate(date) {
             return new Date(date.getFullYear(), date.getMonth(), date.getDate());
         }

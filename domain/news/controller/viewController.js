@@ -19,7 +19,18 @@ app.get("/admin/news", renderIsAdmin, async (req, res) => {
 
 app.get("/admin/news/update", async (req, res) => {
     try {
-        res.render(__dirname + "/../view/admin/assets/updateNews")
+        res.render(__dirname + "/../view/admin/assets/emptyUpdateNews")
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
+app.get("/admin/news/update/:newsId", async (req, res) => {
+    try {
+        const newsDetail = await newsService.detail(req.params.newsId)
+        res.render(__dirname + "/../view/admin/assets/updateNews", {
+            n: newsDetail
+        })
     } catch(e) {
         ExceptionHandler(res, e)
     }

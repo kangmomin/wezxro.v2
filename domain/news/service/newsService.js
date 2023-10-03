@@ -1,4 +1,5 @@
 const status = require("../../../global/entity/status")
+const NotEngoughArgsException = require("../../../global/error/exception/NotEnoughArgsException")
 const formatDateTime = require("../../../global/util/formatDateTime")
 const newsStatus = require("../entity/constant/newsStatus")
 const News = require("../entity/news")
@@ -38,7 +39,20 @@ ex.addNews = async (addNewsDto) => {
     addNewsDto.start = new Date(start[2], start[1], start[0])
     addNewsDto.end = new Date(end[2], end[1], end[0])
     
-    const news = await News.create(addNewsDto)
+    if (addNewsDto.id) await News.update(addNewsDto, {
+        where: {
+            newsId: addNewsDto.id
+        }
+    }) 
+    else await News.create(addNewsDto)
+}
+
+ex.detail = async (newsId = null) => {
+    if (!newsId) throw new NotEngoughArgsException()
+
+    const news = await News.findByPk(newsId)
+    news.created = formatDateTime(news.start)
+    news.updated = formatDateTime(news.end)
 
     return news
 }
