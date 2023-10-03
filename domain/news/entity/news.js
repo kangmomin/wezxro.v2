@@ -1,5 +1,4 @@
 const { Model, DataTypes } = require("sequelize");
-const status = require("../../../global/entity/status");
 const newsType = require("./constant/newsType");
 const newsStatus = require("./constant/newsStatus");
 const sequelize = require('../../../global/config/getSequelize')()
@@ -13,10 +12,6 @@ News.init({
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
-    },
-    title: {
-        type: DataTypes.STRING,
-        allowNull: false
     },
     description: {
         type: DataTypes.TEXT,
