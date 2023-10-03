@@ -135,7 +135,11 @@
                                         <td class="text-center w-10p"><span class="badge btn-info"><%= n.type %></span></td>
                                         <td class="text-center text-muted w-10p"><%= n.createdAt %></td>
                                         <td class="text-center text-muted w-10p"><%= n.updatedAt %></td>
-                                        <td class="text-center w-5p"><span class="badge bg-red"><%= n.status %></span></td>
+                                        <td class="text-center w-5p">
+                                            <span class="badge bg-<%= n.status == "활성화" ? "green-lt" : n.status == "비활성화" ? "orange-lt" : "red-lt" %>">
+                                                <%= n.status %>
+                                            </span>
+                                        </td>
                                         <td class="text-center w-5p">
                                             <div class="item-action dropdown">
                                                 <a href="javascript:void(0)" data-toggle="dropdown" class="icon"><i

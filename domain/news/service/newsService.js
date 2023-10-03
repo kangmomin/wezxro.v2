@@ -27,3 +27,13 @@ ex.getNews = async () => {
         ...statusCnt
     }
 }
+
+/**
+ * 
+ * @param {AddNewsDto} addNewsDto 
+ */
+ex.addNews = async (addNewsDto) => {
+    const news = await News.create(addNewsDto)
+
+    return news
+}

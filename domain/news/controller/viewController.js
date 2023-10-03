@@ -17,4 +17,12 @@ app.get("/admin/news", renderIsAdmin, async (req, res) => {
     }
 })
 
+app.get("/admin/news/update", async (req, res) => {
+    try {
+        res.render(__dirname + "/../view/admin/assets/updateNews")
+    } catch(e) {
+        ExceptionHandler(res, e)
+    }
+})
+
 module.exports = app
