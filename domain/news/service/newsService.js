@@ -49,10 +49,18 @@ ex.addNews = async (addNewsDto) => {
 
 ex.detail = async (newsId = null) => {
     if (!newsId) throw new NotEngoughArgsException()
-
+    
     const news = await News.findByPk(newsId)
     news.created = formatDateTime(news.start)
     news.updated = formatDateTime(news.end)
-
+    
     return news
+}
+
+ex.delete = async (newsId = null) => {
+    if (!newsId) throw new NotEngoughArgsException()
+    
+    await News.destroy({
+        where: { newsId }
+    })
 }
