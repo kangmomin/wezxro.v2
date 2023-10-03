@@ -34,9 +34,9 @@ ex.getNews = async () => {
  */
 ex.addNews = async (addNewsDto) => {
     const start = addNewsDto.start.split("/")
-    const end = addNewsDto.start.split("/")
-    News.start = new Date(start[2], start[1], start[0])
-    News.end = new Date(end[2], end[1], end[0])
+    const end = addNewsDto.end.split("/")
+    addNewsDto.start = new Date(start[2], start[1], start[0])
+    addNewsDto.end = new Date(end[2], end[1], end[0])
     
     const news = await News.create(addNewsDto)
 
