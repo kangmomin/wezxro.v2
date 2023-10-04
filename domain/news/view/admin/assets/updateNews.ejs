@@ -7,7 +7,7 @@
             </div>
             <form action="/admin/news/store/" class="form actionForm"
                 data-redirect="/admin/news" method="POST" accept-charset="utf-8">
-                <input type="hidden" name="id" value="" />
+                <input type="hidden" name="id" value="<%= n.newsId %>" />
                 <div class="modal-body">
                     <div class="row justify-content-md-center">
                         <div class="col-md-12">
@@ -80,7 +80,6 @@
             orientation: 'bottom',
             autoclose: true,
         });
-        $(".datepicker").datepicker().datepicker("setDate", new Date());
         function truncateDate(date) {
             return new Date(date.getFullYear(), date.getMonth(), date.getDate());
         }
