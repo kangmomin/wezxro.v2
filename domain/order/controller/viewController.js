@@ -6,10 +6,12 @@ const categoryService = require('../../category/service/categoryService')
 const formatDateTime = require('../../../global/util/formatDateTime')
 const renderIsAdmin = require('../../../global/config/filter/renderIsAdmin')
 const isAuthUser = require('../../../global/config/filter/isAuthUser')
+const { checkUnread }  = require('../../news/service/newsService')
 
 app.get("/order", isAuthUser, async (req, res) => {
     try {
         const orders = await orderService.findByUserId(req.session.userId)
+        const isUnread = await checkUnread()
         const user = await accountService.info(req)
         
         orders.map(e => {
@@ -17,7 +19,12 @@ app.get("/order", isAuthUser, async (req, res) => {
             return e
         })
         
-        res.render(__dirname + '/../view/order', { orders, ...user, path: "order" })
+        res.render(__dirname + '/../view/order', { 
+            orders, 
+            ...user,
+            isUnread, 
+            path: "order" 
+        })
     } catch (e) {
         ExceptionHandler(res, e)
     }
@@ -28,9 +35,10 @@ app.get("/add-order", isAuthUser, async (req, res) => {
         
         const { name, money } = await accountService.info(req)
         const category = await categoryService.findAllCategory()
+        const isUnread = await checkUnread() 
         
         res.render(__dirname + '/../view/addOrder', {
-            name, money, category, path: "add-order"
+            name, money, category, path: "add-order", isUnread
         })
     } catch(e) {
         ExceptionHandler(res, e)

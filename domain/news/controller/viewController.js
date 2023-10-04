@@ -10,7 +10,7 @@ app.get("/admin/news", renderIsAdmin, async (req, res) => {
 
         res.render(__dirname + "/../view/admin/news", {
             path: "news",
-            ...news
+            ...news,
         })
     } catch(e) {
         ExceptionHandler(res, e)

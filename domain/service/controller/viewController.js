@@ -5,6 +5,7 @@ const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 const NotEngoughArgsException = require("../../../global/error/exception/NotEnoughArgsException")
 const renderIsAdmin = require("../../../global/config/filter/renderIsAdmin")
 const isAuthUser = require("../../../global/config/filter/isAuthUser")
+const { checkUnread }  = require("../../news/service/newsService")
 
 app.get('/admin/services', renderIsAdmin, async (req, res) => {
     try {
@@ -27,12 +28,14 @@ app.get('/services', isAuthUser, async (req, res) => {
     try {
         const user = await accountService.info(req)
         const [services, category] = await serviceService.mainServiceList(req.session.rate)
+        const isUnread = await checkUnread()
         
         res.render(__dirname + '/../view/services', {
             path: "services",
             ...user,
             services,
-            category
+            category,
+            isUnread
         })
     } catch(e) {
         ExceptionHandler(res, e)

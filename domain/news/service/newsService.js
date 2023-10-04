@@ -81,3 +81,17 @@ ex.newses = async () => {
 
     return news
 }
+
+/**
+ * 
+ * @returns {boolean} is there unread notice, return true. otherwise return false
+ */
+ex.checkUnread = async () => {
+    const news = await News.count({
+        where: {
+            status: newsStatus.active
+        },
+    })
+
+    return news > 0
+}

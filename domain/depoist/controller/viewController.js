@@ -2,6 +2,7 @@ const isAuthUser = require('../../../global/config/filter/isAuthUser')
 const renderIsAdmin = require('../../../global/config/filter/renderIsAdmin')
 const ExceptionHandler = require('../../../global/error/ExceptionHandler')
 const { info } = require('../../account/service/accountService')
+const { checkUnread }  = require('../../news/service/newsService')
 const { depoistRender, findForUpdate, allDepoist } = require('../service/depoistService')
 
 const app = require('express').Router()
@@ -10,13 +11,15 @@ app.get('/transactions', isAuthUser, async (req, res) => {
     try {
         const user = await info(req)
         const depoistList = await depoistRender(req.session.userId)
+        const isUnread = await checkUnread()
 
         res.render(__dirname + '/../view/transactions', {
             result: req.query.result || "default",
             ...user,
             depoist: depoistList,
             path: "transactions",
-            isDemo: req.session.isDemo
+            isDemo: req.session.isDemo,
+            isUnread
         })
     } catch (e) {
         ExceptionHandler(res, e)
