@@ -16,6 +16,7 @@ app.get("/statistics", isAuthUser, async (req, res) => {
 
         res.render(__dirname + "/../view/dashboard", {
             ...u, 
+            isUnread,
             path: "statistics",
             ...userDetails,
             
