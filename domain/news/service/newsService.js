@@ -83,6 +83,9 @@ ex.newses = async () => {
             status: newsStatus.active,
             start: {
                 [Op.lte]: new Date()
+            },
+            end: {
+                [Op.gte]: new Date()
             }
         }
     })
@@ -104,7 +107,13 @@ ex.newses = async () => {
 ex.checkUnread = async () => {
     const news = await News.count({
         where: {
-            status: newsStatus.active
+            status: newsStatus.active,
+            start: {
+                [Op.lte]: new Date()
+            },
+            end: {
+                [Op.gte]: new Date()
+            }
         },
     })
     
