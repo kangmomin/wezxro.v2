@@ -81,9 +81,9 @@ app.post('/service_detail/:serviceId', async (req, res) => {
 
         res.render(__dirname + "/../view/assets/getServiceInfo", {
             name: detail.name,
-            min: Number(detail.min).toLocaleString('ko-KR'),
-            max: Number(detail.max).toLocaleString('ko-KR'),
-            rate: Number(detail.rate).toLocaleString('ko-KR'),
+            min: Number(detail.min),
+            max: Number(detail.max),
+            rate: Number(detail.rate),
             description: detail.description,
         })
 
