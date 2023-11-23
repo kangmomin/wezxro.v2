@@ -65,6 +65,7 @@ app.post('/order/get_services/:categoryId', async (req, res) => {
     try {
         const categoryId = req.params.categoryId || null
         
+        req.session.rate = await accountService.getStaticRate(req.session.userId)
         const service = await orderService.findServiceByCategoryId(categoryId, req.session.rate)
         
         res.render(__dirname + "/../view/assets/service_list", {
