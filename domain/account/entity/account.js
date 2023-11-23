@@ -36,7 +36,7 @@ Account.init({
     type: DataTypes.ENUM(Object.values(status)),
     defaultValue: status.active
   },
-  customRate: {
+  staticRate: {
     field: "custom_rate",
     type: DataTypes.FLOAT,
     defaultValue: null,

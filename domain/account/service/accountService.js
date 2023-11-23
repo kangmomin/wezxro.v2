@@ -27,7 +27,7 @@ ex.info = async (req) => {
     if (!userId) throw new NeedLoginException()
 
     const {name, money} = await accountRepository.findByPk(userId, {
-        attributes: ['name', 'money']
+        attributes: ['name', 'money', 'staticRate']
     })
 
     if (name == null) name = "이름을 불러오지 못했습니다."
@@ -170,7 +170,7 @@ ex.detail = async (userId) => {
 
     return await accountRepository.findOne({
         where: { userId },
-        attributes: ["userId", "email", "ip", "pNumber", "customRate"]
+        attributes: ["userId", "email", "ip", "pNumber", "staticRate"]
     })
 }
 
@@ -179,10 +179,20 @@ ex.updateStaticRate = async (userId, staticRate = null) => {
     if (staticRate < 0) new RateToolLowException()
 
     await accountRepository.update({
-        customRate: staticRate
+        staticRate: staticRate
     }, { 
         where: {userId}
     })
+}
+
+ex.getStaticRate = async (userId) => {
+    if (!userId) throw new NotEngoughArgsException()
+    
+    const rate = await accountRepository.findByPk(userId, {
+        attributes: ["staticRate"]
+    })
+
+    return rate.staticRate
 }
 
 /**
