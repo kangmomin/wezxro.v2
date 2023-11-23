@@ -211,6 +211,8 @@ app.post('/admin/users/staticRate/', isAdmin, async (req, res) => {
         const { ids, staticRate } = req.body
         
         await accountService.updateStaticRate(ids, staticRate)
+        if (ids == req.session.userId) req.session.rate = staticRate
+        
         res.send(JSON.stringify({
             message: "전체 감가액을 설정하였습니다.",
             status: "success"
