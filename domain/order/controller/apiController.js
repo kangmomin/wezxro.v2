@@ -12,7 +12,7 @@ const OrderMinException = require('../exception/OrderMinException')
 const UpdateOrderDto = require('../dto/UpdateOrderDto')
 
 app.post("/order/ajax_add_order", async (req, res) => {
-  const { 
+  let { 
     category_id, 
     service_id, 
     link, 
@@ -35,7 +35,7 @@ app.post("/order/ajax_add_order", async (req, res) => {
 
     const info = await accountService.info(req)
 
-    if (req.session.rate !== null) total_charge = total_charge * req.session.rate / 100
+    // if (req.session.rate !== null) total_charge = total_charge * req.session.rate / 100
     if (info.money < total_charge) {
       res.send(JSON.stringify({
         status: "error", 
