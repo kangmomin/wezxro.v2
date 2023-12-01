@@ -166,7 +166,7 @@ ex.allDepoist = async () => {
         if (user[idx] === undefined) {
             console.log(user[idx])
             console.log(`idx: ${idx}`)
-            console.log(`depoist: ${depoists.length}`)
+            console.log(`depoist: ${user.length}`)
         }
         if (d.userId == user[idx].userId) d.email = user[idx].email
         else d.email = "deleted user"
