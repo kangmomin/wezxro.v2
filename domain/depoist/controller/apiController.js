@@ -24,7 +24,7 @@ app.post("/add-depoist", async (req, res) => {
     }
 })
 
-app.post("/depoist", async (req, res) => {
+app.post("/deposit", async (req, res) => {
     const RTP_KEY = process.env.RTP_KEY
 
 
