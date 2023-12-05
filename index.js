@@ -81,7 +81,7 @@ app.get('*', (req, res) => res.render(__dirname + '/global/view/error.ejs', { st
 
 
 //force : 서버 실행 시 마다 테이블을 재생성 할 것인지 아닌지
-sequelize.sync({alter:true}).then(() => {
+sequelize.sync({alter:false}).then(() => {
     console.log('DB Sync complete.');
     app.listen(port, () => { console.log(`server is running on ${port || 3000}`) })
 })
